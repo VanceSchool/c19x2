@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="598.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AppointmentsController">
+   <children>
+      <Label fx:id="Appointmentslb" layoutX="373.0" layoutY="71.0" text="Appointments">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <TabPane layoutY="150.0" prefHeight="222.0" prefWidth="922.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="AppointmentsbyMonthTab" text="By Month">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="431.0">
+                     <children>
+                        <TableView fx:id="byMonthTable" prefHeight="293.0" prefWidth="922.0">
+                           <columns>
+                              <TableColumn fx:id="AppointmentIDColm" prefWidth="22.0" text="ID" />
+                              <TableColumn fx:id="AppointmentTitlecolm" minWidth="0.0" prefWidth="109.0" text="Title" />
+                              <TableColumn fx:id="AppointmentsDescriptioncolm" prefWidth="180.0" text="Description" />
+                              <TableColumn fx:id="AppointmentsLoccolm" prefWidth="97.0" text="Location" />
+                              <TableColumn fx:id="AppointmentsContactcolm" prefWidth="135.0" text="Contact" />
+                              <TableColumn fx:id="AppointmentsTypecolm" prefWidth="64.0" text="Type" />
+                              <TableColumn fx:id="AppointmentsStartcolm" prefWidth="75.0" text="Start Date and Time" />
+                              <TableColumn fx:id="AppointmentEndColm" prefWidth="75.0" text="End Date and Time" />
+                              <TableColumn fx:id="CustomerIDColm" prefWidth="75.0" text="Customer ID" />
+                              <TableColumn fx:id="UserIDColm" prefWidth="75.0" text="User ID" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="AppointmentsByWeekTab" text="By Week">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="byWeekTable" prefHeight="294.0" prefWidth="922.0">
+                           <columns>
+                              <TableColumn fx:id="AppointmentIDcolw" prefWidth="39.0" text="ID" />
+                              <TableColumn fx:id="AppointmentTitlecolw" prefWidth="92.0" text="Title" />
+                              <TableColumn fx:id="AppointmentsDescriptioncolw" prefWidth="180.0" text="Description" />
+                              <TableColumn fx:id="AppointmentsLoccolw" prefWidth="97.0" text="Location" />
+                              <TableColumn fx:id="AppointmentsContactcolw" prefWidth="135.0" text="Contact" />
+                              <TableColumn fx:id="AppointmentsTypecolw" prefWidth="64.0" text="Type" />
+                              <TableColumn fx:id="AppointmentsStartcolw" prefWidth="75.0" text="Start Date and Time" />
+                              <TableColumn fx:id="AppointmentsEndcolw" prefWidth="75.0" text="End Date and Time" />
+                              <TableColumn fx:id="CustomerIDColw" prefWidth="75.0" text="Customer ID" />
+                              <TableColumn fx:id="UserIDColw" prefWidth="75.0" text="User ID" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="AppointmentsAllTab" text="All">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="922.0">
+                     <children>
+                        <TableView fx:id="allAptTable" layoutY="-4.0" prefHeight="273.0" prefWidth="922.0">
+                           <columns>
+                              <TableColumn fx:id="AppointmentIDcol1a" prefWidth="39.0" text="ID" />
+                              <TableColumn fx:id="AppointmentTitlecola" prefWidth="92.0" text="Title" />
+                              <TableColumn fx:id="AppointmentsDescriptioncola" prefWidth="180.0" text="Description" />
+                              <TableColumn fx:id="AppointmentsLoccola" prefWidth="97.0" text="Location" />
+                              <TableColumn fx:id="AppointmentsContactcola" prefWidth="135.0" text="Contact" />
+                              <TableColumn fx:id="AppointmentsTypecola" prefWidth="64.0" text="Type" />
+                              <TableColumn fx:id="AppointmentsStartcola" prefWidth="75.0" text="Start Date and Time" />
+                              <TableColumn fx:id="AppointmentEndCola" prefWidth="75.0" text="End Date and Time" />
+                              <TableColumn fx:id="CustomerIDCola" prefWidth="75.0" text="Customer ID" />
+                              <TableColumn fx:id="UserIDCola" prefWidth="75.0" text="User ID" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="AppointmentsMainMenubt" layoutX="601.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCMainMenubt" text="Main Menu" />
+      <Button fx:id="AppointmentsExit" layoutX="693.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCExitbt" prefHeight="30.0" prefWidth="77.0" text="Exit" />
+      <AnchorPane layoutX="67.0" layoutY="488.0" prefHeight="101.0" prefWidth="310.0" style="-fx-border-color: #aaaaaa; -fx-border-radius: 3;">
+         <children>
+            <Button fx:id="AppointmentsAddbt" layoutX="219.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCAddbt" prefHeight="25.0" prefWidth="77.0" text="Add" />
+            <Button fx:id="AppointmentsModifybt" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleAmodifybt" prefHeight="25.0" prefWidth="77.0" text="Modify" />
+            <Button fx:id="AppointmentsDeletebt" layoutX="117.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleADeletebt" prefHeight="25.0" prefWidth="77.0" text="Delete" />
+            <Label fx:id="AppointmentsLb" layoutX="106.0" layoutY="21.0" text="Appointment Controls" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
