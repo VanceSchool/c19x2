@@ -23,16 +23,16 @@ public class Appointments{
     private LocalDateTime end;
           
     public Appointments(int appointmentID, String title, String type, String description, String location,int contactId, int customerId, int userId, LocalDateTime start, LocalDateTime end){
-    appointmentID = this.appointmentID;
-    title = this.title;
-    description = this.description;
-    location = this.location;
-    type = this.type;
-    customerId = this.customerId;
-    userId = this.userId; 
-    contactId = this.contactId;
-    start = this.start;
-    end = this.end;
+    this.appointmentID =appointmentID;
+    this.title = title;
+    this.description = description;
+    this.location = location;
+    this.type = type;
+    this.customerId = customerId;
+    this.userId = userId; 
+    this.contactId = contactId;
+    this.start = start;
+    this.end = end;
     
     }
 

@@ -11,6 +11,7 @@ import Models.Customers;
 import Models.Provinces;
 import Models.User;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -150,6 +151,7 @@ public class DAOLists {
             LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
             LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
             //make an object instance
+            System.out.println("Appointment ID Equials " + appointmentID);
             Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
             //add to list
             appointListA.add(appoint); 
@@ -160,9 +162,48 @@ public class DAOLists {
        }
        //return the list
        return appointListA;
+       
    }
       
-      
+      public static ObservableList<Appointments> getFilteredMonthAppointments(LocalDate lDMonth){
+        //create a list to return
+        ObservableList<Appointments> appointListA = FXCollections.observableArrayList();
+       //setup the sql
+       String sql = "SELECT * FROM appointments";
+       try{
+       //make the prepared statement
+       PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+       //make the query ==> ResultSet
+       ResultSet rs = ps.executeQuery();
+       System.out.println(rs);
+       //Cycle through the result
+       while(rs.next()){
+            //pull out the data
+            int appointmentID = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String type = rs.getString("Type");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            int contactId = rs.getInt("Contact_ID");
+            int customerId = rs.getInt("User_ID");
+            int userId = rs.getInt("Customer_ID");
+            //Timestamps to Local Date Time
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            //make an object instance
+            System.out.println("Appointment ID Equials " + appointmentID);
+            Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
+            //add to list
+            appointListA.add(appoint); 
+       }
+       }
+       catch(SQLException throwables){
+       throwables.printStackTrace();
+       }
+       //return the list
+       return appointListA;
+       
+   }
       
         public static ObservableList<User> getAllUsers(){
         //create a list to return

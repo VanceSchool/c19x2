@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.Timestamp;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,17 +97,17 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TableColumn<Appointments, String> AppointmentsTypecolw;
     @FXML
-    private TableColumn<Appointments, Timestamp> AppointmentsStartcolw;
+    private TableColumn<Appointments, LocalDateTime> AppointmentsStartcolw;
     @FXML
-    private TableColumn<Appointments, Timestamp> AppointmentsEndcolw;
+    private TableColumn<Appointments, LocalDateTime> AppointmentsEndcolw;
     @FXML
     private TableColumn<Appointments, Integer> CustomerIDColw;
     @FXML
     private TableColumn<Appointments, Integer> UserIDColw;
     @FXML
-    private TableColumn<Appointments, Integer> AppointmentIDcol1a;
+    private TableColumn<Appointments, LocalDateTime> AppointmentIDcol1a;
     @FXML
-    private TableColumn<Appointments, String> AppointmentTitlecola;
+    private TableColumn<Appointments, LocalDateTime> AppointmentTitlecola;
     @FXML
     private TableColumn<Appointments, String> AppointmentsDescriptioncola;
     @FXML
@@ -116,9 +117,9 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TableColumn<Appointments, String> AppointmentsTypecola;
     @FXML
-    private TableColumn<Appointments, Timestamp> AppointmentsStartcola;
+    private TableColumn<Appointments, LocalDateTime> AppointmentsStartcola;
     @FXML
-    private TableColumn<Appointments, Timestamp> AppointmentEndCola;
+    private TableColumn<Appointments, LocalDateTime> AppointmentEndCola;
     @FXML
     private TableColumn<Appointments, Integer> CustomerIDCola;
     @FXML
@@ -132,9 +133,10 @@ public class AppointmentsController implements Initializable {
         // TODO
         populateAllTable();
     }    
-
-    @FXML
-    private void handleCMainMenubt(ActionEvent event) throws IOException {
+    /*
+     *@FXML
+    */
+    public void handleCMainMenubt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -182,8 +184,10 @@ public class AppointmentsController implements Initializable {
        }
     }
     
+    
     private void populateAllTable(){
         ObservableList<Appointments> appointListB = DAOLists.getAllAppointments();
+        System.out.println("List Size Equals:" + appointListB.size());
         allAptTable.setItems(appointListB);
         AppointmentIDcol1a.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         AppointmentTitlecola.setCellValueFactory(new PropertyValueFactory<>("title"));
