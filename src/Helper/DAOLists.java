@@ -223,13 +223,12 @@ public class DAOLists {
      * getFilteredMonthAppointments Method for SQL Statement for SELECT some FROM provinces Table
      * filtered by country.Country_ID
      * @return appointMonthListA
-     * @param lDMonth
      */ 
-      public static ObservableList<Appointments> getFilteredMonthAppointments(LocalDate lDMonth){
+      public static ObservableList<Appointments> getFilteredMonthAppointments(){
         //create a list to return
         ObservableList<Appointments> appointMonthListA = FXCollections.observableArrayList();
        //setup the sql
-       String sql = "SELECT * FROM appointments";
+       String sql = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(current_date()) AND YEAR(Start) = YEAR(current_date());";
        try{
        //make the prepared statement
        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -266,16 +265,15 @@ public class DAOLists {
    }
       
       /**
-     * getFilteredWeekAppointments Method for SQL Statement for SELECT some FROM provinces Table
-     * filtered by country.Country_ID
+     * getFilteredWeekAppointments Method for SQL Statement for SELECT some FROM appointments Table
+     * filtered by appointments.Start
      * @return appointMonthListA
-     * @param lDMonth
      */ 
       public static ObservableList<Appointments> getFilteredWeekAppointments(){
         //create a list to return
         ObservableList<Appointments> appointWeekListA = FXCollections.observableArrayList();
        //setup the sql
-       String sql = "SELECT * FROM appointments WHERE WEEK(Start) = WEEK(current_date());";
+       String sql = "SELECT * FROM appointments WHERE WEEK(Start) = WEEK(current_date()) AND YEAR(Start) = YEAR(current_date());";
        try{
        //make the prepared statement
        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

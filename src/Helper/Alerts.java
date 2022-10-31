@@ -45,8 +45,8 @@ public class Alerts {
     }
     
     
-    public static void alertGroup(int type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    public static void alertGroup2(int type){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Validation");
         alert.setHeaderText("Validation");
                 switch (type) {
@@ -58,6 +58,28 @@ public class Alerts {
                 alert.setContentText("Are you sure you wish to delete this Appointment?");
                 break;
             }
+            case 4: {
+                alert.setContentText("Are You Sure You wish to update");
+                break;
+            }
+            case 6: {
+                alert.setContentText("Are You Sure you wish to Save New Customer?");
+                break;
+            }
+            case 9: {
+                alert.setContentText("Are you sure you want to modify this Appoinment?");
+                break;
+            }
+        }
+        alert.showAndWait();
+    }
+    
+    
+    public static void alertGroup1(int type){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validation");
+        alert.setHeaderText("Validation");
+                switch (type) {
             case 3: {
                 alert.setContentText("Customer Has Been Updated");
                 break;
@@ -68,10 +90,6 @@ public class Alerts {
             }
             case 5: {
                 alert.setContentText("Customer Updated");
-                break;
-            }
-            case 6: {
-                alert.setContentText("Are You Sure you wish to Save New Customer?");
                 break;
             }
             case 7: {

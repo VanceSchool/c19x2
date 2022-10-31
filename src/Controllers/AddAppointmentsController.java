@@ -4,10 +4,6 @@
  */
 package Controllers;
 
-import Helper.Time;
-import Models.Appointments;
-import Models.Contacts;
-import Models.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,18 +17,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- *FXML Controller class
- *@author sean thompson <stho292@wgu.edu>
+ * FXML Controller class
+ *
+ * @author LabUser
  */
-public class ModifyAppointmentController implements Initializable {
+public class AddAppointmentsController implements Initializable {
 
+    @FXML
+    private Button CustomerSavebt;
+    @FXML
+    private Button CustomerBackbt;
     @FXML
     private TextField titletxt;
     @FXML
@@ -42,22 +42,15 @@ public class ModifyAppointmentController implements Initializable {
     @FXML
     private DatePicker endDatepicker;
     @FXML
-    private ComboBox<Contacts> contactdd;
+    private ComboBox<?> contactdd;
     @FXML
-    private ComboBox<Time> startTimedd;
+    private ComboBox<?> startTimedd;
     @FXML
-    private ComboBox<Time> endTimedd;
+    private ComboBox<?> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML
     private TextField typetxt;
-    private Appointments currentAppointment;
-    @FXML
-    private Button AppointmentSavebt;
-    @FXML
-    private Button AppointmentBackbt;
-    @FXML
-    private ComboBox<?> AppointmentCustomercb;
     @FXML
     private TextField AppointmentIDtxt;
 
@@ -70,35 +63,17 @@ public class ModifyAppointmentController implements Initializable {
     }    
 
     @FXML
-    private void handleAppointmentSavebt(ActionEvent event) {
+    private void handleCustomerSavebt(ActionEvent event) {
     }
 
+    @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointsments.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Appointments Menu");
         stage.setScene(scene);
         stage.show();
     }
-    public void setCurrentAppointment(Appointments appointment) {
-       
-    currentAppointment = appointment; 
-    appointmentModify(appointment); 
-    }
     
-       public void appointmentModify(Appointments appointment){       
-        //Sets TextFields based on passed Customer
-        currentAppointment = appointment;
-        AppointmentIDtxt.setText(String.valueOf(currentAppointment.getAppointmentID()));
-        titletxt.setText(currentAppointment.getTitle());
-        descriptiontxt.setText(String.valueOf(currentAppointment.getDescription()));
-        locationtxt.setText(String.valueOf(currentAppointment.getLocation()));
-        typetxt.setText(String.valueOf(currentAppointment.getType()));
-
-    }
-
-    @FXML
-    private void handleAppointmentBackbt(ActionEvent event) {
-    }
 }

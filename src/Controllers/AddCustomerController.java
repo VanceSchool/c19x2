@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import static Helper.Alerts.alertGroup;
+import static Helper.Alerts.*;
 import Helper.UserfulMethods;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.addNewCustomers;
@@ -76,7 +76,7 @@ public class AddCustomerController implements Initializable {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
              //if (allAptTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup(6);
+        alertGroup2(6);
        Customers custMod = new Customers();
        Provinces modProvCust = CustomerStatecb.getValue();
        custMod.setState(modProvCust.getDivName());
@@ -86,7 +86,7 @@ public class AddCustomerController implements Initializable {
        custMod.setCustomerPostalCode(CustomerPostaltf.getText());
        addNewCustomers(custMod);
        
-       alertGroup(8);
+       alertGroup1(8);
        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
        Scene scene = new Scene(root);
@@ -117,6 +117,7 @@ public class AddCustomerController implements Initializable {
     @FXML
     private void handleCustomerStatecb(ActionEvent event) {
     }
+
 
     
     

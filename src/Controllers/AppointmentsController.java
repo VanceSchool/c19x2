@@ -4,12 +4,14 @@
  */
 package Controllers;
 
-import static Helper.Alerts.alertGroup;
+import static Helper.Alerts.*;
+import static Helper.Alerts.exitAlert;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.deleteAppointment;
 import Models.Appointments;
 import Models.Customers;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.security.Timestamp;
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -130,7 +133,25 @@ public class AppointmentsController implements Initializable {
         // TODO
         populateAllTable();
         populateWeekTable();
+        populateMonthTable();
     }    
+    
+    
+    
+        @FXML
+    private void handleByMonthRefreshTab(Event event) {
+        populateMonthTable();
+    }
+
+    @FXML
+    private void handleByWeekRefreshTab(Event event) {
+        populateWeekTable();
+    }
+
+    @FXML
+    private void handleAllRefreshTab(Event event) {
+        populateAllTable();
+    }
     /*
      *@FXML
     */
@@ -146,11 +167,11 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private void handleCExitbt(ActionEvent event) {
-        
+        exitAlert();
     }
 
     @FXML
-    private void handleCAddbt(ActionEvent event) throws IOException {
+    private void handleAAddbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/AddAppointment.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -161,31 +182,49 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private void handleAmodifybt(ActionEvent event) throws IOException {
-        
-        
-        // Changes Scene
-        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/ModifyAppointment.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Modify Menu");
-        stage.setScene(scene);
-        stage.show();
-    }
+             if ((byWeekTable.getSelectionModel().getSelectedItem() != null) 
+                || (byMonthTable.getSelectionModel().getSelectedItem() != null) 
+                || (allAptTable.getSelectionModel().getSelectedItem() != null))
+             {
+            alertGroup2(9);
+            InputStream in = getClass().getResourceAsStream("/Scenes/ModifyAppointment.fxml"); 
+            FXMLLoader loader = new FXMLLoader(); 
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(getClass().getResource("/Scenes/ModifyAppointment.fxml"));
+            Parent ModifyAppointment = loader.load(in);
+            ModifyAppointmentController controller = (ModifyAppointmentController) loader.getController();
+            if(byMonthTable.getSelectionModel().getSelectedItem() != null){
+            controller.setCurrentAppointment(byMonthTable.getSelectionModel().getSelectedItem()); 
+            }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
+                controller.setCurrentAppointment(allAptTable.getSelectionModel().getSelectedItem());
+            }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
+                controller.setCurrentAppointment(byWeekTable.getSelectionModel().getSelectedItem());
+            }
+            Scene modifyPartScene = new Scene(ModifyAppointment);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(modifyPartScene);
+            stage.setResizable(false);
+            stage.show();
+            }
+       }
 
     @FXML
     private void handleADeletebt(ActionEvent event) throws SQLException {
-     if (allAptTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup(2);
-       Appointments delAppoint = allAptTable.getSelectionModel().getSelectedItem();
+     if (byMonthTable.getSelectionModel().getSelectedItem() != null){
+        alertGroup2(2);
+       Appointments delAppoint = byMonthTable.getSelectionModel().getSelectedItem();
        deleteAppointment(delAppoint);
-        ObservableList<Appointments> appointListC = DAOLists.getAllAppointments();
-        allAptTable.setItems(appointListC);
+        populateMonthTable();
        }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
-               alertGroup(2);
+               alertGroup2(2);
        Appointments delAppoint = byWeekTable.getSelectionModel().getSelectedItem();
        deleteAppointment(delAppoint);
-        ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
-        byWeekTable.setItems(appointWeekListB);    
+        populateWeekTable();  
+       }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
+               alertGroup2(2);
+       Appointments delAppoint = allAptTable.getSelectionModel().getSelectedItem();
+       deleteAppointment(delAppoint);
+       populateAllTable(); 
        }
     }
     
@@ -207,20 +246,23 @@ public class AppointmentsController implements Initializable {
     }
     
         private void populateMonthTable(){
-        ObservableList<Appointments> appointListB = DAOLists.getAllAppointments();
-        System.out.println("List Size Equals:" + appointListB.size());
-        allAptTable.setItems(appointListB);
-        AppointmentIDcol1a.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        AppointmentTitlecola.setCellValueFactory(new PropertyValueFactory<>("title"));
-        AppointmentsDescriptioncola.setCellValueFactory(new PropertyValueFactory<>("description"));
-        AppointmentsLoccola.setCellValueFactory(new PropertyValueFactory<>("location"));
-        AppointmentsTypecola.setCellValueFactory(new PropertyValueFactory<>("type"));
-        AppointmentsContactcola.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-        CustomerIDCola.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        UserIDCola.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        AppointmentsStartcola.setCellValueFactory(new PropertyValueFactory<>("start"));
-        AppointmentEndCola.setCellValueFactory(new PropertyValueFactory<>("end"));
+        ObservableList<Appointments> appointMonthListB = DAOLists.getFilteredMonthAppointments();
+        System.out.println("List Size Equals:" + appointMonthListB.size());
+        byMonthTable.setItems(appointMonthListB);
+        AppointmentIDColm.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        AppointmentTitlecolm.setCellValueFactory(new PropertyValueFactory<>("title"));
+        AppointmentsDescriptioncolm.setCellValueFactory(new PropertyValueFactory<>("description"));
+        AppointmentsLoccolm.setCellValueFactory(new PropertyValueFactory<>("location"));
+        AppointmentsTypecolm.setCellValueFactory(new PropertyValueFactory<>("type"));
+        AppointmentsContactcolm.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        CustomerIDColm.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        UserIDColm.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        AppointmentsStartcolm.setCellValueFactory(new PropertyValueFactory<>("start"));
+        AppointmentEndColm.setCellValueFactory(new PropertyValueFactory<>("end"));
     }
+        
+        
+        
         private void populateWeekTable(){
         ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
         System.out.println("List Size Equals:" + appointWeekListB.size());
@@ -237,18 +279,4 @@ public class AppointmentsController implements Initializable {
         AppointmentsEndcolw.setCellValueFactory(new PropertyValueFactory<>("end"));
     }
 
-    @FXML
-    private void handleByMonthRefreshTab(Event event) {
-        populateMonthTable();
-    }
-
-    @FXML
-    private void handleByWeekRefreshTab(Event event) {
-        populateWeekTable();
-    }
-
-    @FXML
-    private void handleAllRefreshTab(Event event) {
-        populateAllTable();
-    }
 }

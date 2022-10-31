@@ -90,7 +90,7 @@
       <Button fx:id="AppointmentsExit" layoutX="693.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleCExitbt" prefHeight="30.0" prefWidth="77.0" text="Exit" />
       <AnchorPane layoutX="67.0" layoutY="488.0" prefHeight="101.0" prefWidth="310.0" style="-fx-border-color: #aaaaaa; -fx-border-radius: 3;">
          <children>
-            <Button fx:id="AppointmentsAddbt" layoutX="219.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCAddbt" prefHeight="25.0" prefWidth="77.0" text="Add" />
+            <Button fx:id="AppointmentsAddbt" layoutX="219.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleAAddbt" prefHeight="25.0" prefWidth="77.0" text="Add" />
             <Button fx:id="AppointmentsModifybt" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleAmodifybt" prefHeight="25.0" prefWidth="77.0" text="Modify" />
             <Button fx:id="AppointmentsDeletebt" layoutX="117.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleADeletebt" prefHeight="25.0" prefWidth="77.0" text="Delete" />
             <Label layoutX="106.0" layoutY="21.0" text="Appointment Controls" />

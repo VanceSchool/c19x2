@@ -4,7 +4,7 @@
  */
 package Helper;
 
-import static Helper.Alerts.alertGroup;
+import static Helper.Alerts.*;
 import static Helper.Time.*;
 import Models.Appointments;
 import Models.Customers;

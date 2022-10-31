@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import static Helper.Alerts.alertGroup;
+import static Helper.Alerts.*;
 import static Helper.Alerts.exitAlert;
 import static Helper.DAOUpdateData.deleteCustomer;
 import Helper.DAOLists;
@@ -104,7 +104,7 @@ public class CustomerController implements Initializable {
    @FXML
    private void handleCDeletebt(ActionEvent event) throws SQLException {
        if (customerTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup(1);
+        alertGroup2(1);
        Customers delCust = customerTable.getSelectionModel().getSelectedItem();
        deleteCustomer(delCust);
        ObservableList<Customers> cusListC = DAOLists.getAllCustomers();
