@@ -4,8 +4,10 @@
  */
 package Controllers;
 
+import Models.Contacts;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,11 +44,11 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private DatePicker endDatepicker;
     @FXML
-    private ComboBox<?> contactdd;
+    private ComboBox<Contacts> contactdd;
     @FXML
-    private ComboBox<?> startTimedd;
+    private ComboBox<LocalTime> startTimedd;
     @FXML
-    private ComboBox<?> endTimedd;
+    private ComboBox<LocalTime> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML

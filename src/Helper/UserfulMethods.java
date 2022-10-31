@@ -4,6 +4,11 @@
  */
 package Helper;
 
+import Models.Customers;
+import java.util.Arrays;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -41,4 +46,10 @@ public abstract class UserfulMethods {
         }
     }
 }
-}
+        public static List displayMinutes(){
+       //create a list to return
+         List<Integer> minuteList = Arrays.asList(00, 15, 30, 45);
+            return minuteList;
+        }
+    }
+
