@@ -134,7 +134,7 @@ public class DAOUpdateData {
      * @throws SQLException
      */
         public static void deleteAppointment(Appointments delAppoint) throws SQLException{
-        String sql = "DELETE appointments.* FROM appointments WHERE Customer_ID = ?";
+        String sql = "DELETE appointments.* FROM appointments WHERE Appointment_ID =?";
         try {
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, delAppoint.getAppointmentID());

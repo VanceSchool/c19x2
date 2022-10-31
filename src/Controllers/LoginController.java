@@ -46,6 +46,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -67,13 +68,6 @@ public class LoginController implements Initializable {
     @FXML
     private Button Loginbt;
     @FXML
-    private RadioButton LoginEnglishrb;
-    @FXML
-    private ToggleGroup LoginLanguage;
-    @FXML
-    private RadioButton LoginFrenchrb;
-    private Text LoginDateTimetxt;
-    @FXML
     private Button LoginExitbt;
     private int userID;
     @FXML
@@ -84,6 +78,10 @@ public class LoginController implements Initializable {
     private Text LoginTimetxt;
     @FXML
     private Text loginHeaderlb;
+    @FXML
+    private Label LoginDateTimelb;
+    @FXML
+    private Label ZoneIdlb;
 
     /**
      * Initializes the controller class.
@@ -123,14 +121,6 @@ public class LoginController implements Initializable {
         loginRecordfailure(setUpUserInfo(setUserInformation(username), password, username));
         passwordAlert();
                 }
-    }
-
-    @FXML
-    private void handleEnglish(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleFrench(ActionEvent event) {
     }
 
     @FXML
@@ -243,8 +233,8 @@ public class LoginController implements Initializable {
         System.out.println(Locale.getDefault());
         try {
             ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
-            ZoneIdtxt.setText(rb.getString("timezone"));
-            LoginDatetxt.setText(rb.getString("date"));
+            ZoneIdlb.setText(rb.getString("timezone"));
+            LoginDateTimelb.setText(rb.getString("date"));
             LoginTimetxt.setText(rb.getString("timezone"));
             loginHeaderlb.setText(rb.getString("title"));
             LoginExitbt.setText(rb.getString("exit"));
