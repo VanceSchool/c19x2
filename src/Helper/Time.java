@@ -55,9 +55,10 @@ public class Time {
         
         return utcZoneTime;
     }
-    public static void changeToTimeStamp(LocalDateTime ldt){
+    public static Timestamp changeToTimeStamp(LocalDateTime ldt){
         Timestamp ts;
         ts = Timestamp.valueOf(ldt);
+        return ts;
     }
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
        LocalDateTime plusFifteen = someTime.plusMinutes(15);

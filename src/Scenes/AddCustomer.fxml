@@ -28,8 +28,6 @@
       <ComboBox fx:id="CustomerStatecb" layoutX="183.0" layoutY="296.0" onAction="#handleCustomerStatecb" prefWidth="150.0" />
       <Label fx:id="CustomerCountrylb" layoutX="57.0" layoutY="261.0" text="Country" />
       <Label fx:id="CustomerStatelb" layoutX="60.0" layoutY="300.0" text="State / Province" />
-      <TextField fx:id="CustomerCitytf" layoutX="183.0" layoutY="213.0" />
-      <Label fx:id="CustomerCitylb" layoutX="60.0" layoutY="217.0" text="City" />
       <Button fx:id="CustomerSavebt" layoutX="81.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleCustomerSavebt" prefHeight="25.0" prefWidth="81.0" text="Save" />
       <Button fx:id="CustomerBackbt" layoutX="230.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleCustomerBackbt" prefHeight="25.0" prefWidth="81.0" text="Back" />
    </children>

@@ -7,6 +7,7 @@ package Controllers;
 import static Helper.Alerts.alertGroup;
 import Helper.UserfulMethods;
 import Helper.DAOLists;
+import static Helper.DAOUpdateData.modifyCustomer;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
 import Models.Countries;
@@ -14,6 +15,7 @@ import Models.Customers;
 import Models.Provinces;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,10 +93,27 @@ public class AddCustomerController implements Initializable {
         }  
 
     @FXML
-    private void handleCustomerSavebt(ActionEvent event) {
+    private void handleCustomerSavebt(ActionEvent event) throws IOException, SQLException {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
-        
+             //if (allAptTable.getSelectionModel().getSelectedItem() != null){
+        alertGroup(6);
+       Customers custMod = new Customers();
+        Provinces modProvCust = CustomerStatecb.getValue();
+        custMod.setState(modProvCust.getDivName());
+       custMod.setAddress(CustomerAddresstf.getText());
+       custMod.setCustomerName(CustomerNametf.getText());
+       custMod.setCustomerPhone(CustomerPhonetf.getText());
+       custMod.setCustomerPostalCode(CustomerPostaltf.getText());
+       modifyCustomer(custMod);
+       
+       alertGroup(8);
+       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
+       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+       Scene scene = new Scene(root);
+       stage.setTitle("Customer Menu");
+       stage.setScene(scene);
+       stage.show();
     }
 
     @FXML
@@ -111,8 +130,6 @@ public class AddCustomerController implements Initializable {
     private void handleCustomerCountrycb(ActionEvent event) {
         Countries jam = CustomerCountrycb.getValue();
         int cId = jam.getCountryId();
-        System.out.println(jam);
-        System.out.println(cId);
         ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
         System.out.println(provListB);
         CustomerStatecb.setItems(provListB);

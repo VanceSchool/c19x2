@@ -5,12 +5,15 @@
 package Helper;
 
 import static Helper.Alerts.alertGroup;
+import static Helper.Time.*;
 import Models.Appointments;
 import Models.Customers;
 import Models.Provinces;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 
 /**
@@ -23,7 +26,7 @@ public class DAOUpdateData {
     }
     
     /**
-     *
+     *deleteCustomer Method for SQL Statement for delete
      * @param delCust
      * @throws SQLException
      */
@@ -61,10 +64,11 @@ public class DAOUpdateData {
         }
 }
         public static void modifyCustomer(Customers modCust) throws SQLException{
+        Timestamp timmy = changeToTimeStamp(getNowLocalDateTime());
         String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
         String sql3 = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
         String sql2 = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = "
-                + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?)"
+                + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?), Last_Update = ?"
                 + "WHERE Customer_ID = ?";
         PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
@@ -77,10 +81,32 @@ public class DAOUpdateData {
             ps2.setString(3, modCust.getPostalcode());
             ps2.setString(4, modCust.getPhone());
             ps2.setString(5,modCust.getState() );
-            ps2.setInt(6, modCust.getCustomerID());
+            ps2.setTimestamp(6, timmy);
+            ps2.setInt(7, modCust.getCustomerID());
             ps2.executeUpdate();
             
         }
+        }
+        
+        public static void addNewCustomers(Customers newCust) throws SQLException{
+            Timestamp timmy = changeToTimeStamp(getNowLocalDateTime());
+        String sql2 = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date,"
+                + "Created_By, Last_Update, Last_Updated_By, Division_ID"
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, SELECT Division_ID FROM first_level_divisions WHERE Division = ?)";
+        
+        PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
+            ps2.setString(1, newCust.getCustomerName());
+            ps2.setString(2, newCust.getAddress());
+            ps2.setString(3, newCust.getPostalcode());
+            ps2.setString(4, newCust.getPhone());
+            ps2.setTimestamp(5, timmy);
+            ps2.setString(6, "vance");
+            ps2.setTimestamp(7, timmy);
+            ps2.setString(8, "vance");
+            ps2.setInt(9, newCust.getCustomerID());
+            ps2.executeUpdate();
+            
+    
         }
         
         

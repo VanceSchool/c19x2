@@ -71,14 +71,18 @@ public class Alerts {
                 break;
             }
             case 6: {
-                alert.setContentText("Please Enter Customer Phone Number");
+                alert.setContentText("Are You Sure you wish to Save New Customer?");
                 break;
             }
             case 7: {
                 alert.setContentText("Please Fill All Fields");
                 break;
             }
-            
+                        
+            case 8: {
+                alert.setContentText("New Customer Created!");
+                break;
+            }
         }
         alert.showAndWait();
     }
