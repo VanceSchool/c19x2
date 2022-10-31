@@ -76,15 +76,14 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ObservableList<Customers> cusListB = DAOLists.getAllCustomers();
-        
         customerTable.setItems(cusListB);
         CustomerIDcol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         CustomerNamecol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        CustomerPhonecol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         CustomerAddresscol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        CustomerZipCodecol.setCellValueFactory(new PropertyValueFactory<>("postalcode"));
+        CustomerPhonecol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         CustomerCountrycol.setCellValueFactory(new PropertyValueFactory<>("country"));
         CustomerCitycol.setCellValueFactory(new PropertyValueFactory<>("state"));
-        CustomerZipCodecol.setCellValueFactory(new PropertyValueFactory<>("postalcode"));
         
     }    
 

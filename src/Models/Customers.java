@@ -7,51 +7,57 @@ package Models;
 import java.sql.Date;
 
 /**
- *
+ *@class Customers
+ * Constructors, Setters and Getters For Class Customers
+ * @param customerId
+ * @param customerName
+ * @param phone
+ * @param address
+ * @param postalCode
+ * @param divisionId
  *@author sean thompson <stho292@wgu.edu>
  */
 public class Customers {
 
-    private int customerID; //Auto incremented in database
+    private int customerId; //Auto incremented in database
     private String customerName;
     private String phone;
     private String address;
+    private String postalCode;
+    private int divisionId;
+    private int countryId;
     private String country;
     private String state;
-    private String postalCode;
-    //private Date createDate;
-    //private String createdBy;
-    //private Date lastUpdate;
-    //private String lastUpdateBy;
+
 
     //constructors
-    public Customers(int customerID, String customerName, String address,String postalCode, String phone, String country, Date lastUpdate, String lastUpdateBy) {
+    public Customers(int customerID, String customerName, String address,String postalCode, String phone,int divisionId ) {
         setCustomerID(customerID);
         setCustomerName(customerName);
-        setCustomerAddress(address);
-        setCustomerPostalCode(postalCode);
+        this.address = address;
+        this.postalCode = postalCode;
         setCustomerPhone(phone);
-        setCustomerCountry(country);
-       // setCustomerLastUpdate(lastUpdate);
-       //setCustomerLastUpdateBy(lastUpdateBy);
-
-    }
-    public Customers(int customerID, String customerName, String address,String postalCode, String phone, String country, String state) {
-        setCustomerID(customerID);
-        setCustomerName(customerName);
-        setCustomerAddress(address);
-        setCustomerPostalCode(postalCode);
-        setCustomerPhone(phone);
-        setCustomerCountry(country);
-        setCustomerState(state);
-
+        this.divisionId = divisionId;
     }
     
+        public Customers(int customerID, String customerName, String address,String postalCode, String phone,String country, String state ) {
+        setCustomerID(customerID);
+        setCustomerName(customerName);
+        this.address = address;
+        setCustomerPostalCode(postalCode);
+        setCustomerPhone(phone);
+        this.state = state;
+        this.country = country;
+        this.divisionId = divisionId;
+        this.countryId = countryId;
+    }
 
+    public Customers() {
+        
+    }
     //getters
-    
     public int getCustomerID() {
-        return customerID;
+        return customerId;
     }
 
     public String getCustomerName() {
@@ -70,10 +76,18 @@ public class Customers {
         return phone;
     }
 
-    public String getCountry() {
+    public int getDivisionId() {
+        return divisionId;
+    }
+    
+    public String getCountry(){
         return country;
     }
-    public String getState() {
+    public int getCountryId(){
+        return countryId;
+    }
+    
+    public String getState(){
         return state;
     }
 /*
@@ -87,16 +101,16 @@ public class Customers {
 */
     //setters
     
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(int customerId) {
 
-        this.customerID = customerID;
+        this.customerId = customerId;
     }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
-    public void setCustomerAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -108,11 +122,18 @@ public class Customers {
         this.phone = phone;
     }
 
-    public void setCustomerCountry(String country) {
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
+    }
+    
+    public void setCountry(String country){
         this.country = country;
     }
     
-    public void setCustomerState(String state) {
+    public void setCountry(int countryId){
+        this.countryId = countryId;
+    }
+    public void setState(String state){
         this.state = state;
     }
 /*

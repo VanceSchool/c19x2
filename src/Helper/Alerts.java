@@ -59,15 +59,15 @@ public class Alerts {
                 break;
             }
             case 3: {
-                alert.setContentText("Please Select Customer Country");
+                alert.setContentText("Customer Has Been Updated");
                 break;
             }
             case 4: {
-                alert.setContentText("Please Select Customer State / Province");
+                alert.setContentText("Are You Sure You wish to update");
                 break;
             }
             case 5: {
-                alert.setContentText("Please Enter Customer Postal Code");
+                alert.setContentText("Customer Updated");
                 break;
             }
             case 6: {

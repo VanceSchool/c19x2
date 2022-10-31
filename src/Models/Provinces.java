@@ -24,6 +24,7 @@ public class Provinces {
         return(divName);
     }
     
+
     public Provinces(int divID, String divName, int countryID){
         this.countryID = countryID;
         this.divName = divName;

@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -176,10 +177,10 @@ public class LoginController implements Initializable {
     *while going through result set, if text matches provided info then return true
     */
     private boolean isPasswordGood (int userID, String password) throws SQLException{
-        Statement st = (Statement) JDBC.connection.createStatement();
-        String sql = "SELECT Password FROM users WHERE User_ID ='" + userID + "' ";
-        ResultSet rs;
-        rs = st.executeQuery(sql);
+        //String sql = "SELECT Password FROM users WHERE User_ID ='" + userID + "' ";
+        String sql ="SELECT * FROM users WHERE users.User_ID = '" + userID + "' AND users.Password = '" + password + "'";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery(sql);
         while(rs.next()){
         String pass = rs.getString("Password");
         System.out.println(pass);

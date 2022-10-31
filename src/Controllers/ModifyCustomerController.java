@@ -4,7 +4,9 @@
  */
 package Controllers;
 
+import static Helper.Alerts.alertGroup;
 import Helper.DAOLists;
+import static Helper.DAOUpdateData.modifyCustomer;
 import Helper.Time;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
@@ -14,6 +16,7 @@ import Models.Customers;
 import Models.Provinces;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -30,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -95,10 +99,31 @@ public class ModifyCustomerController implements Initializable {
     }    
 
     @FXML
-    private void handleCustomerSavebt(ActionEvent event) {
+    private void handleCustomerSavebt(ActionEvent event) throws SQLException, IOException {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
+     //if (allAptTable.getSelectionModel().getSelectedItem() != null){
+        alertGroup(4);
+       Customers custMod = new Customers();
+        Provinces modProvCust = CustomerStatecb.getValue();
+        custMod.setState(modProvCust.getDivName());
+       custMod.setAddress(CustomerAddresstf.getText());
+       int customerId = Integer.parseInt(CustomerIdtf.getText());
+       custMod.setCustomerID(customerId);
+       custMod.setCustomerName(CustomerNametf.getText());
+       custMod.setCustomerPhone(CustomerPhonetf.getText());
+       custMod.setCustomerPostalCode(CustomerPostaltf.getText());
+       modifyCustomer(custMod);
+       
+       alertGroup(5);
+       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
+       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+       Scene scene = new Scene(root);
+       stage.setTitle("Customer Menu");
+       stage.setScene(scene);
+       stage.show();
     }
+  
 
     @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
