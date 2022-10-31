@@ -16,53 +16,22 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author LabUser
- */
+     /**
+     * @class DAOUpdateData
+     * Contains methods to INSERT INTO, UPDATE, DELETE MySQL Database info
+     * Affects tables customers and appointments
+     * @author sean thompson <stho292@wgu.edu>
+     */ 
 public class DAOUpdateData {
 
     public DAOUpdateData() {
     }
-    
-    /**
-     *deleteCustomer Method for SQL Statement for delete
-     * @param delCust
+          
+     /**
+     * modifyCustomer Method for SQL Statement for UPDATE customers Table
+     * @param modCust
      * @throws SQLException
-     */
-    public static void deleteCustomer(Customers delCust) throws SQLException{
-        String sql1, sql2;
-        sql1 = "DELETE appointments.* FROM appointments WHERE Customer_ID = ?";
-        sql2 = "DELETE customers.* FROM customers WHERE Customer_ID = ?";
-        try {
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql1);
-            ps.setInt(1, delCust.getCustomerID());
-            ps.execute();
-            ps = JDBC.getConnection().prepareStatement(sql2);
-            ps.setInt(1, delCust.getCustomerID());
-            ps.execute();
-        } catch(SQLException e) {
-            System.out.println("Issue with SQL");
-            e.printStackTrace();
-        }
-}
-        /**
-     *
-     * @param delAppoint
-     * @throws SQLException
-     */
-        public static void deleteAppointment(Appointments delAppoint) throws SQLException{
-        String sql;
-        sql = "DELETE appointments.* FROM appointments WHERE Customer_ID = ?";
-        try {
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setInt(1, delAppoint.getAppointmentID());
-            ps.execute();
-        } catch(SQLException e) {
-            System.out.println("Issue with SQL");
-            e.printStackTrace();
-        }
-}
+     */ 
         public static void modifyCustomer(Customers modCust) throws SQLException{
         Timestamp timmy = changeToTimeStamp(getNowLocalDateTime());
         String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
@@ -87,31 +56,92 @@ public class DAOUpdateData {
             
         }
         }
-        
-        public static void addNewCustomers(Customers newCust) throws SQLException{
-            Timestamp timmy = changeToTimeStamp(getNowLocalDateTime());
+            
+    /**
+     *deleteCustomer Method for SQL Statement for DELETE customers Table
+     * @param delCust
+     * @throws SQLException
+     */
+    public static void deleteCustomer(Customers delCust) throws SQLException{
+        String sql1, sql2;
+        sql1 = "DELETE appointments.* FROM appointments WHERE Customer_ID = ?";
+        sql2 = "DELETE customers.* FROM customers WHERE Customer_ID = ?";
+        try {
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql1);
+            ps.setInt(1, delCust.getCustomerID());
+            ps.execute();
+            ps = JDBC.getConnection().prepareStatement(sql2);
+            ps.setInt(1, delCust.getCustomerID());
+            ps.execute();
+        } catch(SQLException e) {
+            System.out.println("Issue with SQL");
+            e.printStackTrace();
+        }
+}
+     /**
+     * addNewCustomers Method for SQL Statement for INSERT INTO customers Table
+     * @param newCust
+     * @throws SQLException
+     */ 
+        public static void addNewCustomers(Customers newCust) throws SQLException{ 
         String sql2 = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date,"
-                + "Created_By, Last_Update, Last_Updated_By, Division_ID"
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, SELECT Division_ID FROM first_level_divisions WHERE Division = ?)";
-        
+                + "Created_By, Last_Update, Last_Updated_By, Division_ID) "
+                + "VALUES(?, ?, ?, ?, NOW(), ?, NOW(), ?, (SELECT Division_ID FROM first_level_divisions WHERE Division = ?))";
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
             ps2.setString(1, newCust.getCustomerName());
             ps2.setString(2, newCust.getAddress());
             ps2.setString(3, newCust.getPostalcode());
             ps2.setString(4, newCust.getPhone());
-            ps2.setTimestamp(5, timmy);
+            ps2.setString(5, "vance");
             ps2.setString(6, "vance");
-            ps2.setTimestamp(7, timmy);
-            ps2.setString(8, "vance");
-            ps2.setInt(9, newCust.getCustomerID());
+            ps2.setString(7, newCust.getState());
+            System.out.println(sql2);
             ps2.executeUpdate();
-            
     
         }
+     
         
         
+        
+        
+        
+        
+        
+        
+     /**
+     * addAppointment
+     * @param modAppoint
+     * @throws SQLException
+     */
+        public static void addAppointment(Appointments appointToAdd){
+            String sql ="INSERT INTO appointments VALUES ( )";
+            System.out.println(sql);
+       }
+     /**
+     * modifyAppointment
+     * @param modAppoint
+     * @throws SQLException
+     */
         public static void modifyAppointment(Appointments modAppoint){
             String sql;
             sql ="";
         }
+        
+        
+     /**
+     * deleteAppointment 
+     * @param delAppoint
+     * @throws SQLException
+     */
+        public static void deleteAppointment(Appointments delAppoint) throws SQLException{
+        String sql = "DELETE appointments.* FROM appointments WHERE Customer_ID = ?";
+        try {
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, delAppoint.getAppointmentID());
+            ps.execute();
+        } catch(SQLException e) {
+            System.out.println("Issue with SQL");
+            e.printStackTrace();
+        }
+}
 }

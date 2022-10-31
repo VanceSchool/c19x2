@@ -7,6 +7,7 @@ package Controllers;
 import static Helper.Alerts.alertGroup;
 import Helper.UserfulMethods;
 import Helper.DAOLists;
+import static Helper.DAOUpdateData.addNewCustomers;
 import static Helper.DAOUpdateData.modifyCustomer;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
@@ -105,7 +106,7 @@ public class AddCustomerController implements Initializable {
        custMod.setCustomerName(CustomerNametf.getText());
        custMod.setCustomerPhone(CustomerPhonetf.getText());
        custMod.setCustomerPostalCode(CustomerPostaltf.getText());
-       modifyCustomer(custMod);
+       addNewCustomers(custMod);
        
        alertGroup(8);
        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
