@@ -16,7 +16,7 @@
             <Button fx:id="CustomerAddbt" layoutX="219.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCAddbt" prefHeight="25.0" prefWidth="77.0" text="Add" />
             <Button fx:id="CustomerModifybt" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCmodifybt" prefHeight="25.0" prefWidth="77.0" text="Modify" />
             <Button fx:id="CustomerDeletebt" layoutX="117.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCDeletebt" prefHeight="25.0" prefWidth="77.0" text="Delete" />
-            <Label fx:id="CustomerCustomerControlslb" layoutX="106.0" layoutY="21.0" text="Customer Controls" />
+            <Label layoutX="106.0" layoutY="21.0" text="Customer Controls" />
          </children>
       </AnchorPane>
       <TableView fx:id="customerTable" layoutY="67.0" prefHeight="264.0" prefWidth="882.0">
@@ -30,7 +30,7 @@
             <TableColumn fx:id="CustomerZipCodecol" prefWidth="112.0" text="Zip Code" />
         </columns>
       </TableView>
-      <Label fx:id="CustomerCustomerlb" layoutX="324.0" layoutY="14.0" text="Customer">
+      <Label layoutX="324.0" layoutY="14.0" text="Customer">
          <font>
             <Font size="28.0" />
          </font>

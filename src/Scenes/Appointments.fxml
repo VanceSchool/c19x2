@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="598.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AppointmentsController">
    <children>
-      <Label fx:id="Appointmentslb" layoutX="373.0" layoutY="71.0" text="Appointments">
+      <Label layoutX="373.0" layoutY="71.0" text="Appointments">
          <font>
             <Font size="28.0" />
          </font>
@@ -93,7 +93,7 @@
             <Button fx:id="AppointmentsAddbt" layoutX="219.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleCAddbt" prefHeight="25.0" prefWidth="77.0" text="Add" />
             <Button fx:id="AppointmentsModifybt" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleAmodifybt" prefHeight="25.0" prefWidth="77.0" text="Modify" />
             <Button fx:id="AppointmentsDeletebt" layoutX="117.0" layoutY="62.0" mnemonicParsing="false" onAction="#handleADeletebt" prefHeight="25.0" prefWidth="77.0" text="Delete" />
-            <Label fx:id="AppointmentsLb" layoutX="106.0" layoutY="21.0" text="Appointment Controls" />
+            <Label layoutX="106.0" layoutY="21.0" text="Appointment Controls" />
          </children>
       </AnchorPane>
    </children>

@@ -56,31 +56,10 @@ public class AddCustomerController implements Initializable {
     @FXML
     private TextField CustomerPostaltf;
     @FXML
-    private TextField CustomerIdtf;
-    @FXML
     private ComboBox<Countries> CustomerCountrycb;
     @FXML
     private ComboBox<Provinces> CustomerStatecb;
-    @FXML
-    private Label ModifyCustomerlb;
-    @FXML
-    private Label CustomerNamelb;
-    @FXML
-    private Label CustomerAddreslb;
-    @FXML
-    private Label CustomerNumberlb;
-    @FXML
-    private Label CustomerPostallb;
-    @FXML
-    private Label CustomerIDlb;
-    @FXML
-    private Label CustomerCountrylb;
-    @FXML
-    private Label CustomerStatelb;
-    @FXML
-    private TextField CustomerCitytf;
-    @FXML
-    private Label CustomerCitylb;
+
 
     /**
      * Initializes the controller class.
@@ -90,7 +69,6 @@ public class AddCustomerController implements Initializable {
         // TODO
         ObservableList<Countries> countListB = DAOLists.getAllCountries();
         CustomerCountrycb.setItems(countListB);
-        CustomerIdtf.setEditable(false);
         }  
 
     @FXML
@@ -100,8 +78,8 @@ public class AddCustomerController implements Initializable {
              //if (allAptTable.getSelectionModel().getSelectedItem() != null){
         alertGroup(6);
        Customers custMod = new Customers();
-        Provinces modProvCust = CustomerStatecb.getValue();
-        custMod.setState(modProvCust.getDivName());
+       Provinces modProvCust = CustomerStatecb.getValue();
+       custMod.setState(modProvCust.getDivName());
        custMod.setAddress(CustomerAddresstf.getText());
        custMod.setCustomerName(CustomerNametf.getText());
        custMod.setCustomerPhone(CustomerPhonetf.getText());

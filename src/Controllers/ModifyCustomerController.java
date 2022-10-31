@@ -96,6 +96,7 @@ public class ModifyCustomerController implements Initializable {
         countListB = DAOLists.getAllCountries();
         CustomerCountrycb.setItems(countListB);
         CustomerIdtf.setEditable(false);
+        CustomerIdtf.setDisable(true);
     }    
 
     @FXML

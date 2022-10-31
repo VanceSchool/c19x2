@@ -13,21 +13,21 @@
       <TextField fx:id="CustomerAddresstf" layoutX="184.0" layoutY="173.0" />
       <TextField fx:id="CustomerPhonetf" layoutX="183.0" layoutY="380.0" />
       <TextField fx:id="CustomerPostaltf" layoutX="184.0" layoutY="337.0" />
-      <Label fx:id="ModifyCustomerlb" layoutX="107.0" layoutY="14.0" text="Modify Customer">
+      <Label layoutX="107.0" layoutY="14.0" text="Modify Customer">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="CustomerNamelb" layoutX="57.0" layoutY="135.0" text="Customer Name" />
-      <Label fx:id="CustomerAddreslb" layoutX="57.0" layoutY="177.0" text="Address" />
-      <Label fx:id="CustomerNumberlb" layoutX="56.0" layoutY="384.0" text="Phone Number" />
-      <Label fx:id="CustomerPostallb" layoutX="57.0" layoutY="341.0" text="Postal Code" />
-      <Label fx:id="CustomerIDlb" layoutX="56.0" layoutY="89.0" text="Customer ID" />
+      <Label layoutX="57.0" layoutY="135.0" text="Customer Name" />
+      <Label layoutX="57.0" layoutY="177.0" text="Address" />
+      <Label layoutX="56.0" layoutY="384.0" text="Phone Number" />
+      <Label layoutX="57.0" layoutY="341.0" text="Postal Code" />
+      <Label layoutX="56.0" layoutY="89.0" text="Customer ID" />
       <TextField fx:id="CustomerIdtf" layoutX="184.0" layoutY="85.0" />
       <ComboBox fx:id="CustomerCountrycb" layoutX="183.0" layoutY="257.0" onAction="#handleCustomerCountrycb" prefWidth="150.0" />
       <ComboBox fx:id="CustomerStatecb" layoutX="183.0" layoutY="296.0" onAction="#handleCustomerStatecb" prefWidth="150.0" />
-      <Label fx:id="CustomerCountrylb" layoutX="57.0" layoutY="261.0" text="Country" />
-      <Label fx:id="CustomerStatelb" layoutX="60.0" layoutY="300.0" text="State / Province" />
+      <Label layoutX="57.0" layoutY="261.0" text="Country" />
+      <Label layoutX="60.0" layoutY="300.0" text="State / Province" />
       <Button fx:id="CustomerSavebt" layoutX="81.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleCustomerSavebt" prefHeight="25.0" prefWidth="81.0" text="Save" />
       <Button fx:id="CustomerBackbt" layoutX="230.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleCustomerBackbt" prefHeight="25.0" prefWidth="81.0" text="Back" />
    </children>
