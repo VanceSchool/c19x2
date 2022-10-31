@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,8 +42,6 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Button AppointmentsDeletebt;
     @FXML
-    private Label Appointmentslb;
-    @FXML
     private Button AppointmentsMainMenubt;
     @FXML
     private Button AppointmentsExit;
@@ -51,8 +50,6 @@ public class AppointmentsController implements Initializable {
     @FXML
     private Button AppointmentsModifybt;
     @FXML
-    private Label AppointmentsLb;
-    @FXML
     private Tab AppointmentsbyMonthTab;
     @FXML
     private Tab AppointmentsByWeekTab;
@@ -60,10 +57,6 @@ public class AppointmentsController implements Initializable {
     private Tab AppointmentsAllTab;
     @FXML
     private TableView<Appointments> byMonthTable;
-    @FXML
-    private TableView<Appointments> byWeekTable;
-    @FXML
-    private TableView<Appointments> allAptTable;
     @FXML
     private TableColumn<Appointments, Integer> AppointmentIDColm;
     @FXML
@@ -85,6 +78,8 @@ public class AppointmentsController implements Initializable {
     @FXML
     private TableColumn<Appointments, Integer> UserIDColm;
     @FXML
+    private TableView<Appointments> byWeekTable;
+    @FXML
     private TableColumn<Appointments, Integer> AppointmentIDcolw;
     @FXML
     private TableColumn<Appointments, String> AppointmentTitlecolw;
@@ -104,6 +99,8 @@ public class AppointmentsController implements Initializable {
     private TableColumn<Appointments, Integer> CustomerIDColw;
     @FXML
     private TableColumn<Appointments, Integer> UserIDColw;
+    @FXML
+    private TableView<Appointments> allAptTable;
     @FXML
     private TableColumn<Appointments, LocalDateTime> AppointmentIDcol1a;
     @FXML
@@ -132,10 +129,12 @@ public class AppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         populateAllTable();
+        populateWeekTable();
     }    
     /*
      *@FXML
     */
+    @FXML
     public void handleCMainMenubt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -181,6 +180,12 @@ public class AppointmentsController implements Initializable {
        deleteAppointment(delAppoint);
         ObservableList<Appointments> appointListC = DAOLists.getAllAppointments();
         allAptTable.setItems(appointListC);
+       }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
+               alertGroup(2);
+       Appointments delAppoint = byWeekTable.getSelectionModel().getSelectedItem();
+       deleteAppointment(delAppoint);
+        ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
+        byWeekTable.setItems(appointWeekListB);    
        }
     }
     
@@ -199,5 +204,51 @@ public class AppointmentsController implements Initializable {
         UserIDCola.setCellValueFactory(new PropertyValueFactory<>("userId"));
         AppointmentsStartcola.setCellValueFactory(new PropertyValueFactory<>("start"));
         AppointmentEndCola.setCellValueFactory(new PropertyValueFactory<>("end"));
+    }
+    
+        private void populateMonthTable(){
+        ObservableList<Appointments> appointListB = DAOLists.getAllAppointments();
+        System.out.println("List Size Equals:" + appointListB.size());
+        allAptTable.setItems(appointListB);
+        AppointmentIDcol1a.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        AppointmentTitlecola.setCellValueFactory(new PropertyValueFactory<>("title"));
+        AppointmentsDescriptioncola.setCellValueFactory(new PropertyValueFactory<>("description"));
+        AppointmentsLoccola.setCellValueFactory(new PropertyValueFactory<>("location"));
+        AppointmentsTypecola.setCellValueFactory(new PropertyValueFactory<>("type"));
+        AppointmentsContactcola.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        CustomerIDCola.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        UserIDCola.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        AppointmentsStartcola.setCellValueFactory(new PropertyValueFactory<>("start"));
+        AppointmentEndCola.setCellValueFactory(new PropertyValueFactory<>("end"));
+    }
+        private void populateWeekTable(){
+        ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
+        System.out.println("List Size Equals:" + appointWeekListB.size());
+        byWeekTable.setItems(appointWeekListB);
+        AppointmentIDcolw.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        AppointmentTitlecolw.setCellValueFactory(new PropertyValueFactory<>("title"));
+        AppointmentsDescriptioncolw.setCellValueFactory(new PropertyValueFactory<>("description"));
+        AppointmentsLoccolw.setCellValueFactory(new PropertyValueFactory<>("location"));
+        AppointmentsTypecolw.setCellValueFactory(new PropertyValueFactory<>("type"));
+        AppointmentsContactcolw.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        CustomerIDColw.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        UserIDColw.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        AppointmentsStartcolw.setCellValueFactory(new PropertyValueFactory<>("start"));
+        AppointmentsEndcolw.setCellValueFactory(new PropertyValueFactory<>("end"));
+    }
+
+    @FXML
+    private void handleByMonthRefreshTab(Event event) {
+        populateMonthTable();
+    }
+
+    @FXML
+    private void handleByWeekRefreshTab(Event event) {
+        populateWeekTable();
+    }
+
+    @FXML
+    private void handleAllRefreshTab(Event event) {
+        populateAllTable();
     }
 }
