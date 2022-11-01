@@ -231,7 +231,7 @@ public class AppointmentsController implements Initializable {
     
     private void populateAllTable(){
         ObservableList<Appointments> appointListB = DAOLists.getAllAppointments();
-        System.out.println("List Size Equals:" + appointListB.size());
+        //System.out.println("List Size Equals:" + appointListB.size());
         allAptTable.setItems(appointListB);
         AppointmentIDcol1a.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         AppointmentTitlecola.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -247,7 +247,7 @@ public class AppointmentsController implements Initializable {
     
         private void populateMonthTable(){
         ObservableList<Appointments> appointMonthListB = DAOLists.getFilteredMonthAppointments();
-        System.out.println("List Size Equals:" + appointMonthListB.size());
+        //System.out.println("List Size Equals:" + appointMonthListB.size());
         byMonthTable.setItems(appointMonthListB);
         AppointmentIDColm.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         AppointmentTitlecolm.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -265,7 +265,7 @@ public class AppointmentsController implements Initializable {
         
         private void populateWeekTable(){
         ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
-        System.out.println("List Size Equals:" + appointWeekListB.size());
+        //System.out.println("List Size Equals:" + appointWeekListB.size());
         byWeekTable.setItems(appointWeekListB);
         AppointmentIDcolw.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         AppointmentTitlecolw.setCellValueFactory(new PropertyValueFactory<>("title"));

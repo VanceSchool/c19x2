@@ -5,12 +5,16 @@
 package Controllers;
 
 import Helper.Time;
+import Helper.UserfulMethods;
+import static Helper.UserfulMethods.displayMinutes;
 import Models.Appointments;
 import Models.Contacts;
 import Models.Customers;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,9 +48,9 @@ public class ModifyAppointmentController implements Initializable {
     @FXML
     private ComboBox<Contacts> contactdd;
     @FXML
-    private ComboBox<Time> startTimedd;
+    private ComboBox<Integer> startTimedd;
     @FXML
-    private ComboBox<Time> endTimedd;
+    private ComboBox<Integer> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML
@@ -57,7 +61,7 @@ public class ModifyAppointmentController implements Initializable {
     @FXML
     private Button AppointmentBackbt;
     @FXML
-    private ComboBox<?> AppointmentCustomercb;
+    private ComboBox<Customers> AppointmentCustomercb;
     @FXML
     private TextField AppointmentIDtxt;
 
@@ -67,6 +71,11 @@ public class ModifyAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<Integer> minuteList = displayMinutes();
+        startTimedd.setItems(minuteList);
+        endTimedd.setItems(minuteList);
+        AppointmentIDtxt.setEditable(false);
+        AppointmentIDtxt.setDisable(true);
     }    
 
     @FXML

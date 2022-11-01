@@ -46,9 +46,10 @@ public abstract class UserfulMethods {
         }
     }
 }
-        public static List displayMinutes(){
-       //create a list to return
-         List<Integer> minuteList = Arrays.asList(00, 15, 30, 45);
+        public static ObservableList<Integer> displayMinutes(){
+       
+       ObservableList<Integer> minuteList = FXCollections.observableArrayList();
+        minuteList.addAll(00, 15, 30, 45);
             return minuteList;
         }
     }

@@ -4,17 +4,20 @@
  */
 package Helper;
 
+import Controllers.LoginController;
 import static Helper.Alerts.*;
 import static Helper.Time.*;
 import Models.Appointments;
 import Models.Customers;
 import Models.Provinces;
+import Models.User;
 import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
+
 
      /**
      * @class DAOUpdateData
@@ -23,7 +26,7 @@ import javafx.collections.ObservableList;
      * @author sean thompson <stho292@wgu.edu>
      */ 
 public class DAOUpdateData {
-
+public User user = new User();
     public DAOUpdateData() {
     }
           
@@ -86,7 +89,9 @@ public class DAOUpdateData {
         public static void addNewCustomers(Customers newCust) throws SQLException{ 
         String sql2 = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date,"
                 + "Created_By, Last_Update, Last_Updated_By, Division_ID) "
-                + "VALUES(?, ?, ?, ?, NOW(), ?, NOW(), ?, (SELECT Division_ID FROM first_level_divisions WHERE Division = ?))";
+                + "VALUES(?, ?, ?, ?, NOW(), ?, NOW(), ?, "
+                + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?))";
+        
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
             ps2.setString(1, newCust.getCustomerName());
             ps2.setString(2, newCust.getAddress());
@@ -97,7 +102,6 @@ public class DAOUpdateData {
             ps2.setString(7, newCust.getState());
             System.out.println(sql2);
             ps2.executeUpdate();
-    
         }
      
         
@@ -114,7 +118,9 @@ public class DAOUpdateData {
      * @throws SQLException
      */
         public static void addAppointment(Appointments appointToAdd){
-            String sql ="INSERT INTO appointments VALUES ( )";
+            String sql ="INSERT INTO appointments \n" +
+"(Title, Description, Location, Type, Start, END, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
+"VALUES ( ? ,? ,? , ? , ? ,? , current_date(), 'vance', current_date(), 'vance', '1', '1', '3'); ";
             System.out.println(sql);
        }
      /**

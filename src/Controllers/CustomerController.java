@@ -85,6 +85,13 @@ public class CustomerController implements Initializable {
         CustomerCountrycol.setCellValueFactory(new PropertyValueFactory<>("country"));
         CustomerCitycol.setCellValueFactory(new PropertyValueFactory<>("state"));
         
+        customerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+        System.out.println("I Can't Beleive Lambda is this easy");
+                }
+                }
+                );
+        
     }    
 
     @FXML

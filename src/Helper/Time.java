@@ -61,7 +61,7 @@ public class Time {
         return ts;
     }
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
-       LocalDateTime plusFifteen = someTime.plusMinutes(15);
+       LocalDateTime plusFifteen = someTime.plusMinutes(30);
        return plusFifteen;
     }
 }

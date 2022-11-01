@@ -11,6 +11,9 @@ import Helper.DAOLists;
 import Models.User;
 import Helper.JDBC;
 import static Helper.JDBC.connection;
+import static Helper.Time.*;
+import Main.Seanthompsonc195;
+import Models.Appointments;
 import Models.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +38,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +87,8 @@ public class LoginController implements Initializable {
     private Label LoginDateTimelb;
     @FXML
     private Label ZoneIdlb;
-
+    ObservableList<Appointments> currentAppointments = FXCollections.observableArrayList();
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
     /**
      * Initializes the controller class.
      */
@@ -92,15 +98,15 @@ public class LoginController implements Initializable {
         LoginPasswordtf.setText(null);
         resourceBundleChange();
         setZoneIdField();
+        
     }    
 
     @FXML
-    private void handleLoginbt(ActionEvent event) throws IOException, SQLException {
+    public void handleLoginbt(ActionEvent event) throws IOException, SQLException {
         String username = LoginUsernametf.getText();
         String password = LoginPasswordtf.getText();
         // general login button
         //if((username != null) && (password != null)){
-        
         // Password Check when login button us pressed.
         if(isPasswordGood(setUserInformation(username), password)){
         loginRecordSuccess(setUpUserInfo(setUserInformation(username), password, username));
@@ -137,7 +143,6 @@ public class LoginController implements Initializable {
     private void setZoneIdField(){
         ZoneIdtxt.setText(ZoneId.systemDefault().toString());
         LoginDatetxt.setText(LocalDate.now().toString());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
     }
     /* Set userID
@@ -181,17 +186,41 @@ public class LoginController implements Initializable {
     
     private void appointmentAlert(){
         System.out.println("Appointment Alert");
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = getNowLocalDateTime();
+        LocalDateTime now15 = localTimePlus15(now);
         System.out.println(now);
+        
+
+        FilteredList<Appointments> reminderAcppointments = new FilteredList<>(currentAppointments);
+
+        //lambda expression used to efficiently identify any appointment starting within the next 15 minutes
+        reminderAcppointments.setPredicate(row -> {
+            LocalDateTime rowDate = LocalDateTime.parse(row.getStart().format(dtf));
+            return rowDate.isAfter(now.minusMinutes(30)) && rowDate.isBefore(now15);
+        }
+        );
+        if (reminderAcppointments.isEmpty()) {
+            System.out.println("No upcoming appointment alerts.");
+        } else {
+            int appointment = reminderAcppointments.get(0).getAppointmentID();
+            String start = reminderAcppointments.get(0).getStart().toString(); //1
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("You have Upcoming Appointments");
+            alert.setHeaderText("You have an appointment scheduled in 15 min");
+            alert.setContentText("AppointmentID:" + appointment
+                    + " starts at " + start + ".");
+            alert.showAndWait();
+        }
     }
     
-    private User setUpUserInfo(int userID, String password, String username) throws SQLException{
+    public User setUpUserInfo(int userID, String password, String username) throws SQLException{
         User user = new User(-1, password, username);
         user.setUserId(setUserInformation(username));
         user.setUserName(username);
         user.setUserPassword(password);
         return user;
     }
+    
     /* Login Record Update
    
     */
@@ -204,7 +233,7 @@ public class LoginController implements Initializable {
             //out.txt will appear in the project's root directory under NetBeans projects
             //Note that Notepad will not display the following lines on separate lines
             pw.append("Succesful Login Attempt - User_ID: '" + user.getUserId() + "', Username:'"+ user.getUserName() +"' Password'"+ user.getUserPassword() +"'"
-                    + "Time: '"+ LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "'\n");
+                    + "Time: '"+ LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "' Date: '"+ LocalDate.now() + "'\n");
             pw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,7 +252,7 @@ public class LoginController implements Initializable {
             //out.txt will appear in the project's root directory under NetBeans projects
             //Note that Notepad will not display the following lines on separate lines
             pw.append("Unsuccesful Login Attempt - User_ID: '" + user.getUserId() + "', Username:'"+ user.getUserName() +"' Password'"+ user.getUserPassword() +"'"
-                    + "Time: '"+ LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "'\n");
+                    + "Time: '"+ LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "' Date: '"+ LocalDate.now() + "'\n");
             pw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

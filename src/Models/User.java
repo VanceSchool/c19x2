@@ -33,6 +33,10 @@ userName = this.userName;
         userPassword = this.userPassword;
     }
 
+    public User() {
+        
+    }
+
 //Setters
 public void setUserId(int userId){
     this.userId = userId;

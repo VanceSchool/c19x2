@@ -4,11 +4,15 @@
  */
 package Controllers;
 
+import Helper.UserfulMethods;
+import static Helper.UserfulMethods.displayMinutes;
 import Models.Contacts;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,9 +50,9 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private ComboBox<Contacts> contactdd;
     @FXML
-    private ComboBox<LocalTime> startTimedd;
+    private ComboBox<Integer> startTimedd;
     @FXML
-    private ComboBox<LocalTime> endTimedd;
+    private ComboBox<Integer> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML
@@ -61,7 +65,11 @@ public class AddAppointmentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
+        ObservableList<Integer> minuteList = displayMinutes();
+        startTimedd.setItems(minuteList);
+        endTimedd.setItems(minuteList);
     }    
 
     @FXML
