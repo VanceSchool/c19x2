@@ -10,8 +10,12 @@ import Models.Contacts;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,9 +54,9 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private ComboBox<Contacts> contactdd;
     @FXML
-    private ComboBox<Integer> startTimedd;
+    private ComboBox<String> startTimedd;
     @FXML
-    private ComboBox<Integer> endTimedd;
+    private ComboBox<String> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML
@@ -65,11 +69,11 @@ public class AddAppointmentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+     addTime();
         // TODO
         ObservableList<Integer> minuteList = displayMinutes();
-        startTimedd.setItems(minuteList);
-        endTimedd.setItems(minuteList);
+        //startTimedd.setItems(minuteList);
+        //endTimedd.setItems(minuteList);
     }    
 
     @FXML
@@ -86,4 +90,25 @@ public class AddAppointmentsController implements Initializable {
         stage.show();
     }
     
+    private void addTime(){
+        ObservableList<String> timeChoice = FXCollections.observableArrayList();
+        int[] ti = IntStream.rangeClosed(1, 10).toArray();
+        timeChoice.add(LocalTime.of(8, 0).format(DateTimeFormatter.ofPattern("h:mm")));
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        startTimedd.setItems(timeChoice);
+        endTimedd.setItems(timeChoice);
+    }
 }
