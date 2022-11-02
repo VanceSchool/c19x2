@@ -7,8 +7,10 @@ package Controllers;
 import static Helper.Alerts.*;
 import Helper.UserfulMethods;
 import Helper.DAOLists;
-import static Helper.DAOUpdateData.*;
-import static Helper.UserfulMethods.*;
+import static Helper.DAOUpdateData.addNewCustomers;
+import static Helper.DAOUpdateData.modifyCustomer;
+import static Helper.UserfulMethods.validateHasSelection;
+import static Helper.UserfulMethods.validateNonEmpty;
 import Models.Countries;
 import Models.Customers;
 import Models.Provinces;
@@ -108,7 +110,7 @@ public class AddCustomerController implements Initializable {
         Countries jam = CustomerCountrycb.getValue();
         int cId = jam.getCountryId();
         ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
-        System.out.println(provListB);
+        //System.out.println(provListB);
         CustomerStatecb.setItems(provListB);
     }
 

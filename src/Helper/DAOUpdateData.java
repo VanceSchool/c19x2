@@ -5,6 +5,7 @@
 package Helper;
 
 import Controllers.LoginController;
+import static Controllers.LoginController.meUserID;
 import static Helper.Alerts.*;
 import static Helper.Time.*;
 import Models.Appointments;
@@ -91,16 +92,18 @@ public User user = new User();
                 + "Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES(?, ?, ?, ?, NOW(), ?, NOW(), ?, "
                 + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?))";
-        
+        //(SELECT User_Name FROM users WHERE User_ID = ?)
+
+       System.out.println(LoginController.meUserID);
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
             ps2.setString(1, newCust.getCustomerName());
             ps2.setString(2, newCust.getAddress());
             ps2.setString(3, newCust.getPostalcode());
             ps2.setString(4, newCust.getPhone());
-            ps2.setString(5, "vance");
-            ps2.setString(6, "vance");
+            ps2.setString(5, LoginController.meUserID);
+            ps2.setString(6, LoginController.meUserID);
             ps2.setString(7, newCust.getState());
-            System.out.println(sql2);
+            //System.out.println(sql2);
             ps2.executeUpdate();
         }
      

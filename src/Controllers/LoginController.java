@@ -5,12 +5,12 @@
 package Controllers;
 
 
-import static Helper.Alerts.exitAlert;
-import static Helper.Alerts.passwordAlert;
+import static Helper.Alerts.*;
 import Helper.DAOLists;
 import Models.User;
 import Helper.JDBC;
-import static Helper.JDBC.connection;
+import Helper.JDBC.*;
+import Helper.Time.*;
 import static Helper.Time.*;
 import Main.Seanthompsonc195;
 import Models.Appointments;
@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
     private Button Loginbt;
     @FXML
     private Button LoginExitbt;
-    private int userID;
+    public static String meUserID;
     @FXML
     private Text ZoneIdtxt;
     @FXML
@@ -89,6 +89,7 @@ public class LoginController implements Initializable {
     private Label ZoneIdlb;
     ObservableList<Appointments> currentAppointments = FXCollections.observableArrayList();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+    public User meUser;
     /**
      * Initializes the controller class.
      */
@@ -110,6 +111,7 @@ public class LoginController implements Initializable {
         // Password Check when login button us pressed.
         if(isPasswordGood(setUserInformation(username), password)){
         loginRecordSuccess(setUpUserInfo(setUserInformation(username), password, username));
+        meUserID = username;
         appointmentAlert();
         // load widget hierarchy of next screen
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
@@ -123,6 +125,7 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         // "raise the curtain" Show the scene
         stage.show();
+ 
         }else{
         loginRecordfailure(setUpUserInfo(setUserInformation(username), password, username));
         passwordAlert();
@@ -153,16 +156,16 @@ public class LoginController implements Initializable {
     *while going through result set, if text matches provided info then return the new user ID
     */  
    public int setUserInformation(String username) throws SQLException{
-        int userID = -1;
+        int meUserID = -1;
         Statement st = (Statement) JDBC.connection.createStatement();
         String sqlStatement = "SELECT User_ID FROM users WHERE User_Name ='" + username + "'";
         ResultSet rs;
         rs = st.executeQuery(sqlStatement);
         while (rs.next()) {
-            userID = rs.getInt("User_Id");
+            meUserID = rs.getInt("User_Id");
         }
-        System.out.println(userID);
-        return userID;
+        System.out.println(meUserID);
+        return meUserID;
     }
     /*Validate Password:
     *Connect to database

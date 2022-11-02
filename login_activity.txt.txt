@@ -4,3 +4,8 @@ Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '1
 Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '21:15:42' Date: '2022-10-31'
 Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '21:16:24' Date: '2022-10-31'
 Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '21:20:50' Date: '2022-10-31'
+Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '00:53:39' Date: '2022-11-02'
+Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '00:55:23' Date: '2022-11-02'
+Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '01:03:13' Date: '2022-11-02'
+Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '01:06:27' Date: '2022-11-02'
+Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '01:13:14' Date: '2022-11-02'

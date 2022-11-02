@@ -5,7 +5,6 @@
 package Controllers;
 
 import static Helper.Alerts.*;
-import static Helper.Alerts.exitAlert;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.deleteAppointment;
 import Models.Appointments;
