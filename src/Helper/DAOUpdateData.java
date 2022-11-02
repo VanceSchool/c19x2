@@ -27,7 +27,7 @@ import javafx.collections.ObservableList;
      * @author sean thompson <stho292@wgu.edu>
      */ 
 public class DAOUpdateData {
-public User user = new User();
+    
     public DAOUpdateData() {
     }
           
@@ -41,7 +41,7 @@ public User user = new User();
         String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
         String sql3 = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
         String sql2 = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = "
-                + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?), Last_Update = ?"
+                + "(SELECT Division_ID FROM first_level_divisions WHERE Division = ?), Last_Update = ?, Last_Updated_By = ?"
                 + "WHERE Customer_ID = ?";
         PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
@@ -55,6 +55,7 @@ public User user = new User();
             ps2.setString(4, modCust.getPhone());
             ps2.setString(5,modCust.getState() );
             ps2.setTimestamp(6, timmy);
+            ps2.setString(7, LoginController.meUserID);
             ps2.setInt(7, modCust.getCustomerID());
             ps2.executeUpdate();
             
