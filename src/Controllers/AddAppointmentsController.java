@@ -71,7 +71,8 @@ public class AddAppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      addTime();
-     addContacts();
+        ObservableList<Contacts> contListB = DAOLists.getAllContacts();
+        contactdd.setItems(contListB);
         // TODO
         ObservableList<Integer> minuteList = displayMinutes();
         //startTimedd.setItems(minuteList);
@@ -81,7 +82,17 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private void handleCustomerSavebt(ActionEvent event) {
     }
-
+    
+    @FXML
+    private void handleCustomerBackbt(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Appointments");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     @FXML
     private void handleContactdd(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
@@ -96,20 +107,6 @@ public class AddAppointmentsController implements Initializable {
         ObservableList<String> timeChoice = FXCollections.observableArrayList();
         int[] ti = IntStream.rangeClosed(1, 10).toArray();
         timeChoice.add(LocalTime.of(8, 0).format(DateTimeFormatter.ofPattern("h:mm")));
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         startTimedd.setItems(timeChoice);
         endTimedd.setItems(timeChoice);
     }
