@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Helper.DAOLists;
 import Helper.UserfulMethods;
 import static Helper.UserfulMethods.displayMinutes;
 import Models.Contacts;
@@ -70,6 +71,7 @@ public class AddAppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      addTime();
+     addContacts();
         // TODO
         ObservableList<Integer> minuteList = displayMinutes();
         //startTimedd.setItems(minuteList);
@@ -113,11 +115,9 @@ public class AddAppointmentsController implements Initializable {
     }
     
         @FXML
-    private void handleCustomerCountrycb(ActionEvent event) {
-        Countries jam = CustomerCountrycb.getValue();
-        int cId = jam.getCountryId();
-        ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
-        //System.out.println(provListB);
-        CustomerStatecb.setItems(provListB);
+    private void addContacts() {
+        Contacts jam = contactdd.getValue();
+        ObservableList<Contacts> contListB = DAOLists.getAllContacts();
+        contactdd.setItems(contListB);
     }
 }
