@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 
@@ -26,7 +27,6 @@ public abstract class UserfulMethods {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.NONE);
             alert.setTitle("Validation of Fields");
-            alert.setHeaderText("Customer Not Added");
             alert.setContentText("Please Fill All Fields");
             alert.show();
             return; 
@@ -39,18 +39,43 @@ public abstract class UserfulMethods {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.NONE);
             alert.setTitle("Validation of Fields");
-            alert.setHeaderText("Customer Not Added");
             alert.setContentText("Please Fill All Fields");
             alert.show();
             return; 
         }
     }
 }
+        
+        public static void validateHasDate(DatePicker... dp) {        
+        for (DatePicker datepicker: dp){
+            if (datepicker.getValue().equals(null)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("Please Fill All Fields");
+            alert.show();
+            return; 
+        }
+    }
+}
+        
+                public static void validateHasTime(ComboBox cb1, ComboBox cb2) {        
+            if (cb2.getValue() >= cb1.getValue()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("Please Fill All Fields");
+            alert.show();
+            return; 
+    }
+}
+        /*
         public static ObservableList<Integer> displayMinutes(){
        
        ObservableList<Integer> minuteList = FXCollections.observableArrayList();
         minuteList.addAll(00, 15, 30, 45);
             return minuteList;
         }
+*/
     }
 
