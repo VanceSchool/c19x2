@@ -5,6 +5,9 @@
 package Helper;
 
 import Models.Customers;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -15,10 +18,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 
-/**
- *
- *@author sean thompson <stho292@wgu.edu>
- */
+     /**
+     * @class UsefulMethtods
+     * Contains methods that can be  re-used for multiple pages
+     * @author sean thompson <stho292@wgu.edu>
+     */ 
 public abstract class UserfulMethods {
     
         public static void validateNonEmpty(TextField... tf) {        
@@ -59,15 +63,32 @@ public abstract class UserfulMethods {
     }
 }
         
-                public static void validateHasTime(ComboBox cb1, ComboBox cb2) {        
-            if (cb2.getValue() >= cb1.getValue()){
+      /**
+     * validateHasTime
+     * Verifies End Date and Time do not overlap or come before Start Date and Time
+     * @param cb1
+     * @param cb2
+     * @param ld1
+     * @param ld2
+     */
+        public static void validateHasTime(LocalTime cb1, LocalTime cb2,LocalDate ld1, LocalDate ld2) {  
+            LocalDateTime ldt1 = LocalDateTime.of(ld1, cb1);
+            LocalDateTime ldt2 = LocalDateTime.of(ld2, cb2);
+            if (ldt2.isBefore(ldt1)){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.NONE);
             alert.setTitle("Validation of Fields");
-            alert.setContentText("Please Fill All Fields");
+            alert.setContentText("End Time is Before Beginning Time, Please ammend!");
             alert.show();
             return; 
-    }
+        }else if(ldt1.equals(ldt2)){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("End Time Is Same As Beginning Time, Please Ammend!");
+            alert.show();
+            return; 
+        }
 }
         /*
         public static ObservableList<Integer> displayMinutes(){
@@ -76,6 +97,6 @@ public abstract class UserfulMethods {
         minuteList.addAll(00, 15, 30, 45);
             return minuteList;
         }
-*/
+        */
     }
 
