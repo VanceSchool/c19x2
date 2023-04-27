@@ -131,7 +131,7 @@ public class DAOUpdateData {
      * @throws SQLException
      */
         public static void addAppointment(Appointments appointToAdd) throws SQLException{
-            String sql ="UPDATE appointments SET\n" +
+            String sql="INSERT INTO appointments \n" +
             "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
             "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"

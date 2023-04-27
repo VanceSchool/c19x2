@@ -44,7 +44,35 @@ public class Alerts {
         if (result.get() == ButtonType.OK);
     }
     
+    /*alertGroup3
+    * Contains alerts having to do with Appointment Schedules
+    */
+        public static void alertGroup3(int type){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validation");
+        alert.setHeaderText("Validation");
+                switch (type) {
+            case 1: {
+                alert.setContentText("End Time is Before Beginning Time, Please ammend!");
+                break;
+            }
+            case 2: {
+                alert.setContentText("End Time Is Same As Beginning Time, Please Ammend!");
+                break;
+            }
+            case 3: {
+                alert.setContentText("Meeting is Before Current Time, Please Ammend!");
+                break;
+            }
+                        
+        }
+        alert.showAndWait();
+    }
     
+
+        /*
+        
+        */
     public static void alertGroup2(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Validation");
@@ -78,6 +106,7 @@ public class Alerts {
         }
         alert.showAndWait();
     }
+    
     
     
     public static void alertGroup1(int type){

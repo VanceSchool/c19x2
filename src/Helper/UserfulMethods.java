@@ -4,6 +4,7 @@
  */
 package Helper;
 
+import static Helper.Alerts.alertGroup3;
 import Models.Customers;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,19 +76,13 @@ public abstract class UserfulMethods {
             LocalDateTime ldt1 = LocalDateTime.of(ld1, cb1);
             LocalDateTime ldt2 = LocalDateTime.of(ld2, cb2);
             if (ldt2.isBefore(ldt1)){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initModality(Modality.NONE);
-            alert.setTitle("Validation of Fields");
-            alert.setContentText("End Time is Before Beginning Time, Please ammend!");
-            alert.show();
-            return; 
+            alertGroup3(1);
         }else if(ldt1.equals(ldt2)){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initModality(Modality.NONE);
-            alert.setTitle("Validation of Fields");
-            alert.setContentText("End Time Is Same As Beginning Time, Please Ammend!");
-            alert.show();
-            return; 
+            alertGroup3(2);
+        }else if(ldt2.isBefore(LocalDateTime.now())){
+            alertGroup3(3);
+        }else if (ldt2.isBefore(LocalDateTime.now())){
+            alertGroup3(3); 
         }
 }
         /*

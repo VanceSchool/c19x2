@@ -98,7 +98,9 @@ public class AddAppointmentsController implements Initializable {
         validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
         validateHasDate(startDatepick,endDatepicker );
         validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue(),endDatepicker.getValue());
+        
         alertGroup2(10);// Are you sure  you wish to save new appoinotment?
+        
         Customers modAppointCust = AppointmentCustomercb.getValue();
         Contacts modAppointCon = contactdd.getValue();
         System.out.println(modAppointCon.getContactId());
@@ -115,12 +117,12 @@ public class AddAppointmentsController implements Initializable {
        addAppointment(newAppointment);
        
        alertGroup1(8);
-       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
-       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-       Scene scene = new Scene(root);
-       stage.setTitle("Customer Menu");
-       stage.setScene(scene);
-       stage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Appointments");
+        stage.setScene(scene);
+        stage.show();
         
     }
    
