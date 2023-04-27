@@ -21,6 +21,9 @@ public class Appointments{
     private int contactId;
     private LocalDateTime start;
     private LocalDateTime end;
+    private String customerName;
+    private String contactName;
+    
           
     public Appointments(int appointmentID, String title, String type, String description, String location,int contactId, int customerId, int userId, LocalDateTime start, LocalDateTime end){
     this.appointmentID =appointmentID;
@@ -33,6 +36,23 @@ public class Appointments{
     this.contactId = contactId;
     this.start = start;
     this.end = end;
+    
+    }
+    
+        public Appointments(int appointmentID, String title, String type, String description, String location,String contactName, String customerName, LocalDateTime start, LocalDateTime end){
+    this.appointmentID =appointmentID;
+    this.title = title;
+    this.description = description;
+    this.location = location;
+    this.type = type;
+    this.customerName = customerName;
+    this.contactName = contactName;
+    this.start = start;
+    this.end = end;
+    
+    }
+
+    public Appointments() {
     
     }
 
@@ -79,6 +99,14 @@ public class Appointments{
         return end;
     }
     
+     public String getContactName(){
+        return contactName;
+    }
+     
+    public String getCustomerName(){
+        return customerName;
+    }
+    
 
     //Setters
     
@@ -86,40 +114,46 @@ public class Appointments{
       this.appointmentID = appointmentID;
     }
     
-    public void settTitle(){
+    public void setTitle(String title){
        this.title = title;
     }
     
-    public void setDescription(){
+    public void setDescription(String description){
        this.description = description;
     }
     
-    public void setLocation(){
+    public void setLocation(String location){
        this.location = location;
     }
     
-    public void setType(){
+    public void setType(String type){
        this.type = type;
     }
     
-    public void setCustomerId(){
+    public void setCustomerId(int customerId){
         this.customerId = customerId;
     }
     
-    public void setUserId(){
+    public void setUserId(int userId){
         this.userId = userId;
     }
     
-    public void setContactId(){
+    public void setContactId(int contactId){
        this.contactId = contactId;
     }
     
-    public void setStart(){
+    public void setStart(LocalDateTime start){
         this.start = start;
     }
     
-    public void setEnd(){
+    public void setEnd(LocalDateTime end){
         this.end = end;
     }
-    
+
+    public void setContactName(String contactName){
+       this.type = type;
+    }
+    public void setCustomerName(String customerName){
+       this.type = type;
+    }
 }

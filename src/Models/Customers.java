@@ -145,4 +145,9 @@ public class Customers {
         this.lastUpdateBy = lastUpdateBy;
     }
 */
+    
+        @Override
+    public String toString(){
+        return customerName;
+    }
 }

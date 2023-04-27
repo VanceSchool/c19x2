@@ -4,12 +4,22 @@
  */
 package Controllers;
 
+import static Helper.Alerts.*;
 import Helper.DAOLists;
+import static Helper.DAOUpdateData.addAppointment;
+import static Helper.Time.changeUpLocaleDateTime;
 import Helper.UserfulMethods;
-import static Helper.UserfulMethods.displayMinutes;
+import static Helper.UserfulMethods.validateHasSelection;
+import static Helper.UserfulMethods.validateNonEmpty;
+import static Helper.UserfulMethods.validateHasDate;
+import static Helper.UserfulMethods.validateHasTime;
+import Models.Appointments;
 import Models.Contacts;
+import Models.Customers;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -28,6 +38,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -55,15 +66,19 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private ComboBox<Contacts> contactdd;
     @FXML
-    private ComboBox<String> startTimedd;
+    private ComboBox<LocalTime> startTimedd;
     @FXML
-    private ComboBox<String> endTimedd;
+    private ComboBox<LocalTime> endTimedd;
     @FXML
     private TextField locationtxt;
     @FXML
     private TextField typetxt;
     @FXML
-    private TextField AppointmentIDtxt;
+    private ComboBox<Customers> AppointmentCustomercb;
+    @FXML
+    private Label startTimelb;
+    @FXML
+    private Label endTimelb;
 
     /**
      * Initializes the controller class.
@@ -71,17 +86,44 @@ public class AddAppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      addTime();
-        ObservableList<Contacts> contListB = DAOLists.getAllContacts();
-        contactdd.setItems(contListB);
-        // TODO
-        ObservableList<Integer> minuteList = displayMinutes();
-        //startTimedd.setItems(minuteList);
-        //endTimedd.setItems(minuteList);
+     addContacts();
+     addCustomers();
+     
     }    
 
     @FXML
-    private void handleCustomerSavebt(ActionEvent event) {
+    private void handleCustomerSavebt(ActionEvent event) throws IOException, SQLException{
+        
+        validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt);
+        validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
+        validateHasDate(startDatepick,endDatepicker );
+        validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue(),endDatepicker.getValue());
+        alertGroup2(10);// Are you sure  you wish to save new appoinotment?
+        Customers modAppointCust = AppointmentCustomercb.getValue();
+        Contacts modAppointCon = contactdd.getValue();
+        System.out.println(modAppointCon.getContactId());
+        System.out.println(modAppointCust.getCustomerID());
+       Appointments newAppointment = new Appointments();
+       newAppointment.setTitle(titletxt.getText());
+       newAppointment.setDescription(descriptiontxt.getText());
+       newAppointment.setLocation(locationtxt.getText());
+       newAppointment.setType(typetxt.getText());
+       newAppointment.setCustomerId(modAppointCust.getCustomerID());
+       newAppointment.setContactId(modAppointCon.getContactId());
+       newAppointment.setStart(changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue()));
+       newAppointment.setEnd(changeUpLocaleDateTime(endDatepicker.getValue(), endTimedd.getValue()));
+       addAppointment(newAppointment);
+       
+       alertGroup1(8);
+       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
+       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+       Scene scene = new Scene(root);
+       stage.setTitle("Customer Menu");
+       stage.setScene(scene);
+       stage.show();
+        
     }
+   
     
     @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
@@ -93,7 +135,6 @@ public class AddAppointmentsController implements Initializable {
         stage.show();
     }
     
-    @FXML
     private void handleContactdd(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -103,18 +144,24 @@ public class AddAppointmentsController implements Initializable {
         stage.show();
     }
     
+    
     private void addTime(){
-        ObservableList<String> timeChoice = FXCollections.observableArrayList();
-        int[] ti = IntStream.rangeClosed(1, 10).toArray();
-        timeChoice.add(LocalTime.of(8, 0).format(DateTimeFormatter.ofPattern("h:mm")));
-        startTimedd.setItems(timeChoice);
-        endTimedd.setItems(timeChoice);
+    
+            for(int i=0;i<24;i++){
+            startTimedd.getItems().add(LocalTime.of(i, 0));
+            endTimedd.getItems().add(LocalTime.of(i, 0));
+        }
+
     }
     
-        @FXML
+    
     private void addContacts() {
-        Contacts jam = contactdd.getValue();
         ObservableList<Contacts> contListB = DAOLists.getAllContacts();
         contactdd.setItems(contListB);
+    }
+    
+    private void addCustomers() {
+        ObservableList<Customers> custListB = DAOLists.getAllCustomers();
+        AppointmentCustomercb.setItems(custListB);
     }
 }

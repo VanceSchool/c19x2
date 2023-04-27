@@ -60,6 +60,9 @@ public class Time {
         ts = Timestamp.valueOf(ldt);
         return ts;
     }
+    
+
+    
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
        LocalDateTime plusFifteen = someTime.plusMinutes(30);
        return plusFifteen;

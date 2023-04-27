@@ -67,8 +67,7 @@ public class AddCustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<Countries> countListB = DAOLists.getAllCountries();
-        CustomerCountrycb.setItems(countListB);
+       addCountries();
         }  
 
     @FXML
@@ -118,7 +117,12 @@ public class AddCustomerController implements Initializable {
     private void handleCustomerStatecb(ActionEvent event) {
     }
 
+        @FXML
+    private void addCountries() {
 
+         ObservableList<Countries> countListB = DAOLists.getAllCountries();
+        CustomerCountrycb.setItems(countListB);
+    }
     
     
 }

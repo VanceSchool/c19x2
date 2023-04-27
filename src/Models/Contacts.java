@@ -11,6 +11,12 @@ public class Contacts {
     int contactId;
     String contactName;
     String email;
+
+    public Contacts(int contactId, String contactName) {
+        this.contactId = contactId;
+        this.contactName = contactName;
+    }
+    
     
     public Contacts(int contactId, String contactName, String email){
         contactId = this.contactId;
@@ -42,6 +48,11 @@ public class Contacts {
     
     public void setEmail(){
        this.email = email;
+    }
+    
+    @Override
+    public String toString(){
+        return contactName;
     }
     
 }

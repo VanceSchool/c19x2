@@ -70,6 +70,11 @@ public class Alerts {
                 alert.setContentText("Are you sure you want to modify this Appoinment?");
                 break;
             }
+            case 10: {
+                alert.setContentText("Are you sure you want to save this Appoinment?");
+                break;
+            }
+            
         }
         alert.showAndWait();
     }

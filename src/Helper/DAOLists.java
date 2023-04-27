@@ -123,9 +123,9 @@ public class DAOLists {
             //pull out the data
             int contactId = rs.getInt("Contact_ID");
             String contactName = rs.getString("Contact_Name");
-            String email =  rs.getString("Email");
+            //String email =  rs.getString("Email");
             //make an object instance
-            Contacts count = new Contacts(contactId, contactName, email);
+            Contacts count = new Contacts(contactId, contactName);
             //add to list
             contactsListA.add(count);
        }

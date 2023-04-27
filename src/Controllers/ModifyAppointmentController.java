@@ -6,7 +6,6 @@ package Controllers;
 
 import Helper.Time;
 import Helper.UserfulMethods;
-import static Helper.UserfulMethods.displayMinutes;
 import Models.Appointments;
 import Models.Contacts;
 import Models.Customers;
@@ -71,9 +70,6 @@ public class ModifyAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<Integer> minuteList = displayMinutes();
-        startTimedd.setItems(minuteList);
-        endTimedd.setItems(minuteList);
         AppointmentIDtxt.setEditable(false);
         AppointmentIDtxt.setDisable(true);
     }    
