@@ -242,10 +242,46 @@ public class DAOLists {
        } return provListA;
    }
  
-
      /**
-     * getFilteredMonthAppointments Method for SQL Statement for SELECT some FROM provinces Table
+     * getFilteredCustAppointments Method for SQL Statement for SELECT some FROM provinces Table
      * filtered by country.Country_ID
+     * @return appointMonthListA
+     * @param deleteCustID
+     */ 
+      public static ObservableList<Appointments> getFilteredCustAppointments(int deleteCustID){
+        ObservableList<Appointments> appointCustListA = FXCollections.observableArrayList();
+       String sql = "SELECT * FROM appointments WHERE Customer_ID = (SELECT Customer_ID FROM customers WHERE Customer_ID = ?);";
+       try{
+       PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+       ps.setInt(1, deleteCustID);
+       ResultSet rs = ps.executeQuery();
+       System.out.println(rs);
+       while(rs.next()){
+            int appointmentID = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String type = rs.getString("Type");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            int contactId = rs.getInt("Contact_ID");
+            int customerId = rs.getInt("User_ID");
+            int userId = rs.getInt("Customer_ID");
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
+            appointCustListA.add(appoint); 
+       }
+       }
+       catch(SQLException throwables){
+       throwables.printStackTrace();
+       }
+       //return the list
+       return appointCustListA;
+       
+   }
+      
+     /**
+     * getFilteredMonthAppointments Method for SQL Statement for SELECT some FROM appointments Table
+     * filtered by MONTH(current_date)
      * @return appointMonthListA
      */ 
       public static ObservableList<Appointments> getFilteredMonthAppointments(){
