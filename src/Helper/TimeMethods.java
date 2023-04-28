@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
  *
  *@author sean thompson <stho292@wgu.edu>
  */
-public class Time {
+public class TimeMethods {
 
 
     public LocalDateTime dateTime;
@@ -57,7 +57,7 @@ public class Time {
         return utcZoneTime;
     }
     
-        public LocalDateTime changeToUST(LocalDateTime lD){
+        public static LocalDateTime changeToUST(LocalDateTime lD){
         //Set LocalDateTime to ZonedDateTime of current Zone
         ZonedDateTime nowzdt = lD.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
         //Convert ZonedDateTime to EST Date Time

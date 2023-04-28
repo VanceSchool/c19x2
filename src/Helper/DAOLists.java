@@ -71,71 +71,104 @@ public class DAOLists {
        return cusListA;
        
    } 
+   
+   /**
+     * getFilteredCustomers Method for SQL Statement for SELECT All FROM customers Table WHERE Customer_ID = custID
+     * @return cusListB
+     * @param custID
+     */ 
+   public static ObservableList<Customers> getFilteredCustomers(int custID){
+       ObservableList<Customers> cusListB = FXCollections.observableArrayList();
+       String sql = "SELECT Customer_ID, Customer_Name FROM customers WHERE Customer_ID = ? ";
+ 
+       try{
+       PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+       ps.setInt(1, custID);
+       ResultSet rs = ps.executeQuery();
+       while(rs.next()){
+           int id = rs.getInt("Customer_ID");
+           String cName = rs.getString("Customer_Name");
+           Customers cust = new Customers(id, cName);
+           cusListB.add(cust);
+       }
+       } catch(SQLException throwables){
+          throwables.printStackTrace();
+      } return cusListB;
+}
      
+   
      /**
      * getAllCountries Method for SQL Statement for SELECT all FROM countries Table
      * @return countryListA
      */ 
    public static ObservableList<Countries> getAllCountries(){
-       //create a list to return
        ObservableList<Countries> countryListA = FXCollections.observableArrayList();
-       //setup the sql
        String sql = "SELECT * From countries";
        try{
-       //make the prepared statement
        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-       //make the query ==> ResultSet
        ResultSet rs = ps.executeQuery();
-       //Cycle through the result
        while(rs.next()){
-            //pull out the data
             int countryId = rs.getInt("Country_ID");
             String country = rs.getString("Country");
-            //make an object instance
             Countries count = new Countries(countryId, country);
-            //add to list
             countryListA.add(count);
        }
        }
        catch(SQLException throwables){
           throwables.printStackTrace();
        }
-       //return the list
        return countryListA;
 }
    
-       /**
-     * getAllCountries Method for SQL Statement for SELECT all FROM countries Table
-     * @return countryListA
+   
+     /**
+     * getAllContacts Method for SQL Statement for SELECT all FROM contacts Table
+     * @return contactsListA
      */ 
    public static ObservableList<Contacts> getAllContacts(){
-       //create a list to return
        ObservableList<Contacts> contactsListA = FXCollections.observableArrayList();
-       //setup the sql
        String sql = "SELECT * From contacts";
        try{
-       //make the prepared statement
        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-       //make the query ==> ResultSet
        ResultSet rs = ps.executeQuery();
-       //Cycle through the result
        while(rs.next()){
-            //pull out the data
             int contactId = rs.getInt("Contact_ID");
             String contactName = rs.getString("Contact_Name");
-            //String email =  rs.getString("Email");
-            //make an object instance
             Contacts count = new Contacts(contactId, contactName);
-            //add to list
             contactsListA.add(count);
        }
        }
        catch(SQLException throwables){
           throwables.printStackTrace();
-       }
-       //return the list
-       return contactsListA;
+       } return contactsListA;
 }
+   
+   
+   
+     /**
+     * getFilteredContacts Method for SQL Statement for SELECT all FROM contacts Table WHERE Contact_ID = cID
+     * @return countryListA
+     * @param cID
+     */ 
+   public static ObservableList<Contacts> getFilteredContacts(int cID){
+       ObservableList<Contacts> contactsListB = FXCollections.observableArrayList();
+       String sql = "SELECT * From contacts WHERE Contact_ID = ?";
+       try{
+       PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+       ps.setInt(1, cID);
+       ResultSet rs = ps.executeQuery();
+       while(rs.next()){
+            int contactId = rs.getInt("Contact_ID");
+            String contactName = rs.getString("Contact_Name");
+            Contacts count = new Contacts(contactId, contactName);
+            contactsListB.add(count);
+       }
+       } catch(SQLException throwables){
+          throwables.printStackTrace();
+       }
+       return contactsListB;
+}
+   
    
      /**
      * getAllAppointments Method for SQL Statement for SELECT all FROM appointments Table
@@ -163,11 +196,10 @@ public class DAOLists {
             int contactId = rs.getInt("Contact_ID");
             int customerId = rs.getInt("User_ID");
             int userId = rs.getInt("Customer_ID");
-            //Timestamps to Local Date Time
             LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
             LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
             //make an object instance
-            System.out.println("Appointment ID Equials " + appointmentID);
+            //System.out.println("Appointment ID Equials " + appointmentID);
             Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
             //add to list
             appointListA.add(appoint); 
@@ -191,33 +223,23 @@ public class DAOLists {
      * @param cId
      */ 
    public static ObservableList<Provinces> getFilteredProvinces(int cId){
-       //create a list to return
+
        ObservableList<Provinces> provListA = FXCollections.observableArrayList();
-       //setup the sql
        String sql = "SELECT * From first_level_divisions WHERE Country_ID =?";
        try{
-       //make the prepared statement
        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
        ps.setInt(1, cId);
-       //make the query ==> ResultSet
        ResultSet rs = ps.executeQuery();
-       //Cycle through the result
        while(rs.next()){
-            //pull out the data
             int divID = rs.getInt("Division_ID");
             String divName = rs.getString("Division");
             int countryID = rs.getInt("Country_ID");
-            //make an object instance
             Provinces province = new Provinces(divID, divName, countryID);
-            //add to list
             provListA.add(province); 
        }
-       }
-       catch(SQLException throwables){
+       }catch(SQLException throwables){
        throwables.printStackTrace();
-       }
-       //return the list
-       return provListA;
+       } return provListA;
    }
  
 
@@ -269,7 +291,7 @@ public class DAOLists {
       /**
      * getFilteredWeekAppointments Method for SQL Statement for SELECT some FROM appointments Table
      * filtered by appointments.Start
-     * @return appointMonthListA
+     * @return appointWeekListA
      */ 
       public static ObservableList<Appointments> getFilteredWeekAppointments(){
         //create a list to return

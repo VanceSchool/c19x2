@@ -7,7 +7,7 @@ package Helper;
 import Controllers.LoginController;
 import static Controllers.LoginController.meUserID;
 import static Helper.Alerts.*;
-import static Helper.Time.*;
+import static Helper.TimeMethods.*;
 import Models.Appointments;
 import Models.Customers;
 import Models.Provinces;
@@ -33,7 +33,8 @@ public class DAOUpdateData {
     }
           
      /**
-     * modifyCustomer Method for SQL Statement for UPDATE customers Table
+     * modifyCustomer 
+     * Method for SQL Statement for UPDATE customers Table
      * @param modCust
      * @throws SQLException
      */ 
@@ -67,7 +68,8 @@ public class DAOUpdateData {
         }
             
     /**
-     *deleteCustomer Method for SQL Statement for DELETE customers Table
+     *deleteCustomer 
+     * Method for SQL Statement for DELETE customers Table
      * @param delCust
      * @throws SQLException
      */
@@ -89,7 +91,8 @@ public class DAOUpdateData {
 }
     
      /**
-     * addNewCustomers Method for SQL Statement for INSERT INTO customers Table
+     * addNewCustomers 
+     * Method for SQL Statement for INSERT INTO customers Table
      * @param newCust
      * @throws SQLException
      */ 
@@ -127,6 +130,7 @@ public class DAOUpdateData {
         
      /**
      * addAppointment
+     * Inserts new Appointment into appointments table
      * @param newAppoint
      * @throws SQLException
      */
@@ -136,14 +140,18 @@ public class DAOUpdateData {
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
             "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
             + " (SELECT User_ID FROM users WHERE User_Name = ?), ?); ";   
+            LocalDateTime startlds = changeToUST(appointToAdd.getStart());
+            LocalDateTime endslds = changeToUST(appointToAdd.getEnd());
+            Timestamp startts = Timestamp.valueOf(startlds);
+            Timestamp endts = Timestamp.valueOf(endslds);
          try {   
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql);
             ps2.setString(1, appointToAdd.getTitle());
             ps2.setString(2, appointToAdd.getDescription());
             ps2.setString(3, appointToAdd.getLocation());
             ps2.setString(4, appointToAdd.getType());
-            ps2.setString(5, appointToAdd.getStart().toString());
-            ps2.setString(6, appointToAdd.getEnd().toString());
+            ps2.setTimestamp(5, startts);
+            ps2.setTimestamp(6, endts);
             ps2.setString(7, LoginController.meUserID);
             ps2.setString(8, LoginController.meUserID);
             ps2.setInt(9, appointToAdd.getCustomerId());
@@ -169,6 +177,11 @@ public class DAOUpdateData {
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
             "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
             + " (SELECT User_ID FROM users WHERE User_Name = ?), ?) WHERE Appointment_ID = ?; ";
+            
+            LocalDateTime startlds = changeToUST(modAppoint.getStart());
+            LocalDateTime endslds = changeToUST(modAppoint.getEnd());
+            Timestamp startts = Timestamp.valueOf(startlds);
+            Timestamp endts = Timestamp.valueOf(endslds);
           try {  //System.out.println(sql);
          PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);   
             //System.out.println(LoginController.meUserID);
@@ -177,8 +190,8 @@ public class DAOUpdateData {
             ps2.setString(2, modAppoint.getDescription());
             ps2.setString(3, modAppoint.getLocation());
             ps2.setString(4, modAppoint.getType());
-            ps2.setString(5, modAppoint.getStart().toString());
-            ps2.setString(6, modAppoint.getEnd().toString());
+            ps2.setTimestamp(5, startts);
+            ps2.setTimestamp(6, endts);
             ps2.setString(7, LoginController.meUserID);
             ps2.setString(8, LoginController.meUserID);
             ps2.setInt(9, modAppoint.getCustomerId());

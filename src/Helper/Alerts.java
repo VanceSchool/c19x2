@@ -64,6 +64,14 @@ public class Alerts {
                 alert.setContentText("Meeting is Before Current Time, Please Ammend!");
                 break;
             }
+            case 4: {
+                alert.setContentText("Appointment Start Time is Outside Normal Hours of Operation 8AM to 4PM EST, Please Ammend!");
+                break;
+            }
+            case 5: {
+                alert.setContentText("Appointment End Time is Outside Normal Hours of Operation 8AM to 4PM EST, Please Ammend!");
+                break;
+            }
                         
         }
         alert.showAndWait();

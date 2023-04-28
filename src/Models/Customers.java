@@ -55,6 +55,12 @@ public class Customers {
     public Customers() {
         
     }
+
+    public Customers(int id, String cName) {
+      setCustomerID(id);
+      setCustomerName(cName);
+    }
+    
     //getters
     public int getCustomerID() {
         return customerId;
@@ -90,15 +96,7 @@ public class Customers {
     public String getState(){
         return state;
     }
-/*
-    public Date getCustomerLastUpdate() {
-        return lastUpdate;
-    }
 
-    public String getCustomerLastUpdateBy() {
-        return lastUpdateBy;
-    }
-*/
     //setters
     
     public void setCustomerID(int customerId) {
@@ -136,15 +134,6 @@ public class Customers {
     public void setState(String state){
         this.state = state;
     }
-/*
-    public void setCustomerLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public void setCustomerLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
-    }
-*/
     
         @Override
     public String toString(){

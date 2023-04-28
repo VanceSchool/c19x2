@@ -7,8 +7,11 @@ package Controllers;
 import static Helper.Alerts.*;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.addAppointment;
-import static Helper.Time.*;
-import Helper.UserfulMethods;
+import static Helper.TimeMethods.*;
+import Helper.UserfulMethods.*;
+import static Helper.UserfulMethods.addContacts;
+import static Helper.UserfulMethods.addCustomers;
+import static Helper.UserfulMethods.addTime;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
 import static Helper.UserfulMethods.validateHasDate;
@@ -84,9 +87,9 @@ public class AddAppointmentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     addTime();
-     addContacts();
-     addCustomers();
+     addTime(startTimedd, endTimedd);
+     addContacts(contactdd);
+     addCustomers(AppointmentCustomercb);
      
     }    
 
@@ -96,7 +99,7 @@ public class AddAppointmentsController implements Initializable {
         validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt);
         validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
         validateHasDate(startDatepick);
-        validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue(),startDatepick.getValue());
+        validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue());
         alertGroup2(10);// Are you sure  you wish to save new appoinotment?
         Customers modAppointCust = AppointmentCustomercb.getValue();
         Contacts modAppointCon = contactdd.getValue();
@@ -192,34 +195,5 @@ public class AddAppointmentsController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    private void handleContactdd(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Appointments Menu");
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    
-    private void addTime(){
-            for(int i=0;i<24;i++){
-            startTimedd.getItems().add(LocalTime.of(i, 0));
-            endTimedd.getItems().add(LocalTime.of(i, 0));
-        }
-
-    }
-    
-    
-    private void addContacts() {
-        ObservableList<Contacts> contListB = DAOLists.getAllContacts();
-        contactdd.setItems(contListB);
-    }
-    
-    private void addCustomers() {
-        ObservableList<Customers> custListB = DAOLists.getAllCustomers();
-        AppointmentCustomercb.setItems(custListB);
-    }
-
-
+   
 }

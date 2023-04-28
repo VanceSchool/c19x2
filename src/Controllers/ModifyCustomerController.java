@@ -7,7 +7,7 @@ package Controllers;
 import static Helper.Alerts.*;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.modifyCustomer;
-import Helper.Time;
+import Helper.TimeMethods;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
 import Models.Contacts;
