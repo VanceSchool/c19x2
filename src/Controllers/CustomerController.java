@@ -8,6 +8,7 @@ import static Helper.Alerts.*;
 import static Helper.Alerts.exitAlert;
 import static Helper.DAOUpdateData.deleteCustomer;
 import Helper.DAOLists;
+import static Helper.DAOUpdateData.deleteCustomerAppoint;
 import Models.Customers;
 import java.io.IOException;
 import java.io.InputStream;
@@ -108,17 +109,22 @@ public class CustomerController implements Initializable {
     private void handleCExitbt(ActionEvent event) {
         exitAlert();
     }
+    
+    
    @FXML
-   private void handleCDeletebt(ActionEvent event) throws SQLException {
-       if (customerTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup2(1);
-       Customers delCust = customerTable.getSelectionModel().getSelectedItem();
-       deleteCustomer(delCust);
-       ObservableList<Customers> cusListC = DAOLists.getAllCustomers();
-        customerTable.setItems(cusListC);
-       }
-        
+    private void handleCDeletebt(ActionEvent event) throws SQLException {
+        if (customerTable.getSelectionModel().getSelectedItem() != null){
+           if(alertGroupVerifyAction(1)){
+           Customers delCust = customerTable.getSelectionModel().getSelectedItem();
+           deleteCustomerAppoint(delCust.getCustomerID());
+           deleteCustomer(delCust);
+           ObservableList<Customers> cusListC = DAOLists.getAllCustomers();
+           customerTable.setItems(cusListC);
+           }return;
+        }   
    }
+    
+    
     @FXML
     private void handleCAddbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/AddCustomer.fxml"));

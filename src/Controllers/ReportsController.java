@@ -69,7 +69,7 @@ public class ReportsController implements Initializable {
     @FXML
     private void handleCancelbt(ActionEvent event) {
     }
-    
+   /* 
     private void populateTable(){
         ObservableList<Appointments> appointListB = DAOLists.getFilteredCustAppointments();
         //System.out.println("List Size Equals:" + appointMonthListB.size());
@@ -85,5 +85,6 @@ public class ReportsController implements Initializable {
         AppointmentsStartcolm.setCellValueFactory(new PropertyValueFactory<>("start"));
         AppointmentEndColm.setCellValueFactory(new PropertyValueFactory<>("end"));
     }
+*/
     
 }

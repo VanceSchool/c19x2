@@ -8,40 +8,26 @@ import static Helper.Alerts.*;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.modifyCustomer;
 import Helper.TimeMethods;
-import static Helper.UserfulMethods.validateHasSelection;
-import static Helper.UserfulMethods.validateNonEmpty;
-import Models.Contacts;
-import Models.Countries;
-import Models.Customers;
-import Models.Provinces;
+import static Helper.UserfulMethods.*;
+import Models.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.collections.*;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
 /**
- *FXML Controller class
+ *FXML Controller for ModifyCustomer Scene/view
  *@author sean thompson <stho292@wgu.edu>
  */
 public class ModifyCustomerController implements Initializable {
@@ -77,33 +63,33 @@ public class ModifyCustomerController implements Initializable {
         countListB = DAOLists.getAllCountries();
         CustomerCountrycb.setItems(countListB);
         CustomerIdtf.setEditable(false);
-        CustomerIdtf.setDisable(true);
-    }    
+        CustomerIdtf.setDisable(true); 
+    }
+    
 
     @FXML
     private void handleCustomerSavebt(ActionEvent event) throws SQLException, IOException {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
-     //if (allAptTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup2(4);
-       Customers custMod = new Customers();
-        Provinces modProvCust = CustomerStatecb.getValue();
-        custMod.setState(modProvCust.getDivName());
-       custMod.setAddress(CustomerAddresstf.getText());
-       int customerId = Integer.parseInt(CustomerIdtf.getText());
-       custMod.setCustomerID(customerId);
-       custMod.setCustomerName(CustomerNametf.getText());
-       custMod.setCustomerPhone(CustomerPhonetf.getText());
-       custMod.setCustomerPostalCode(CustomerPostaltf.getText());
-       modifyCustomer(custMod);
-       
-       alertGroup1(5);
-       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
-       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-       Scene scene = new Scene(root);
-       stage.setTitle("Customer Menu");
-       stage.setScene(scene);
-       stage.show();
+        if(alertGroupVerifyAction(4)){
+            Customers custMod = new Customers();
+            Provinces modProvCust = CustomerStatecb.getValue();
+            custMod.setState(modProvCust.getDivName());
+            custMod.setAddress(CustomerAddresstf.getText());
+            int customerId = Integer.parseInt(CustomerIdtf.getText());
+            custMod.setCustomerID(customerId);
+            custMod.setCustomerName(CustomerNametf.getText());
+            custMod.setCustomerPhone(CustomerPhonetf.getText());
+            custMod.setCustomerPostalCode(CustomerPostaltf.getText());
+            modifyCustomer(custMod);
+            alertGroup1(5);
+            Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Customer Menu");
+            stage.setScene(scene);
+            stage.show();
+        }return;
     }
   
 
@@ -115,22 +101,19 @@ public class ModifyCustomerController implements Initializable {
         stage.setTitle("Customer Menu");
         stage.setScene(scene);
         stage.show();
+        
     }
 
     
-    
-
-
-
-    public void setCurrentCustomer(Customers customer) {
-       
-     currentCustomer = customer; 
-    customerModify(customer); 
+    public void setCurrentCustomer(Customers customer){
+        currentCustomer = customer; 
+        customerModify(customer); 
     }
+    
     /**
-     *
-     * @param customer
-     */
+    *
+    * @param customer
+    */
     public void customerModify(Customers customer){       
         //Sets TextFields based on passed Customer
         currentCustomer = customer;
@@ -147,8 +130,8 @@ public class ModifyCustomerController implements Initializable {
         int cId = 0;
         for(Countries c:countListB){
             if(c.getCountryName().equals(customer.getCountry())){
-              cId = c.getCountryId();     
-              break;
+                cId = c.getCountryId();     
+                break;
             }
         }
         ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);

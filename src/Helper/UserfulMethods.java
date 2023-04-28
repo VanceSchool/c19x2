@@ -4,7 +4,7 @@
  */
 package Helper;
 
-import static Helper.Alerts.alertGroup3;
+import static Helper.Alerts.appointmentTimeAlerts;
 import static Helper.TimeMethods.changeToEst;
 import Models.Contacts;
 import Models.Customers;
@@ -53,12 +53,12 @@ public abstract class UserfulMethods {
     }
 }
         
-     /**
-     * validateHasSelection
-     * Verifies ComboBox has a selection
-     * @param ComboBox
-     */ 
-        public static void validateHasSelection(ComboBox... cb) {        
+    /**
+    * validateHasSelection
+    * Verifies ComboBox has a selection
+    * @param ComboBox
+    */ 
+    public static void validateHasSelection(ComboBox... cb) {        
         for (ComboBox combobox: cb){
             if (combobox.selectionModelProperty() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -67,9 +67,10 @@ public abstract class UserfulMethods {
             alert.setContentText("Please Fill All Fields");
             alert.show();
             return; 
+            }
         }
     }
-}
+    
      /**
      * validateHasDate
      * Verifies Date Picker has a selection
@@ -95,45 +96,50 @@ public abstract class UserfulMethods {
      * @param cb2
      * @param ld1
      */
-        public static void validateHasTime(LocalTime cb1, LocalTime cb2,LocalDate ld1) {  
-            LocalDateTime ldt1 = LocalDateTime.of(ld1, cb1);
-            LocalDateTime ldt2 = LocalDateTime.of(ld1, cb2);
-            LocalDateTime estldt1 = changeToEst(ld1, cb1);
-            LocalDateTime estldt2 = changeToEst(ld1, cb2);
-            LocalTime estlt1 = estldt1.toLocalTime();
-            LocalTime estlt2 = estldt2.toLocalTime();
-            LocalTime minTime = LocalTime.of(8, 00);
-            LocalTime maxTime = LocalTime.of(16, 00);
-         if (ldt2.isBefore(ldt1)){
-            alertGroup3(1);
+    public static void validateHasTime(LocalTime cb1, LocalTime cb2,LocalDate ld1){  
+        boolean valid = true;
+        LocalDateTime ldt1 = LocalDateTime.of(ld1, cb1);
+        LocalDateTime ldt2 = LocalDateTime.of(ld1, cb2);
+        LocalDateTime estldt1 = changeToEst(ld1, cb1);
+        LocalDateTime estldt2 = changeToEst(ld1, cb2);
+        LocalTime estlt1 = estldt1.toLocalTime();
+        LocalTime estlt2 = estldt2.toLocalTime();
+        LocalTime minTime = LocalTime.of(8, 00);
+        LocalTime maxTime = LocalTime.of(22, 00);
+        if (ldt2.isBefore(ldt1)){
+            appointmentTimeAlerts(1);
+            
         }else if(ldt1.equals(ldt2)){
-            alertGroup3(2);
+            appointmentTimeAlerts(2);
+            
         }else if(ldt2.isBefore(LocalDateTime.now())){
-            alertGroup3(3); 
+            appointmentTimeAlerts(3); 
+            
         }else if((estlt1.isBefore(minTime)) || (estlt1.isAfter(maxTime)) ){
-            alertGroup3(4);
+            appointmentTimeAlerts(4);
+            
         }else if((estlt2.isBefore(minTime)) || (estlt2.isAfter(maxTime))){
-            alertGroup3(5);
-        }
-}
+            appointmentTimeAlerts(5);
+        }return;
+    }   
+        
+        
     public static void addTime(ComboBox startTimedd, ComboBox endTimedd){
-            for(int i=0;i<24;i++){
-            startTimedd.getItems().add(LocalTime.of(i, 0));
-            endTimedd.getItems().add(LocalTime.of(i, 0));
+        for(int i=0;i<24;i++){
+        startTimedd.getItems().add(LocalTime.of(i, 0));
+        endTimedd.getItems().add(LocalTime.of(i, 0));
         }
-
     }
     
     
     public static void addContacts(ComboBox contactdd) {
-        ObservableList<Contacts> contListB = DAOLists.getAllContacts();
-        contactdd.setItems(contListB);
+    ObservableList<Contacts> contListB = DAOLists.getAllContacts();
+    contactdd.setItems(contListB);
     }
     
     public static void addCustomers(ComboBox AppointmentCustomercb) {
-        ObservableList<Customers> custListB = DAOLists.getAllCustomers();
-        AppointmentCustomercb.setItems(custListB);
+    ObservableList<Customers> custListB = DAOLists.getAllCustomers();
+    AppointmentCustomercb.setItems(custListB);
     }
-        
-    }
+}
 

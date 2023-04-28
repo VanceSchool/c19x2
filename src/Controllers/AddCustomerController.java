@@ -75,7 +75,7 @@ public class AddCustomerController implements Initializable {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
              //if (allAptTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup2(6);
+        if(alertGroupVerifyAction(6)){
        Customers custMod = new Customers();
        Provinces modProvCust = CustomerStatecb.getValue();
        custMod.setState(modProvCust.getDivName());
@@ -92,6 +92,8 @@ public class AddCustomerController implements Initializable {
        stage.setTitle("Customer Menu");
        stage.setScene(scene);
        stage.show();
+        }
+        return;
     }
 
     @FXML

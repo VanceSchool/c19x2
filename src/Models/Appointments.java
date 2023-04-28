@@ -4,7 +4,6 @@
  */
 package Models;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  *
@@ -19,13 +18,13 @@ public class Appointments{
     private int customerId;
     private int userId;
     private int contactId;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private Timestamp start;
+    private Timestamp end;
     private String customerName;
     private String contactName;
     
           
-    public Appointments(int appointmentID, String title, String type, String description, String location,int contactId, int customerId, int userId, LocalDateTime start, LocalDateTime end){
+    public Appointments(int appointmentID, String title, String type, String description, String location,int contactId, int customerId, int userId, Timestamp start, Timestamp end){
     this.appointmentID =appointmentID;
     this.title = title;
     this.description = description;
@@ -39,7 +38,7 @@ public class Appointments{
     
     }
     
-        public Appointments(int appointmentID, String title, String type, String description, String location,String contactName, String customerName, LocalDateTime start, LocalDateTime end){
+        public Appointments(int appointmentID, String title, String type, String description, String location,String contactName, String customerName, Timestamp start, Timestamp end){
     this.appointmentID =appointmentID;
     this.title = title;
     this.description = description;
@@ -91,11 +90,11 @@ public class Appointments{
         return contactId;
     }
     
-    public LocalDateTime getStart(){
+    public Timestamp getStart(){
         return start;
     }
     
-    public LocalDateTime getEnd(){
+    public Timestamp getEnd(){
         return end;
     }
     
@@ -142,11 +141,11 @@ public class Appointments{
        this.contactId = contactId;
     }
     
-    public void setStart(LocalDateTime start){
+    public void setStart(Timestamp start){
         this.start = start;
     }
     
-    public void setEnd(LocalDateTime end){
+    public void setEnd(Timestamp end){
         this.end = end;
     }
 

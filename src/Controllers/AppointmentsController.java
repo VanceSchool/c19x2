@@ -181,11 +181,11 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     private void handleAmodifybt(ActionEvent event) throws IOException {
-             if ((byWeekTable.getSelectionModel().getSelectedItem() != null) 
-                || (byMonthTable.getSelectionModel().getSelectedItem() != null) 
-                || (allAptTable.getSelectionModel().getSelectedItem() != null))
-             {
-            alertGroup2(9);
+        if ((byWeekTable.getSelectionModel().getSelectedItem() != null) 
+            || (byMonthTable.getSelectionModel().getSelectedItem() != null) 
+            || (allAptTable.getSelectionModel().getSelectedItem() != null))
+        {
+            if(alertGroupVerifyAction(9)){;
             InputStream in = getClass().getResourceAsStream("/Scenes/ModifyAppointment.fxml"); 
             FXMLLoader loader = new FXMLLoader(); 
             loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -205,25 +205,30 @@ public class AppointmentsController implements Initializable {
             stage.setResizable(false);
             stage.show();
             }
-       }
+        } return;
+    }
 
     @FXML
     private void handleADeletebt(ActionEvent event) throws SQLException {
-     if (byMonthTable.getSelectionModel().getSelectedItem() != null){
-        alertGroup2(2);
-       Appointments delAppoint = byMonthTable.getSelectionModel().getSelectedItem();
-       deleteAppointment(delAppoint);
-        populateMonthTable();
-       }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
-               alertGroup2(2);
-       Appointments delAppoint = byWeekTable.getSelectionModel().getSelectedItem();
-       deleteAppointment(delAppoint);
-        populateWeekTable();  
-       }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
-               alertGroup2(2);
-       Appointments delAppoint = allAptTable.getSelectionModel().getSelectedItem();
-       deleteAppointment(delAppoint);
-       populateAllTable(); 
+        if (byMonthTable.getSelectionModel().getSelectedItem() != null){
+            if(alertGroupVerifyAction(2)){
+            Appointments delAppoint = byMonthTable.getSelectionModel().getSelectedItem();
+            deleteAppointment(delAppoint);
+            populateMonthTable();
+            } return;
+        }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
+            if(alertGroupVerifyAction(2)){;
+            Appointments delAppoint = byWeekTable.getSelectionModel().getSelectedItem();
+            deleteAppointment(delAppoint);
+            populateWeekTable();  
+            }return;
+        }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
+            if(alertGroupVerifyAction(2)){
+            Appointments delAppoint = allAptTable.getSelectionModel().getSelectedItem();
+            deleteAppointment(delAppoint);
+            populateAllTable(); 
+            }return;
+            
        }
     }
     

@@ -22,6 +22,7 @@ import Models.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -100,7 +101,7 @@ public class AddAppointmentsController implements Initializable {
         validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
         validateHasDate(startDatepick);
         validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue());
-        alertGroup2(10);// Are you sure  you wish to save new appoinotment?
+        if(alertGroupVerifyAction(10)){;// Are you sure  you wish to save new appoinotment?
         Customers modAppointCust = AppointmentCustomercb.getValue();
         Contacts modAppointCon = contactdd.getValue();
         System.out.println(modAppointCon.getContactId());
@@ -112,8 +113,10 @@ public class AddAppointmentsController implements Initializable {
        newAppointment.setType(typetxt.getText());
        newAppointment.setCustomerId(modAppointCust.getCustomerID());
        newAppointment.setContactId(modAppointCon.getContactId());
-       newAppointment.setStart(changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue()));
-       newAppointment.setEnd(changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue()));
+       LocalDateTime starttime = changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue());
+       LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
+       newAppointment.setStart(Timestamp.valueOf(starttime));
+       newAppointment.setEnd(Timestamp.valueOf(endtime));
        addAppointment(newAppointment);
        
        alertGroup1(8);
@@ -123,6 +126,7 @@ public class AddAppointmentsController implements Initializable {
         stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
+        }return;
         
     }
     

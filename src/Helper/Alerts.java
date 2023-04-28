@@ -17,7 +17,13 @@ import javafx.stage.Modality;
  */
 public class Alerts {
     
-    
+    /**
+    * exitAlert
+    * Method created to alert of exiting program, upon confirmation connection to database will close
+    * and system will exit.
+    * Lambda expression used to bypass if statement, methods to exit system and close connection were merged into 
+    * @method closeConnection
+    */
     public static void exitAlert(){
         ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -25,14 +31,19 @@ public class Alerts {
         alert.setTitle(rb.getString("validation"));
         alert.setHeaderText(rb.getString("confirm"));
         alert.setContentText(rb.getString("action"));
+        /*
         Optional<ButtonType> result = alert.showAndWait();
-
         if (result.get() == ButtonType.OK) {
             System.exit(0);
             JDBC.closeConnection();
         }
+        */
+        alert.showAndWait()
+        .filter(response -> response == ButtonType.OK)
+        .ifPresent(response -> JDBC.closeConnection());
     }
    
+    
     public static void passwordAlert(){
         ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -41,13 +52,16 @@ public class Alerts {
         alert.setHeaderText(rb.getString("useandpass"));
         Optional<ButtonType> result = alert.showAndWait();
 
-        if (result.get() == ButtonType.OK);
+        if (result.get() == ButtonType.OK){
+            return;
+        };
     }
+    
     
     /*alertGroup3
     * Contains alerts having to do with Appointment Schedules
     */
-        public static void alertGroup3(int type){
+        public static void appointmentTimeAlerts(int type){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validation");
         alert.setHeaderText("Validation");
@@ -75,16 +89,19 @@ public class Alerts {
                         
         }
         alert.showAndWait();
+        return;
     }
     
 
         /*
         
         */
-    public static void alertGroup2(int type){
+    public static boolean alertGroupVerifyAction(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Validation");
         alert.setHeaderText("Validation");
+        
+        
                 switch (type) {
             case 1: {
                 alert.setContentText("Are you sure you wish to delete this customer and all appointments associated?");
@@ -112,7 +129,11 @@ public class Alerts {
             }
             
         }
-        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            return true;
+ }
+        return false;
     }
     
     
@@ -145,6 +166,7 @@ public class Alerts {
             }
         }
         alert.showAndWait();
+        
     }
     
 }

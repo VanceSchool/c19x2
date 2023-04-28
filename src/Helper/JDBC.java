@@ -44,6 +44,7 @@ public abstract class JDBC {
     public static void closeConnection() {
         try {
             connection.close();
+            System.exit(0);
             System.out.println("Connection closed!");
         }
         catch(Exception e)

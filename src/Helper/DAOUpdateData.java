@@ -140,18 +140,18 @@ public class DAOUpdateData {
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
             "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
             + " (SELECT User_ID FROM users WHERE User_Name = ?), ?); ";   
-            LocalDateTime startlds = changeToUST(appointToAdd.getStart());
-            LocalDateTime endslds = changeToUST(appointToAdd.getEnd());
-            Timestamp startts = Timestamp.valueOf(startlds);
-            Timestamp endts = Timestamp.valueOf(endslds);
+            //LocalDateTime startlds = changeToUST(appointToAdd.getStart());
+            //LocalDateTime endslds = changeToUST(appointToAdd.getEnd());
+            //Timestamp startts = Timestamp.valueOf(startlds);
+            //Timestamp endts = Timestamp.valueOf(endslds);
          try {   
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql);
             ps2.setString(1, appointToAdd.getTitle());
             ps2.setString(2, appointToAdd.getDescription());
             ps2.setString(3, appointToAdd.getLocation());
             ps2.setString(4, appointToAdd.getType());
-            ps2.setTimestamp(5, startts);
-            ps2.setTimestamp(6, endts);
+            ps2.setTimestamp(5, appointToAdd.getStart());
+            ps2.setTimestamp(6, appointToAdd.getEnd());
             ps2.setString(7, LoginController.meUserID);
             ps2.setString(8, LoginController.meUserID);
             ps2.setInt(9, appointToAdd.getCustomerId());
@@ -165,33 +165,28 @@ public class DAOUpdateData {
         }
        }
         
-     /**
-     * modifyAppointment
-     * @param modAppoint
-     * @throws SQLException
-     */
-        public static void modifyAppointment(Appointments modAppoint) throws SQLException{
-            String sql1 = "SELECT * FROM appointments WHERE Appointment_ID = ?";
-            String sql2="INSERT INTO appointments \n" +
-            "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
-            + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
-            "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
-            + " (SELECT User_ID FROM users WHERE User_Name = ?), ?) WHERE Appointment_ID = ?; ";
-            
-            LocalDateTime startlds = changeToUST(modAppoint.getStart());
-            LocalDateTime endslds = changeToUST(modAppoint.getEnd());
-            Timestamp startts = Timestamp.valueOf(startlds);
-            Timestamp endts = Timestamp.valueOf(endslds);
-          try {  //System.out.println(sql);
-         PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);   
+    /**
+    * modifyAppointment
+    * @param modAppoint
+    * @throws SQLException
+    */
+    public static void modifyAppointment(Appointments modAppoint) throws SQLException{
+        String sql1 = "SELECT * FROM appointments WHERE Appointment_ID = ?";
+        String sql2="INSERT INTO appointments \n" +
+        "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
+        + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
+        "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
+        + " (SELECT User_ID FROM users WHERE User_Name = ?), ?) WHERE Appointment_ID = ?; ";
+        try {  //System.out.println(sql);
+            PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);   
             //System.out.println(LoginController.meUserID);
-        PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
+            PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
             ps2.setString(1, modAppoint.getTitle());
             ps2.setString(2, modAppoint.getDescription());
             ps2.setString(3, modAppoint.getLocation());
             ps2.setString(4, modAppoint.getType());
-            ps2.setTimestamp(5, startts);
-            ps2.setTimestamp(6, endts);
+            ps2.setTimestamp(5, modAppoint.getStart());
+            ps2.setTimestamp(6, modAppoint.getEnd());
             ps2.setString(7, LoginController.meUserID);
             ps2.setString(8, LoginController.meUserID);
             ps2.setInt(9, modAppoint.getCustomerId());
@@ -199,11 +194,11 @@ public class DAOUpdateData {
             ps2.setInt(11, modAppoint.getContactId());
             System.out.println(ps2);
             ps2.executeUpdate();
-             } catch(SQLException e) {
-            System.out.println("Issue with SQL");
-            e.printStackTrace();
-        }
-        }
+            }catch(SQLException e) {
+                System.out.println("Issue with SQL");
+                e.printStackTrace();
+            }
+    }
         
         
      /**
@@ -216,6 +211,24 @@ public class DAOUpdateData {
         try {
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, delAppoint.getAppointmentID());
+            ps.execute();
+        } catch(SQLException e) {
+            System.out.println("Issue with SQL");
+            e.printStackTrace();
+        }
+}
+        
+        
+             /**
+     * deleteCustomerAppoint 
+     * @param custId
+     * @throws SQLException
+     */
+        public static void deleteCustomerAppoint(int custId) throws SQLException{
+        String sql = "DELETE appointments.* FROM appointments WHERE Customer_ID =?";
+        try {
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, custId);
             ps.execute();
         } catch(SQLException e) {
             System.out.println("Issue with SQL");
