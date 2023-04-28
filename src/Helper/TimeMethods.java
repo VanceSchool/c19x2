@@ -51,7 +51,7 @@ public class TimeMethods {
     }
     public ZonedDateTime changeToUTC(LocalDateTime ldt){
         ZonedDateTime ldtZone;
-        ldtZone = ZonedDateTime.of(dateTime, ZoneId.systemDefault());
+        ldtZone = ZonedDateTime.of(ldt, ZoneId.systemDefault());
         ZonedDateTime utcZoneTime = ldtZone.withZoneSameInstant(ZoneOffset.UTC);
         
         return utcZoneTime;
@@ -61,7 +61,7 @@ public class TimeMethods {
         //Set LocalDateTime to ZonedDateTime of current Zone
         ZonedDateTime nowzdt = lD.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
         //Convert ZonedDateTime to EST Date Time
-        ZonedDateTime ustzdt = nowzdt.withZoneSameInstant(ZoneId.of("UST"));
+        ZonedDateTime ustzdt = nowzdt.withZoneSameInstant(ZoneId.of("UTC"));
         //Convert ZonedDateTime of EST to LocalDateTime
         LocalDateTime ustldt = ustzdt.toLocalDateTime();
         return ustldt;   
@@ -90,7 +90,12 @@ public class TimeMethods {
 
     
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
-       LocalDateTime plusFifteen = someTime.plusMinutes(30);
+       LocalDateTime plusFifteen = someTime.plusMinutes(15);
        return plusFifteen;
+    }
+    
+        public static LocalDateTime localTimeMinusFifteen(LocalDateTime someTime){
+       LocalDateTime minusFifteen = someTime.minusMinutes(15);
+       return minusFifteen;
     }
 }
