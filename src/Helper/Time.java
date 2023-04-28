@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.sql.Timestamp;
 import java.time.*;
 import static java.time.LocalDateTime.now;
+import static java.time.ZoneOffset.UTC;
 import java.time.ZonedDateTime;
 
 
@@ -55,6 +56,31 @@ public class Time {
         
         return utcZoneTime;
     }
+    
+        public LocalDateTime changeToUST(LocalDateTime lD){
+        //Set LocalDateTime to ZonedDateTime of current Zone
+        ZonedDateTime nowzdt = lD.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
+        //Convert ZonedDateTime to EST Date Time
+        ZonedDateTime ustzdt = nowzdt.withZoneSameInstant(ZoneId.of("UST"));
+        //Convert ZonedDateTime of EST to LocalDateTime
+        LocalDateTime ustldt = ustzdt.toLocalDateTime();
+        return ustldt;   
+    }
+        
+    public static LocalDateTime changeToEst(LocalDate ld, LocalTime lt){
+
+        //Convert local Date and Local time values to LocalDateTime
+        LocalDateTime ldt;
+        ldt = LocalDateTime.of(ld, lt);
+        //Set LocalDateTime to ZonedDateTime of current Zone
+        ZonedDateTime nowzdt = ldt.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
+        //Convert ZonedDateTime to EST Date Time
+        ZonedDateTime estzdt = nowzdt.withZoneSameInstant(ZoneId.of("America/New_York"));
+        //Convert ZonedDateTime of EST to LocalDateTime
+        LocalDateTime estldt = estzdt.toLocalDateTime();
+        return estldt;   
+    }
+    
     public static Timestamp changeToTimeStamp(LocalDateTime ldt){
         Timestamp ts;
         ts = Timestamp.valueOf(ldt);

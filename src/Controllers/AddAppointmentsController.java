@@ -7,7 +7,7 @@ package Controllers;
 import static Helper.Alerts.*;
 import Helper.DAOLists;
 import static Helper.DAOUpdateData.addAppointment;
-import static Helper.Time.changeUpLocaleDateTime;
+import static Helper.Time.*;
 import Helper.UserfulMethods;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
@@ -19,6 +19,7 @@ import Models.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -62,8 +63,6 @@ public class AddAppointmentsController implements Initializable {
     @FXML
     private DatePicker startDatepick;
     @FXML
-    private DatePicker endDatepicker;
-    @FXML
     private ComboBox<Contacts> contactdd;
     @FXML
     private ComboBox<LocalTime> startTimedd;
@@ -96,11 +95,9 @@ public class AddAppointmentsController implements Initializable {
         
         validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt);
         validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
-        validateHasDate(startDatepick,endDatepicker );
-        validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue(),endDatepicker.getValue());
-        
+        validateHasDate(startDatepick);
+        validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue(),startDatepick.getValue());
         alertGroup2(10);// Are you sure  you wish to save new appoinotment?
-        
         Customers modAppointCust = AppointmentCustomercb.getValue();
         Contacts modAppointCon = contactdd.getValue();
         System.out.println(modAppointCon.getContactId());
@@ -113,7 +110,7 @@ public class AddAppointmentsController implements Initializable {
        newAppointment.setCustomerId(modAppointCust.getCustomerID());
        newAppointment.setContactId(modAppointCon.getContactId());
        newAppointment.setStart(changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue()));
-       newAppointment.setEnd(changeUpLocaleDateTime(endDatepicker.getValue(), endTimedd.getValue()));
+       newAppointment.setEnd(changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue()));
        addAppointment(newAppointment);
        
        alertGroup1(8);
@@ -125,8 +122,67 @@ public class AddAppointmentsController implements Initializable {
         stage.show();
         
     }
-   
     
+        @FXML
+    private void handleDatePicker(ActionEvent event) {
+        if((startTimedd.getValue() != null) && (endTimedd.getValue() != null)){
+             LocalTime lt1 = startTimedd.getValue();
+             LocalTime lt2 = endTimedd.getValue();
+             LocalDateTime ldt1;
+             LocalDateTime ldt2;
+             LocalDate ld = startDatepick.getValue();
+             ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+              ldt2 = changeToEst(ld, lt2);
+             endTimelb.setText("Time EST " + ldt2.toLocalTime().toString());
+        } else if((startTimedd.getValue() != null) && (endTimedd.getValue() == null)){
+               LocalTime lt1 = endTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt1;
+              ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+             endTimelb.setText("Please Choose Time");
+        } else if((startTimedd.getValue() == null) && (endTimedd.getValue() != null)){
+             LocalTime lt2 = endTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt2;
+              ldt2 = changeToEst(ld, lt2);
+             endTimelb.setText("Time EST " + ldt2.toLocalTime().toString());
+             startTimelb.setText("Please Choose Time");
+        }else {
+            startTimelb.setText("Please Choose Time");
+            endTimelb.setText("Please Choose Time");
+        }
+    }
+    
+       @FXML
+    private void handleStartTimedd(ActionEvent event) {
+        if(startDatepick.getValue() != null){
+             LocalTime lt1 = startTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt1;
+             ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+        }else{
+
+             startTimelb.setText("Please Choose Date");
+        }
+    }
+
+    @FXML
+    private void handleEndTimedd(ActionEvent event) {
+        if(startDatepick.getValue() != null){
+             LocalTime lt2 = endTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt2;
+                ldt2 = changeToEst(ld, lt2);
+             endTimelb.setText("Time EST " + ldt2.toLocalTime().toString());
+        }else{
+            endTimelb.setText("Please Choose Date");
+        }
+        
+    }
+
     @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
@@ -136,7 +192,6 @@ public class AddAppointmentsController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
     private void handleContactdd(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -148,7 +203,6 @@ public class AddAppointmentsController implements Initializable {
     
     
     private void addTime(){
-    
             for(int i=0;i<24;i++){
             startTimedd.getItems().add(LocalTime.of(i, 0));
             endTimedd.getItems().add(LocalTime.of(i, 0));
@@ -166,4 +220,6 @@ public class AddAppointmentsController implements Initializable {
         ObservableList<Customers> custListB = DAOLists.getAllCustomers();
         AppointmentCustomercb.setItems(custListB);
     }
+
+
 }
