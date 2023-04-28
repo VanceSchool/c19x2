@@ -46,16 +46,27 @@ import javafx.stage.Stage;
  */
 public class ModifyCustomerController implements Initializable {
 
+    @FXML
     private TextField CustomerNametf;
+    @FXML
     private TextField CustomerAddresstf;
+    @FXML
     private TextField CustomerPhonetf;
+    @FXML
     private TextField CustomerPostaltf;
+    @FXML
     private TextField CustomerIdtf;
     private Customers currentCustomer;
     private Set<Customers> toBeModified = new HashSet();
+    @FXML
     private ComboBox<Countries> CustomerCountrycb;
+    @FXML
     private ComboBox<Provinces> CustomerStatecb;
     ObservableList<Countries> countListB = FXCollections.observableArrayList();
+    @FXML
+    private Button CustomerSavebt;
+    @FXML
+    private Button CustomerBackbt;
 
     /**
      * Initializes the controller class.
@@ -69,6 +80,7 @@ public class ModifyCustomerController implements Initializable {
         CustomerIdtf.setDisable(true);
     }    
 
+    @FXML
     private void handleCustomerSavebt(ActionEvent event) throws SQLException, IOException {
         validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
         validateHasSelection(CustomerCountrycb, CustomerStatecb);
@@ -95,6 +107,7 @@ public class ModifyCustomerController implements Initializable {
     }
   
 
+    @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -142,6 +155,7 @@ public class ModifyCustomerController implements Initializable {
         CustomerStatecb.setItems(provListB);
     }
 
+    @FXML
     private void handleCustomerCountrycb(ActionEvent event) {
         Countries jam = CustomerCountrycb.getValue();
         int cId = jam.getCountryId();
@@ -150,6 +164,10 @@ public class ModifyCustomerController implements Initializable {
         ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
         System.out.println(provListB);
         CustomerStatecb.setItems(provListB);
+    }
+
+    @FXML
+    private void handleCustomerStatecb(ActionEvent event) {
     }
 
 
