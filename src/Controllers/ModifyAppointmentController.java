@@ -4,10 +4,9 @@
  */
 package Controllers;
 
+import static DAO.DAOContacts.findContactByID;
+import static DAO.DAOCustomers.findCustomeresByID;
 import static Helper.Alerts.alertGroupVerifyAction;
-import static Helper.DAOLists.findContactByID;
-import static Helper.DAOLists.findCustomeresByID;
-import static Helper.DAOLists.getFilteredContacts;
 import Helper.TimeMethods;
 import static Helper.TimeMethods.changeToEst;
 import Helper.UserfulMethods;

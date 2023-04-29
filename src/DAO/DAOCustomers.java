@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 * @class DAOContacts
 * Contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database info into ObservableLists,
 * Affects tables customers, countries, first_level_divisions
-* Contains general(obtain All) and filtered(obtain specific set) queries
 * @author sean thompson <stho292@wgu.edu>
 */ 
 public class DAOCustomers {
