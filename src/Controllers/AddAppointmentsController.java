@@ -119,7 +119,7 @@ public class AddAppointmentsController implements Initializable {
        newAppointment.setEnd(Timestamp.valueOf(endtime));
        addAppointment(newAppointment);
        
-       alertGroup1(8);
+       alertGroupDatabaseChange(3);
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

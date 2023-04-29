@@ -84,7 +84,7 @@ public class AddCustomerController implements Initializable {
        custMod.setCustomerPostalCode(CustomerPostaltf.getText());
        addNewCustomers(custMod);
        
-       alertGroup1(8);
+       alertGroupDatabaseChange(1);
        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
        Scene scene = new Scene(root);

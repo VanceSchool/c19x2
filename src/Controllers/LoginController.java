@@ -164,12 +164,13 @@ public class LoginController implements Initializable {
         LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
     }
     
-    /* setUserInformation
+    /** setUserInformation
     * create userID, set to -1
     * Create Statement Object
     * Create SQL Statement
     * designate result set, designate that executed statement is result set.
     * while going through result set, if text matches provided info then return the new user ID
+    *@param username
     */  
     public int setUserInformation(String username) throws SQLException{
     int meUserID = -1;
@@ -184,12 +185,14 @@ public class LoginController implements Initializable {
         return meUserID;
     }
    
-    /*Validate Password:
+    /**isPasswordGood
     *Connect to database
     *Create SQL Statement
     *designate result set
     *designate that executed statement is result set.
     *while going through result set, if text matches provided info then return true
+    * @param userID
+    * @param password
     */
     private boolean isPasswordGood (int userID, String password) throws SQLException{
     //String sql = "SELECT Password FROM users WHERE User_ID ='" + userID + "' ";
@@ -198,7 +201,7 @@ public class LoginController implements Initializable {
     ResultSet rs = ps.executeQuery(sql);
         while(rs.next()){
         String pass = rs.getString("Password");
-        System.out.println(pass);
+        //System.out.println(pass);
         return true;
         }return false;
     }
@@ -252,15 +255,16 @@ public class LoginController implements Initializable {
         return user;
     }
     
-    /*loginRecordSuccess
-   
+    /**loginRecordSuccess
+    *
+    * @param user
     */
     private void loginRecordSuccess(User user) throws IOException{
-    System.out.println("Login Record Updated Positive"); 
+    //System.out.println("Login Record Updated Positive"); 
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(
-                    new File("login_activity.txt.txt"),
-                    true /* append = true */));
+                new File("login_activity.txt.txt"),
+                true));
             //out.txt will appear in the project's root directory under NetBeans projects
             //Note that Notepad will not display the following lines on separate lines
             pw.append("Succesful Login Attempt - User_ID: '" + user.getUserId() + "', Username:'"+ user.getUserName() +"' Password'"+ user.getUserPassword() +"'"
@@ -270,8 +274,11 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
-    /* Login Record Update
     
+    /** loginRecordfailure
+    *
+    * 
+    * @param user
     */
     private void loginRecordfailure(User user){
         System.out.println("Login Record Updated Negative");

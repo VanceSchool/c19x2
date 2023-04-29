@@ -91,8 +91,9 @@ public class ModifyAppointmentController implements Initializable {
         if(alertGroupVerifyAction(9)){
             Customers modAppointCust = AppointmentCustomercb.getValue();
             Contacts modAppointCon = contactdd.getValue();
-            System.out.println(modAppointCon.getContactId());
-            System.out.println(modAppointCust.getCustomerID());
+            int appointmentID = Integer.parseInt(appointmentIDtxt.getText());
+            //System.out.println(modAppointCon.getContactId());
+            //System.out.println(modAppointCust.getCustomerID());
             Appointments changeAppointment = new Appointments();
             changeAppointment.setTitle(titletxt.getText());
             changeAppointment.setDescription(descriptiontxt.getText());
@@ -104,8 +105,10 @@ public class ModifyAppointmentController implements Initializable {
             LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
             changeAppointment.setStart(Timestamp.valueOf(starttime));
             changeAppointment.setEnd(Timestamp.valueOf(endtime));
-            changeAppointment.setAppointmentID();
-            modifyAppointment(changeAppointment);
+            System.out.println(appointmentID);
+            changeAppointment.setAppointmentID(appointmentID);
+            System.out.println(changeAppointment.getAppointmentID());
+            modifyAppointment(changeAppointment, appointmentID);
        
             alertGroupDatabaseChange(3);
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));

@@ -193,11 +193,11 @@ public class AppointmentsController implements Initializable {
             Parent ModifyAppointment = loader.load(in);
             ModifyAppointmentController controller = (ModifyAppointmentController) loader.getController();
             if(byMonthTable.getSelectionModel().getSelectedItem() != null){
-            controller.setCurrentAppointment(byMonthTable.getSelectionModel().getSelectedItem()); 
+            controller.appointmentModify(byMonthTable.getSelectionModel().getSelectedItem()); 
             }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
-                controller.setCurrentAppointment(allAptTable.getSelectionModel().getSelectedItem());
+                controller.appointmentModify(allAptTable.getSelectionModel().getSelectedItem());
             }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
-                controller.setCurrentAppointment(byWeekTable.getSelectionModel().getSelectedItem());
+                controller.appointmentModify(byWeekTable.getSelectionModel().getSelectedItem());
             }
             Scene modifyPartScene = new Scene(ModifyAppointment);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -58,8 +58,11 @@ public class Alerts {
     }
     
     
-    /*alertGroup3
+    /**
+    * alertGroup3
     * Contains alerts having to do with Appointment Schedules
+    *
+    * @param type
     */
         public static void appointmentTimeAlerts(int type){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -93,17 +96,17 @@ public class Alerts {
     }
     
 
-        /*
-        
-        */
+    /**
+    *
+    * 
+    * @param type
+    */
     public static boolean alertGroupVerifyAction(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Validation");
         alert.setHeaderText("Validation");
-        
-        
-                switch (type) {
-            case 1: {
+        switch(type){
+            case 1:{
                 alert.setContentText("Are you sure you wish to delete this customer and all appointments associated?");
                 break;
             }
@@ -112,7 +115,7 @@ public class Alerts {
                 break;
             }
             case 4: {
-                alert.setContentText("Are You Sure You wish to update");
+                alert.setContentText("Are You Sure You wish to modify this Customer?");
                 break;
             }
             case 6: {
@@ -132,38 +135,37 @@ public class Alerts {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             return true;
- }
+        }
         return false;
     }
     
     
-    
-    public static void alertGroup1(int type){
+    /** alertGroup1
+    *
+    * 
+    * @param type
+    */
+    public static void alertGroupDatabaseChange(int type){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validation");
         alert.setHeaderText("Validation");
-                switch (type) {
-            case 3: {
-                alert.setContentText("Customer Has Been Updated");
-                break;
-            }
-            case 4: {
-                alert.setContentText("Are You Sure You wish to update");
-                break;
-            }
-            case 5: {
-                alert.setContentText("Customer Updated");
-                break;
-            }
-            case 7: {
-                alert.setContentText("Please Fill All Fields");
-                break;
-            }
-                        
-            case 8: {
+        switch(type){
+            case 1: {
                 alert.setContentText("New Customer Created!");
                 break;
             }
+            case 2: {
+                alert.setContentText("Customer Updated!");
+                break;
+            }
+            case 3: {
+                alert.setContentText("New Appointment Created!");
+                break;
+            }
+            case 4: {
+                alert.setContentText("Appointment Updated!");
+                break;
+            }          
         }
         alert.showAndWait();
         

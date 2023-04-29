@@ -125,7 +125,7 @@ public class DAOCustomers {
         PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
         ps1.setInt(1, modCust.getCustomerID());
         ResultSet rs1 = ps1.executeQuery();
-        System.out.println(modCust.getState());
+        //System.out.println(modCust.getState());
         while(rs1.next()){
             ps2.setString(1, modCust.getCustomerName());
             ps2.setString(2, modCust.getAddress());

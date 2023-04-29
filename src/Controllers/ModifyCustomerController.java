@@ -82,7 +82,7 @@ public class ModifyCustomerController implements Initializable {
             custMod.setCustomerPhone(CustomerPhonetf.getText());
             custMod.setCustomerPostalCode(CustomerPostaltf.getText());
             modifyCustomer(custMod);
-            alertGroup1(5);
+            alertGroupDatabaseChange(2);
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
