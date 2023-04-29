@@ -5,6 +5,7 @@
 package Controllers;
 
 
+import static DAO.DAOAppointments.getAllAppointments;
 import static Helper.Alerts.*;
 import DAO.DAOLists;
 import Models.User;
@@ -33,6 +34,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.logging.*;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -83,64 +85,64 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    LoginUsernametf.setText(null);
-    LoginPasswordtf.setText(null);
-    resourceBundleChange();
-    setZoneIdField();  
+        LoginUsernametf.setText(null);
+        LoginPasswordtf.setText(null);
+        resourceBundleChange();
+        setZoneIdField();  
     }    
 
     @FXML
     public void handleLoginbt(ActionEvent event) throws IOException, SQLException {
-    String username = LoginUsernametf.getText();
-    String password = LoginPasswordtf.getText();
+        String username = LoginUsernametf.getText();
+        String password = LoginPasswordtf.getText();
         // general login button
         //if((username != null) && (password != null)){
         // Password Check when login button us pressed.
         if(isPasswordGood(setUserInformation(username), password)){
-        loginRecordSuccess(setUpUserInfo(setUserInformation(username), password, username));
-        meUserID = username;
-        //appointmentAlert();
-        // load widget hierarchy of next screen
-        Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
-        //Get a stage
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        //create the new scene
-        Scene scene = new Scene(root);
-        //set title 
-        stage.setTitle("Main Menu");
-        //set the scene on the the stage
-        stage.setScene(scene);
-        // "raise the curtain" Show the scene
-        stage.show();
+            loginRecordSuccess(setUpUserInfo(setUserInformation(username), password, username));
+            meUserID = username;
+            appointmentAlert();
+            // load widget hierarchy of next screen
+            Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
+            //Get a stage
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            //create the new scene
+            Scene scene = new Scene(root);
+            //set title 
+            stage.setTitle("Main Menu");
+            //set the scene on the the stage
+            stage.setScene(scene);
+            // "raise the curtain" Show the scene
+            stage.show();
         }else{
             loginRecordfailure(setUpUserInfo(setUserInformation(username), password, username));
             passwordAlert();
-            }
+        }
     }
 
     @FXML
     private void handleExitbt(ActionEvent event) {
-    exitAlert();
+        exitAlert();
     }
     
-    /*
-    Set ZoneID txt to system Default Zone ID
-    Set Login Date Text Field to Local Login Date
-    Create Date Time Formatter
-    Set Login Time text to local time using Date Time Formatter
+    /**setZoneIdField
+    *Set ZoneID text to system Default Zone ID
+    *Set Login Date Text Field to Local Login Date
+    *Create Date Time Formatter
+    *Set Login Time text to local time using Date Time Formatter
     */
     private void setZoneIdField(){
-    ZoneIdtxt.setText(ZoneId.systemDefault().toString());
-    LoginDatetxt.setText(LocalDate.now().toString());
-    LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
+        ZoneIdtxt.setText(ZoneId.systemDefault().toString());
+        LoginDatetxt.setText(LocalDate.now().toString());
+        LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
     }
     
-    /* Set userID
-    *create userID, set to -1
-    *Create Statement Object
-    *Create SQL Statement
-    *designate result set, designate that executed statement is result set.
-    *while going through result set, if text matches provided info then return the new user ID
+    /* setUserInformation
+    * create userID, set to -1
+    * Create Statement Object
+    * Create SQL Statement
+    * designate result set, designate that executed statement is result set.
+    * while going through result set, if text matches provided info then return the new user ID
     */  
     public int setUserInformation(String username) throws SQLException{
     int meUserID = -1;
@@ -174,25 +176,34 @@ public class LoginController implements Initializable {
         }return false;
     }
     
-    private void appointmentAlert(){
-        
-        System.out.println("Appointment Alert");
-        /*
-        LocalDateTime now = getNowLocalDateTime();
-        LocalDateTime nowfifth = localTimePlus15(now);
-        LocalDateTime nowMinFifth = localTimeMinusFifteen(now);
-        LocalDateTime notutcfifth = changeToUST(nowfifth);
-        LocalDateTime notutcMinFifth = changeToUST(nowMinFifth);
-        System.out.println(now);
-        */
-        FilteredList<Appointments> reminderAcppointments = new FilteredList<>(currentAppointments);
-        //lambda expression used to efficiently identify any appointment starting within the next 15 minutes
-            reminderAcppointments.setPredicate(row -> {
-            java.sql.Timestamp rowDate = row.getStart();
-            java.sql.Timestamp nowPlusFifteen = Timestamp.valueOf();
-            return rowDate.isAfter(notutcMinFifth) && rowDate.isBefore(notutcfifth);
-            });
-        if (reminderAcppointments.isEmpty()) {
+    /**appointmentAlert
+    *
+    *
+    *
+    *
+    *
+    */
+    private void appointmentAlert(){   
+        //System.out.println("Appointment Alert");
+        List<Appointments> reminderAppointments = new ArrayList<>(currentAppointments);
+        ArrayList <Appointments> myAppointments = new ArrayList();
+        for(Appointments a:getAllAppointments()){
+             myAppointments.add(a);
+        };
+        java.sql.Timestamp nowPlusFifteen = java.sql.Timestamp.valueOf(LocalDateTime.now().plus(15, ChronoUnit.MINUTES));
+        java.sql.Timestamp rightNow = java.sql.Timestamp.valueOf(LocalDateTime.now());
+        //lambda expression used to efficiently identify any appointment starting within the next 15 minutes and add to list
+        reminderAppointments = myAppointments.stream().filter(row -> (
+            (row.getStart().after(rightNow) || row.getStart().equals(rightNow)) && row.getStart().before(nowPlusFifteen)
+            )
+        ).collect(Collectors.toList());
+        //System.out.println(nowPlusFifteen);
+        //System.out.println(rightNow);
+        //System.out.println(reminderAppointments);
+        //for(Appointments a:getAllAppointments()){
+        //    System.out.println(a.getStart());
+        // }
+        if (reminderAppointments.isEmpty()) {
             System.out.println("No upcoming appointment alerts.");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("You have No Upcoming Appointments");
@@ -200,8 +211,8 @@ public class LoginController implements Initializable {
             alert.setContentText("You have No appointments scheduled within 15 minutes");
             alert.showAndWait();
         } else {
-            int appointment = reminderAcppointments.get(0).getAppointmentID();
-            String start = reminderAcppointments.get(0).getStart().toString(); //1
+            int appointment = reminderAppointments.get(0).getAppointmentID();
+            String start = reminderAppointments.get(0).getStart().toString(); //1
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("You have Upcoming Appointments");
             alert.setHeaderText("You have an appointment scheduled in 15 min");
