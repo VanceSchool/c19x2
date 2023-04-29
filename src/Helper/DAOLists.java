@@ -133,6 +133,24 @@ public class DAOLists {
             throwables.printStackTrace();
         }return contactsListA;
     }
+    
+    public static Contacts findContactByID(int id){
+        String sql = "SELECT * From contacts WHERE Contact_ID = ?";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int contactId = rs.getInt("Contact_ID");
+                String contactName = rs.getString("Contact_Name");
+                Contacts count = new Contacts(contactId, contactName);
+                return count;
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }return null;
+        
+    }
    
     /**
     * getFilteredContacts Method for SQL Statement for SELECT all FROM contacts Table WHERE Contact_ID = cID

@@ -5,6 +5,7 @@
 package Controllers;
 
 import static Helper.Alerts.alertGroupVerifyAction;
+import static Helper.DAOLists.findContactByID;
 import static Helper.DAOLists.getFilteredContacts;
 import Helper.TimeMethods;
 import static Helper.TimeMethods.changeToEst;
@@ -116,6 +117,7 @@ public class ModifyAppointmentController implements Initializable {
         startTimedd.setValue(startlt);
         endTimedd.setValue(endlt);
         startDatepick.setValue(appointDate);
+        contactdd.setValue(findContactByID(currentAppointment.getContactId()));
         }
     
 
@@ -153,11 +155,11 @@ public class ModifyAppointmentController implements Initializable {
 
     @FXML
     private void handleContactdd(ActionEvent event) {
-        addContacts(contactdd);
+        
     }
 
     @FXML
     private void handleCustomerdd(ActionEvent event) {
-        addCustomers(AppointmentCustomercb);
+        
     }
 }

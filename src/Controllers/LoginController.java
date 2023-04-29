@@ -21,6 +21,7 @@ import java.io.PrintWriter;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.net.URL;
+import java.security.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -173,6 +174,7 @@ public class LoginController implements Initializable {
     }
     /*
     private void appointmentAlert(){
+        
         System.out.println("Appointment Alert");
         LocalDateTime now = getNowLocalDateTime();
         LocalDateTime nowfifth = localTimePlus15(now);
@@ -183,7 +185,7 @@ public class LoginController implements Initializable {
         FilteredList<Appointments> reminderAcppointments = new FilteredList<>(currentAppointments);
         //lambda expression used to efficiently identify any appointment starting within the next 15 minutes
             reminderAcppointments.setPredicate(row -> {
-            LocalDateTime rowDate = LocalDateTime.parse(row.getStart().format(dtf));
+            Timestamp rowDate = row.getStart();
             return rowDate.isAfter(notutcMinFifth) && rowDate.isBefore(notutcfifth);
             });
         if (reminderAcppointments.isEmpty()) {
@@ -204,7 +206,8 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         }
     }
-    */
+        */
+    
     
     public User setUpUserInfo(int userID, String password, String username) throws SQLException{
         User user = new User(-1, password, username);
