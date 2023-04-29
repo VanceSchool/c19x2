@@ -7,7 +7,7 @@ package Controllers;
 import static DAO.DAOCustomers.addNewCustomers;
 import static Helper.Alerts.*;
 import Helper.UserfulMethods;
-import Helper.DAOLists;
+import DAO.DAOLists;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
 import Models.Countries;

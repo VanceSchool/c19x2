@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import Helper.DAOLists;
+import DAO.DAOLists;
 import Models.Appointments;
 import java.net.URL;
 import java.util.ResourceBundle;

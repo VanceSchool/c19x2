@@ -19,8 +19,7 @@ import javafx.collections.ObservableList;
 * @author sean thompson <stho292@wgu.edu>
 */ 
 public class DAOContacts {
-    
-    //SELECT Methodsd
+    //SELECT Methods
     
     /**
     * getAllContacts Method for SQL Statement for SELECT all FROM contacts Table

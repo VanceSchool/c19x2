@@ -4,6 +4,7 @@
  */
 package Helper;
 
+import DAO.DAOLists;
 import static Helper.Alerts.appointmentTimeAlerts;
 import static Helper.TimeMethods.changeToEst;
 import Models.Contacts;
@@ -134,7 +135,7 @@ public abstract class UserfulMethods {
     
     
     public static void addContacts(ComboBox contactdd) {
-    ObservableList<Contacts> contListB = DAOLists.getAllContacts();
+    ObservableList<Contacts> contListB = DAOContacts.getAllContacts();
     contactdd.setItems(contListB);
     }
     

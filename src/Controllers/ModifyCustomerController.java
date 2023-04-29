@@ -6,7 +6,7 @@ package Controllers;
 
 import static DAO.DAOCustomers.modifyCustomer;
 import static Helper.Alerts.*;
-import Helper.DAOLists;
+import DAO.DAOLists;
 import Helper.TimeMethods;
 import static Helper.UserfulMethods.*;
 import Models.*;

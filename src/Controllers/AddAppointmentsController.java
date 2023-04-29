@@ -4,9 +4,9 @@
  */
 package Controllers;
 
+import static DAO.DAOAppointments.addAppointment;
 import static Helper.Alerts.*;
-import Helper.DAOLists;
-import static Helper.DAOUpdateData.addAppointment;
+import DAO.DAOLists;
 import static Helper.TimeMethods.*;
 import Helper.UserfulMethods.*;
 import static Helper.UserfulMethods.addContacts;

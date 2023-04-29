@@ -4,9 +4,9 @@
  */
 package Controllers;
 
+import DAO.DAOAppointments;
+import static DAO.DAOAppointments.deleteAppointment;
 import static Helper.Alerts.*;
-import Helper.DAOLists;
-import static Helper.DAOUpdateData.deleteAppointment;
 import Models.Appointments;
 import Models.Customers;
 import java.io.IOException;
@@ -234,7 +234,7 @@ public class AppointmentsController implements Initializable {
     
     
     private void populateAllTable(){
-        ObservableList<Appointments> appointListB = DAOLists.getAllAppointments();
+        ObservableList<Appointments> appointListB = DAOAppointments.getAllAppointments();
         //System.out.println("List Size Equals:" + appointListB.size());
         allAptTable.setItems(appointListB);
         AppointmentIDcol1a.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
@@ -250,7 +250,7 @@ public class AppointmentsController implements Initializable {
     }
     
         private void populateMonthTable(){
-        ObservableList<Appointments> appointMonthListB = DAOLists.getFilteredMonthAppointments();
+        ObservableList<Appointments> appointMonthListB = DAOAppointments.getFilteredMonthAppointments();
         //System.out.println("List Size Equals:" + appointMonthListB.size());
         byMonthTable.setItems(appointMonthListB);
         AppointmentIDColm.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
@@ -268,7 +268,7 @@ public class AppointmentsController implements Initializable {
         
         
         private void populateWeekTable(){
-        ObservableList<Appointments> appointWeekListB = DAOLists.getFilteredWeekAppointments();
+        ObservableList<Appointments> appointWeekListB = DAOAppointments.getFilteredWeekAppointments();
         //System.out.println("List Size Equals:" + appointWeekListB.size());
         byWeekTable.setItems(appointWeekListB);
         AppointmentIDcolw.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
