@@ -6,8 +6,8 @@ package Controllers;
 
 import static Helper.Alerts.*;
 import static Helper.Alerts.exitAlert;
-import static Helper.DAOUpdateData.deleteCustomer;
-import Helper.DAOLists;
+import DAO.*;
+import static DAO.DAOCustomers.deleteCustomer;
 import static Helper.DAOUpdateData.deleteCustomerAppoint;
 import Models.Customers;
 import java.io.IOException;
@@ -76,7 +76,7 @@ public class CustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<Customers> cusListB = DAOLists.getAllCustomers();
+        ObservableList<Customers> cusListB = DAOCustomers.getAllCustomers();
         customerTable.setItems(cusListB);
         CustomerIDcol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         CustomerNamecol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -118,7 +118,7 @@ public class CustomerController implements Initializable {
            Customers delCust = customerTable.getSelectionModel().getSelectedItem();
            deleteCustomerAppoint(delCust.getCustomerID());
            deleteCustomer(delCust);
-           ObservableList<Customers> cusListC = DAOLists.getAllCustomers();
+           ObservableList<Customers> cusListC = DAOCustomers.getAllCustomers();
            customerTable.setItems(cusListC);
            }return;
         }   

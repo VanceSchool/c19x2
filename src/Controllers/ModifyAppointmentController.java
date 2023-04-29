@@ -6,6 +6,7 @@ package Controllers;
 
 import static Helper.Alerts.alertGroupVerifyAction;
 import static Helper.DAOLists.findContactByID;
+import static Helper.DAOLists.findCustomeresByID;
 import static Helper.DAOLists.getFilteredContacts;
 import Helper.TimeMethods;
 import static Helper.TimeMethods.changeToEst;
@@ -118,6 +119,9 @@ public class ModifyAppointmentController implements Initializable {
         endTimedd.setValue(endlt);
         startDatepick.setValue(appointDate);
         contactdd.setValue(findContactByID(currentAppointment.getContactId()));
+        AppointmentCustomercb.setValue(findCustomeresByID(currentAppointment.getCustomerId()));
+        
+        updateTimeText();
         }
     
 
@@ -133,10 +137,21 @@ public class ModifyAppointmentController implements Initializable {
 
     @FXML
     private void handleDatePicker(ActionEvent event) {
+    updateTimeText();
     }
 
     @FXML
     private void handleStartTimedd(ActionEvent event) {
+                if(startDatepick.getValue() != null){
+             LocalTime lt1 = startTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt1;
+             ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+        }else{
+
+             startTimelb.setText("Please Choose Date");
+        }
     }
 
     @FXML
@@ -161,5 +176,36 @@ public class ModifyAppointmentController implements Initializable {
     @FXML
     private void handleCustomerdd(ActionEvent event) {
         
+    }
+    
+    private void updateTimeText(){
+                        if((startTimedd.getValue() != null) && (endTimedd.getValue() != null)){
+             LocalTime lt1 = startTimedd.getValue();
+             LocalTime lt2 = endTimedd.getValue();
+             LocalDateTime ldt1;
+             LocalDateTime ldt2;
+             LocalDate ld = startDatepick.getValue();
+             ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+              ldt2 = changeToEst(ld, lt2);
+             endTimelb.setText("Time EST " + ldt2.toLocalTime().toString());
+        } else if((startTimedd.getValue() != null) && (endTimedd.getValue() == null)){
+               LocalTime lt1 = endTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt1;
+              ldt1 = changeToEst(ld, lt1);
+             startTimelb.setText("Time EST " + ldt1.toLocalTime().toString());
+             endTimelb.setText("Please Choose Time");
+        } else if((startTimedd.getValue() == null) && (endTimedd.getValue() != null)){
+             LocalTime lt2 = endTimedd.getValue();
+             LocalDate ld = startDatepick.getValue();
+             LocalDateTime ldt2;
+              ldt2 = changeToEst(ld, lt2);
+             endTimelb.setText("Time EST " + ldt2.toLocalTime().toString());
+             startTimelb.setText("Please Choose Time");
+        }else {
+            startTimelb.setText("Please Choose Time");
+            endTimelb.setText("Please Choose Time");
+        }
     }
 }

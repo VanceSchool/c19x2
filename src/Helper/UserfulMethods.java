@@ -8,6 +8,7 @@ import static Helper.Alerts.appointmentTimeAlerts;
 import static Helper.TimeMethods.changeToEst;
 import Models.Contacts;
 import Models.Customers;
+import DAO.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -138,7 +139,7 @@ public abstract class UserfulMethods {
     }
     
     public static void addCustomers(ComboBox AppointmentCustomercb) {
-    ObservableList<Customers> custListB = DAOLists.getAllCustomers();
+    ObservableList<Customers> custListB = DAOCustomers.getAllCustomers();
     AppointmentCustomercb.setItems(custListB);
     }
 }

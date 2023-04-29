@@ -26,69 +26,6 @@ import javafx.collections.ObservableList;
      */ 
 public class DAOLists {
     
-
-    /**
-    * getAllCustomers Method for SQL Statement for SELECT all FROM customers Table
-    * @return cusListA
-    */ 
-    public static ObservableList<Customers> getAllCustomers(){
-        //create a list to return
-        ObservableList<Customers> cusListA = FXCollections.observableArrayList();
-        //setup the sql
-        String sql = "SELECT *, first_level_divisions.Division, countries.Country FROM customers "
-        + "INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID "
-        + "INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID ";
-            try{
-            //make the prepared statement
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            //make the query ==> ResultSet
-            ResultSet rs = ps.executeQuery();
-            //Cycle through the result
-                while(rs.next()){
-                //pull out the data
-                int id = rs.getInt("Customer_ID");
-                String cName = rs.getString("Customer_Name");
-                String cAddress = rs.getString("Address");
-                String cPCode = rs.getString("Postal_Code");
-                String phone = rs.getString("Phone");
-                String country = rs.getString("Country");
-                String state = rs.getString("Division");
-                //make an object instance
-                Customers cust = new Customers(id, cName, cAddress, cPCode, phone, country, state);
-                //add to list
-                cusListA.add(cust);
-                }    
-            }    
-        catch(SQLException throwables){
-            throwables.printStackTrace();
-        }
-    //return the list
-    return cusListA;
-   } 
-   
-    /**
-    *getFilteredCustomers Method for SQL Statement for SELECT All FROM customers Table WHERE Customer_ID = custID
-    *@return cusListB
-    *@param custID
-    */ 
-    public static ObservableList<Customers> getFilteredCustomers(int custID){
-        ObservableList<Customers> cusListB = FXCollections.observableArrayList();
-        String sql = "SELECT Customer_ID, Customer_Name FROM customers WHERE Customer_ID = ? ";
-        try{
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setInt(1, custID);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("Customer_ID");
-                String cName = rs.getString("Customer_Name");
-                Customers cust = new Customers(id, cName);
-                cusListB.add(cust);
-            }
-        }catch(SQLException throwables){
-            throwables.printStackTrace();
-        } return cusListB;
-    }
-     
     /**
     * getAllCountries Method for SQL Statement for SELECT all FROM countries Table
     * @return countryListA
