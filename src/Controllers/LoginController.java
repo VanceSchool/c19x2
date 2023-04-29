@@ -95,13 +95,40 @@ public class LoginController implements Initializable {
     public void handleLoginbt(ActionEvent event) throws IOException, SQLException {
         String username = LoginUsernametf.getText();
         String password = LoginPasswordtf.getText();
-        // general login button
-        //if((username != null) && (password != null)){
         // Password Check when login button us pressed.
         if(isPasswordGood(setUserInformation(username), password)){
             loginRecordSuccess(setUpUserInfo(setUserInformation(username), password, username));
             meUserID = username;
-            appointmentAlert();
+            //Appointment Alert if appoint within 15 minutes of login time
+            List<Appointments> reminderAppointments = new ArrayList<>(currentAppointments);
+            ArrayList <Appointments> myAppointments = new ArrayList();
+            for(Appointments a:getAllAppointments()){
+                myAppointments.add(a);
+            };
+            java.sql.Timestamp nowPlusFifteen = java.sql.Timestamp.valueOf(LocalDateTime.now().plus(15, ChronoUnit.MINUTES));
+            java.sql.Timestamp rightNow = java.sql.Timestamp.valueOf(LocalDateTime.now());
+            //lambda expression used to efficiently identify any appointment starting within the next 15 minutes and add to list
+            reminderAppointments = myAppointments.stream().filter(row -> (
+                (row.getStart().after(rightNow) || row.getStart().equals(rightNow)) && row.getStart().before(nowPlusFifteen)
+                )
+            ).collect(Collectors.toList());
+            if (reminderAppointments.isEmpty()) {
+                System.out.println("No upcoming appointment alerts.");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("You have No Upcoming Appointments");
+                alert.setHeaderText("You have No appointments scheduled within 15 minutes");
+                alert.setContentText("You have No appointments scheduled within 15 minutes");
+                alert.showAndWait();
+            }else{
+                int appointment = reminderAppointments.get(0).getAppointmentID();
+                String start = reminderAppointments.get(0).getStart().toString(); //1
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("You have Upcoming Appointments");
+                alert.setHeaderText("You have an appointment scheduled in 15 min");
+                alert.setContentText("AppointmentID:" + appointment
+                        + " starts at " + start + ".");
+                alert.showAndWait();
+            }
             // load widget hierarchy of next screen
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
             //Get a stage
@@ -176,13 +203,7 @@ public class LoginController implements Initializable {
         }return false;
     }
     
-    /**appointmentAlert
-    *
-    *
-    *
-    *
-    *
-    */
+    /*
     private void appointmentAlert(){   
         //System.out.println("Appointment Alert");
         List<Appointments> reminderAppointments = new ArrayList<>(currentAppointments);
@@ -202,7 +223,7 @@ public class LoginController implements Initializable {
         //System.out.println(reminderAppointments);
         //for(Appointments a:getAllAppointments()){
         //    System.out.println(a.getStart());
-        // }
+        //}
         if (reminderAppointments.isEmpty()) {
             System.out.println("No upcoming appointment alerts.");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -221,7 +242,7 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         }
     }
-    
+    */
     
     public User setUpUserInfo(int userID, String password, String username) throws SQLException{
         User user = new User(-1, password, username);

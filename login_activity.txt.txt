@@ -158,3 +158,4 @@ Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '14:
 Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '14:19:41' Date: '2023-04-29'
 Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '14:29:53' Date: '2023-04-29'
 Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '14:31:18' Date: '2023-04-29'
+Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '14:43:27' Date: '2023-04-29'
