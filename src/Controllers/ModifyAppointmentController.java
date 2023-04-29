@@ -108,9 +108,10 @@ public class ModifyAppointmentController implements Initializable {
             System.out.println(appointmentID);
             changeAppointment.setAppointmentID(appointmentID);
             System.out.println(changeAppointment.getAppointmentID());
-            modifyAppointment(changeAppointment, appointmentID);
+            //modifyAppointment(changeAppointment, appointmentID);
+            modifyAppointment(changeAppointment);
        
-            alertGroupDatabaseChange(3);
+            alertGroupDatabaseChange(4);
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

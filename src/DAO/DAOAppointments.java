@@ -220,7 +220,7 @@ public class DAOAppointments {
     * @param modAppoint
     * @throws SQLException
     */
-    public static void modifyAppointment(Appointments modAppoint, int id) throws SQLException{
+    public static void modifyAppointment(Appointments modAppoint) throws SQLException{
         String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
         
 
@@ -232,7 +232,7 @@ public class DAOAppointments {
         try {
             PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);
             PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
-            ps1.setInt(1, id);
+            ps1.setInt(1, modAppoint.getAppointmentID());
             
             ResultSet rs1 = ps1.executeQuery();
             System.out.println(rs1);
@@ -246,7 +246,7 @@ public class DAOAppointments {
                 ps2.setInt(8, modAppoint.getCustomerId());
                 ps2.setString(9, LoginController.meUserID);
                 ps2.setInt(10, modAppoint.getContactId());
-                ps2.setInt(11, id);
+                ps2.setInt(11, modAppoint.getAppointmentID());
                 System.out.println(ps2);
                 ps2.executeUpdate();
             

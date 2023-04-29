@@ -109,7 +109,7 @@ public class Appointments{
 
     //Setters
     
-    public void setAppointmentID(int id){
+    public void setAppointmentID(int appointmentID){
       this.appointmentID = appointmentID;
     }
     

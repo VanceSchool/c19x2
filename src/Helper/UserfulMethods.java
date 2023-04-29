@@ -109,17 +109,11 @@ public abstract class UserfulMethods {
         LocalTime minTime = LocalTime.of(8, 00);
         LocalTime maxTime = LocalTime.of(22, 00);
         if (ldt2.isBefore(ldt1)){
-            appointmentTimeAlerts(1);
-            
+            appointmentTimeAlerts(1);  
         }else if(ldt1.equals(ldt2)){
             appointmentTimeAlerts(2);
-            
-        }else if(ldt2.isBefore(LocalDateTime.now())){
-            appointmentTimeAlerts(3); 
-            
         }else if((estlt1.isBefore(minTime)) || (estlt1.isAfter(maxTime)) ){
             appointmentTimeAlerts(4);
-            
         }else if((estlt2.isBefore(minTime)) || (estlt2.isAfter(maxTime))){
             appointmentTimeAlerts(5);
         }return;

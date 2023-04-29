@@ -118,7 +118,6 @@ public class AddAppointmentsController implements Initializable {
        newAppointment.setStart(Timestamp.valueOf(starttime));
        newAppointment.setEnd(Timestamp.valueOf(endtime));
        addAppointment(newAppointment);
-       
        alertGroupDatabaseChange(3);
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

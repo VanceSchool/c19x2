@@ -121,13 +121,19 @@ public class LoginController implements Initializable {
                 alert.showAndWait();
             }else{
                 int appointment = reminderAppointments.get(0).getAppointmentID();
-                String start = reminderAppointments.get(0).getStart().toString(); //1
+                String start = reminderAppointments.get(0).getStart().toString();
+                DateTimeFormatter fomatter = DateTimeFormatter.ofPattern("MM/dd/yy 'at' hh:mm a");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("You have Upcoming Appointments");
                 alert.setHeaderText("You have an appointment scheduled in 15 min");
-                alert.setContentText("AppointmentID:" + appointment
-                        + " starts at " + start + ".");
-                alert.showAndWait();
+                StringBuilder alertSB = new StringBuilder();
+                for(Appointments apl:reminderAppointments){
+                int appointID = apl.getAppointmentID();
+                String Output = fomatter.format(apl.getStart().toLocalDateTime());
+                    alert.setContentText("AppointmentID:" + appointID
+                        + " starts at " + Output + ".\n");
+                    alert.showAndWait();
+                }
             }
             // load widget hierarchy of next screen
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));
