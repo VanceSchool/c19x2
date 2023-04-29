@@ -30,6 +30,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.logging.*;
 import javafx.collections.FXCollections;
@@ -172,20 +173,23 @@ public class LoginController implements Initializable {
         return true;
         }return false;
     }
-    /*
+    
     private void appointmentAlert(){
         
         System.out.println("Appointment Alert");
+        /*
         LocalDateTime now = getNowLocalDateTime();
         LocalDateTime nowfifth = localTimePlus15(now);
         LocalDateTime nowMinFifth = localTimeMinusFifteen(now);
         LocalDateTime notutcfifth = changeToUST(nowfifth);
         LocalDateTime notutcMinFifth = changeToUST(nowMinFifth);
         System.out.println(now);
+        */
         FilteredList<Appointments> reminderAcppointments = new FilteredList<>(currentAppointments);
         //lambda expression used to efficiently identify any appointment starting within the next 15 minutes
             reminderAcppointments.setPredicate(row -> {
-            Timestamp rowDate = row.getStart();
+            java.sql.Timestamp rowDate = row.getStart();
+            java.sql.Timestamp nowPlusFifteen = Timestamp.valueOf();
             return rowDate.isAfter(notutcMinFifth) && rowDate.isBefore(notutcfifth);
             });
         if (reminderAcppointments.isEmpty()) {
@@ -206,7 +210,6 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         }
     }
-        */
     
     
     public User setUpUserInfo(int userID, String password, String username) throws SQLException{
@@ -217,7 +220,7 @@ public class LoginController implements Initializable {
         return user;
     }
     
-    /* Login Record Update
+    /*loginRecordSuccess
    
     */
     private void loginRecordSuccess(User user) throws IOException{
