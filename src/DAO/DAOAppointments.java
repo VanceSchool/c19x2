@@ -188,7 +188,7 @@ public class DAOAppointments {
             String sql="INSERT INTO appointments \n" +
             "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
-            "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
+            "VALUES ( ? ,? ,? , ? , ? ,? , current_timestamp(), ?, current_timestamp(), ?, ?,\n"
             + " (SELECT User_ID FROM users WHERE User_Name = ?), ?); ";   
             //LocalDateTime startlds = changeToUST(appointToAdd.getStart());
             //LocalDateTime endslds = changeToUST(appointToAdd.getEnd());
@@ -225,7 +225,7 @@ public class DAOAppointments {
         String sql2="INSERT INTO appointments \n" +
         "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
         + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
-        "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_date(), ?, ?,\n"
+        "VALUES ( ? ,? ,? , ? , ? ,? , current_date(), ?, current_timestamp(), ?, ?,\n"
         + " (SELECT User_ID FROM users WHERE User_Name = ?), ?) WHERE Appointment_ID = ?; ";
         try {  //System.out.println(sql);
             PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);   
