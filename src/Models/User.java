@@ -16,21 +16,36 @@ public class User{
     private static String userName;
     
 
-/**Constructor User
- * @param userName id of user
- * @param userPassword of user
- * @param userId of user
- * This Constructor used to validate Login Attempts
- */ 
-public User(int userId, String userPassword, String userName){
-userId = this.userId;
-userPassword = this.userPassword;
-userName = this.userName;
-}
+    /**Constructor User
+    * @param userName id of user
+     * @param userPassword of user
+     * @param userId of user
+     * This Constructor used to validate Login Attempts
+     */ 
+    public User(int userId, String userPassword, String userName){
+        userId = this.userId;
+        userPassword = this.userPassword;
+        userName = this.userName;
+    }
 
+    /**Constructor User
+     * @param userPassword of user
+     * @param userId of user
+     * 
+     */ 
     public User(int userId, String userPassword) {
        userId = this.userId;
-        userPassword = this.userPassword;
+       userPassword = this.userPassword;
+    }
+    
+    /**Constructor User
+     * @param userName of user
+     * @param userId of user
+     * This constructor used for Appointment Creation and Modification
+     */ 
+    public User(String userName, int userId) {
+       userId = this.userId;
+       userName = this.userName;
     }
 
     public User() {
@@ -38,28 +53,33 @@ userName = this.userName;
     }
 
 //Setters
-public void setUserId(int userId){
-    this.userId = userId;
-}
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
 
-public void setUserPassword(String userPassword){
-    this.userPassword = userPassword;
-}
+    public void setUserPassword(String userPassword){
+        this.userPassword = userPassword;
+    }
 
-public void setUserName(String userName){
-    this.userName = userName;
-}
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
 //Getters
 
-public int getUserId(){
-    return userId;
-}
+    public int getUserId(){
+        return userId;
+    }
 
-public String getUserName(){
-    return userName;
-}
+    public String getUserName(){
+        return userName;
+    }
 
-public String getUserPassword(){
-    return userPassword;
-}
+    public String getUserPassword(){
+        return userPassword;
+    }
+
+        @Override
+    public String toString(){
+        return userName;
+    }
 }

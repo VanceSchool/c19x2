@@ -50,6 +50,8 @@ public class Appointments{
     this.end = end;
     
     }
+        
+
 
     public Appointments() {
     
@@ -154,5 +156,9 @@ public class Appointments{
     }
     public void setCustomerName(String customerName){
        this.type = type;
+    }
+
+    public void setUserName(User value) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

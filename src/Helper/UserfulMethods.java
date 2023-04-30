@@ -10,6 +10,7 @@ import static Helper.TimeMethods.changeToEst;
 import Models.Contacts;
 import Models.Customers;
 import DAO.*;
+import Models.User;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -137,5 +138,11 @@ public abstract class UserfulMethods {
     ObservableList<Customers> custListB = DAOCustomers.getAllCustomers();
     AppointmentCustomercb.setItems(custListB);
     }
+    
+    public static void addUsers(ComboBox usercb) {
+        ObservableList<User> userListB = DAOUser.getAllUsers();
+        usercb.setItems(userListB);
+    }
+    
 }
 

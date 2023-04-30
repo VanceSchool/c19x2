@@ -36,7 +36,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="17.0" prefWidth="155.0" text="Customer" />
@@ -59,8 +58,6 @@
             <ComboBox id="customerdd" fx:id="AppointmentCustomercb" prefHeight="25.0" prefWidth="328.0" GridPane.columnIndex="2" />
             <Label id="startTimelb" fx:id="startTimelb" prefHeight="17.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label id="endTimelb" fx:id="endTimelb" prefHeight="17.0" prefWidth="137.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="userCb" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <Label text="User" GridPane.rowIndex="9" />
          </children>
       </GridPane>
    </children>

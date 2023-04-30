@@ -12,6 +12,7 @@ import Helper.UserfulMethods.*;
 import static Helper.UserfulMethods.addContacts;
 import static Helper.UserfulMethods.addCustomers;
 import static Helper.UserfulMethods.addTime;
+import static Helper.UserfulMethods.addUsers;
 import static Helper.UserfulMethods.validateHasSelection;
 import static Helper.UserfulMethods.validateNonEmpty;
 import static Helper.UserfulMethods.validateHasDate;
@@ -19,6 +20,7 @@ import static Helper.UserfulMethods.validateHasTime;
 import Models.Appointments;
 import Models.Contacts;
 import Models.Customers;
+import Models.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -82,8 +84,7 @@ public class AddAppointmentsController implements Initializable {
     private Label startTimelb;
     @FXML
     private Label endTimelb;
-    @FXML
-    private ComboBox<?> userCb;
+ 
 
     /**
      * Initializes the controller class.
@@ -93,6 +94,7 @@ public class AddAppointmentsController implements Initializable {
      addTime(startTimedd, endTimedd);
      addContacts(contactdd);
      addCustomers(AppointmentCustomercb);
+
      
     }    
 

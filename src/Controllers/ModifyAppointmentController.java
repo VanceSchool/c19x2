@@ -68,8 +68,6 @@ public class ModifyAppointmentController implements Initializable {
     private Label startTimelb;
     @FXML
     private Label endTimelb;
-    @FXML
-    private ComboBox<?> userCb;
 
     /**
      * Initializes the controller class.
