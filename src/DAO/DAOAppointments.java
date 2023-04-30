@@ -145,8 +145,8 @@ public class DAOAppointments {
     /**
     * getFilteredCustAppointments Method for SQL Statement for SELECT some FROM provinces Table
     * filtered by country.Country_ID
-    * @return appointMonthListA
-    * @param deleteCustID
+    * @return appointCustListA
+    * @param CustID
     */ 
     public static ObservableList<Appointments> getFilteredCustAppointments(int CustID){
         ObservableList<Appointments> appointCustListA = FXCollections.observableArrayList();
@@ -185,7 +185,9 @@ public class DAOAppointments {
     */ 
     public static ObservableList<Appointments> getFilteredContactsAppointments(String CName){
         ObservableList<Appointments> appointConListA = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM appointments WHERE Contact_ID = (SELECT Contact_ID FROM contacts WHERE Contact_Name = ?);";
+        String sql = "SELECT * FROM appointments "
+                + "WHERE Contact_ID = (SELECT Contact_ID FROm contacts WHERE Contact_Name = ?) "
+                + "GROUP BY Start ORDER BY Start DESC;";
         try{
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, CName);
