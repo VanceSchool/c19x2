@@ -98,8 +98,6 @@ public class AddAppointmentsController implements Initializable {
      addTime(startTimedd, endTimedd);
      addContacts(contactdd);
      addCustomers(AppointmentCustomercb);
-
-     
     }    
 
     @FXML
@@ -109,6 +107,7 @@ public class AddAppointmentsController implements Initializable {
         validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
         validateHasDate(startDatepick);
         validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue());
+        
         if(alertGroupVerifyAction(10)){;// Are you sure  you wish to save new appoinotment?
         Customers modAppointCust = AppointmentCustomercb.getValue();
         Contacts modAppointCon = contactdd.getValue();
@@ -133,7 +132,6 @@ public class AddAppointmentsController implements Initializable {
            alertGroupDatabaseChange(3);
            return;
        }else{
-       checkingOverLap(tsStart, tsEnd, modAppointCon.getContactId());
        newAppointment.setStart(Timestamp.valueOf(starttime));
        newAppointment.setEnd(Timestamp.valueOf(endtime));
        addAppointment(newAppointment);
@@ -144,8 +142,8 @@ public class AddAppointmentsController implements Initializable {
         stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
-       }
-        }return;
+       }return;
+      }
         
     }
     

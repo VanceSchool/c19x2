@@ -83,11 +83,11 @@ public class Alerts {
                 break;
             }
             case 4: {
-                alert.setContentText("Appointment Start Time is Outside Normal Hours of Operation 8AM to 4PM EST, Please Ammend!");
+                alert.setContentText("Appointment Start Time is Outside Normal Hours of Operation 8AM to 10PM EST, Please Ammend!");
                 break;
             }
             case 5: {
-                alert.setContentText("Appointment End Time is Outside Normal Hours of Operation 8AM to 4PM EST, Please Ammend!");
+                alert.setContentText("Appointment End Time is Outside Normal Hours of Operation 8AM to 10PM EST, Please Ammend!");
                 break;
             }
             
@@ -97,8 +97,8 @@ public class Alerts {
             }
                         
         }
-        alert.showAndWait();
-        return;
+            alert.show();
+            return;
     }
     
 
