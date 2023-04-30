@@ -118,7 +118,7 @@ public class AddCustomerController implements Initializable {
     private void handleCustomerStatecb(ActionEvent event) {
     }
 
-        @FXML
+   
     private void addCountries() {
 
          ObservableList<Countries> countListB = DAOLists.getAllCountries();
