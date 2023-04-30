@@ -100,6 +100,7 @@ public class AddAppointmentsController implements Initializable {
      addTime(startTimedd, endTimedd);
      addContacts(contactdd);
      addCustomers(AppointmentCustomercb);
+
     }    
 
     /** Method used to save changes on screen and add appointment to database.

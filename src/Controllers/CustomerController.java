@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -139,10 +141,40 @@ public class CustomerController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /*Method to handle the modify button behavior.
+    *Lambda function here creates listener for the table. This was a test of the lambda function
+    *to be used on later pages that have multiple elements that can be selected same time.
+    *As of right now it just cause the  listener to activate upon first press then take action during second press.
+    *Mostly just an "annoy people" function.
+    */
     @FXML
     private void handleCmodifybt(ActionEvent event) throws IOException {
-                if (customerTable.getSelectionModel().getSelectedItem() != null){
+        
+        /*
+        customerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null) {
+            InputStream in = getClass().getResourceAsStream("/Scenes/ModifyCustomer.fxml"); 
+            FXMLLoader loader = new FXMLLoader(); 
+            loader.setBuilderFactory(new JavaFXBuilderFactory());
+            loader.setLocation(getClass().getResource("/Scenes/ModifyCustomer.fxml"));
+            Parent modifyPartParent = null; 
+                try {
+                    modifyPartParent = loader.load(in);
+                } catch (IOException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            ModifyCustomerController controller = (ModifyCustomerController) loader.getController(); 
+            controller.setCurrentCustomer(customerTable.getSelectionModel().getSelectedItem()); 
+            Scene modifyPartScene = new Scene(modifyPartParent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(modifyPartScene);
+            stage.setResizable(false);
+            stage.show();
+            }
+            });
+        */
+        
+        if (customerTable.getSelectionModel().getSelectedItem() != null){
             InputStream in = getClass().getResourceAsStream("/Scenes/ModifyCustomer.fxml"); 
             FXMLLoader loader = new FXMLLoader(); 
             loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -155,7 +187,7 @@ public class CustomerController implements Initializable {
             stage.setScene(modifyPartScene);
             stage.setResizable(false);
             stage.show();
-    }
-
+            }
     }
 }
+

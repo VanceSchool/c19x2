@@ -60,15 +60,28 @@ public class AddCustomerController implements Initializable {
     private ComboBox<Provinces> CustomerStatecb;
 
 
-    /**
-     * Initializes the controller class.
+    /** Initializes the controller class, contains Lambda function for listener and Method for adding country selection.
+     * 
      * @param url
      * @param rb
+     * Lambda activates a listener on country drop down button, when any selection is made it automatically updates 
+     *  that first_division_level button AKA CustomerStatecb.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
        addCountries();
+       
+       CustomerCountrycb.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+        Countries jam = CustomerCountrycb.getValue();
+        int cId = jam.getCountryId();
+        ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
+        //System.out.println(provListB);
+        CustomerStatecb.setItems(provListB);
+        CustomerStatecb.setPromptText("Select Division!");
+    }
+});
         }  
 
     @FXML
@@ -112,11 +125,13 @@ public class AddCustomerController implements Initializable {
 
     @FXML
     private void handleCustomerCountrycb(ActionEvent event) {
+        /*
         Countries jam = CustomerCountrycb.getValue();
         int cId = jam.getCountryId();
         ObservableList<Provinces> provListB = DAOLists.getFilteredProvinces(cId);
         //System.out.println(provListB);
         CustomerStatecb.setItems(provListB);
+        */
     }
 
     @FXML
