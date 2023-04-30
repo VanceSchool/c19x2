@@ -17,6 +17,9 @@ public class Report {
     int total;
     String user;
     LocalDate year;
+    String country;
+    String region;
+    
     
     
     /**
@@ -27,6 +30,7 @@ public class Report {
     }
     /**
      * Constructors for Report Showing Month and Type with total
+     * @param country
      */
     public Report(String type, String month, int total){
         this.type = type;
@@ -43,8 +47,30 @@ public class Report {
         this.user = user;
         this.total = total;
     }
+    
+    /**
+    * Constructors for Report Showing Country, Region, Total
+    * @param country
+    * @param region
+    * @param total
+    */
+    public Report(int total, String country, String region){
+        this.country = country;
+        this.region = region;
+        this.total = total;
+    }
+    
    
     //Getters
+    
+    public String getCountry(){
+        return country;
+    }
+    
+    public String getRegion(){
+        return region;
+    }
+        
     public String getType(){
         return type;
     }
@@ -85,4 +111,13 @@ public class Report {
     public void setYear(LocalDate year){
         this.year = year;
     }
+    
+    public void setCountry(String country){
+        this.country = country;
+    }
+    
+    public void setRegion(String region){
+        this.region = region;
+    }
+    
 }

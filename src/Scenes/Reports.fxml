@@ -19,19 +19,19 @@
       </Label>
       <TabPane layoutY="45.0" prefHeight="447.0" prefWidth="710.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="custAppointTab" onSelectionChanged="#handleOnCustAppoint" text="Customer Appointments">
+          <Tab fx:id="custAppointTab" onSelectionChanged="#handleOnCustAppoint" text="Ccontact Appointments">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="710.0">
                      <children>
                         <TableView fx:id="byCustomerTable" prefHeight="369.0" prefWidth="711.0">
                            <columns>
-                              <TableColumn fx:id="AppointmentIDColm" prefWidth="36.0" text="ID" />
+                              <TableColumn fx:id="AppointmentsStartcolm" maxWidth="1.7976931348623157E308" prefWidth="151.0" text="Start Date and Time" />
+                              <TableColumn fx:id="AppointmentEndColm" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="End Date and Time" />
                               <TableColumn fx:id="AppointmentTitlecolm" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="90.0" text="Title" />
                               <TableColumn fx:id="AppointmentsDescriptioncolm" maxWidth="1.7976931348623157E308" prefWidth="122.0" text="Description" />
                               <TableColumn fx:id="AppointmentsTypecolm" maxWidth="1.7976931348623157E308" prefWidth="81.0" text="Type" />
-                              <TableColumn fx:id="AppointmentsStartcolm" maxWidth="1.7976931348623157E308" prefWidth="151.0" text="Start Date and Time" />
-                              <TableColumn fx:id="AppointmentEndColm" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="End Date and Time" />
                               <TableColumn fx:id="CustomerIDColm" maxWidth="1.7976931348623157E308" prefWidth="90.0" text="Customer ID" />
+                              <TableColumn fx:id="AppointmentIDColm" prefWidth="36.0" text="ID" />
                            </columns>
                         </TableView>
                         <ComboBox fx:id="Customerscd" layoutX="281.0" layoutY="371.0" onAction="#handleOnCustomerSelection" prefWidth="150.0" promptText="SELECT CUSTOMER" />
@@ -54,16 +54,15 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Appointments Created Per Month">
+            <Tab fx:id="customerLocationTab" onSelectionChanged="#handleCustomerLocationTab" text="Customers Per Location">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="710.0">
                      <children>
-                        <TableView fx:id="AppointmentsCreatedTable" prefHeight="331.0" prefWidth="402.0">
+                        <TableView fx:id="CustomerLocactionTablle" prefHeight="331.0" prefWidth="402.0">
                           <columns>
-                            <TableColumn fx:id="appointmentYearCol" prefWidth="103.0" text="Year" />
-                            <TableColumn fx:id="appointmentMonthCol" prefWidth="102.0" text="Month" />
-                              <TableColumn fx:id="userCol" prefWidth="109.0" text="User" />
-                              <TableColumn fx:id="totalCol" prefWidth="87.0" text="Total" />
+                            <TableColumn fx:id="customerCountrycol" prefWidth="153.0" text="Country" />
+                            <TableColumn fx:id="customerRegioncol" prefWidth="156.0" text="Region" />
+                              <TableColumn fx:id="customerRegioinTotalcol" prefWidth="90.0" text="Total" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

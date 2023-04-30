@@ -105,5 +105,32 @@ public class DAOLists {
         }return reportA;
     }
 
+    
+        /**
+    * getCustomersPerRegion Method for SQL Statement for SELECT some FROM Customers Table
+    * firs_level_divisions table and countries Table, Then gives count of each region customers
+    * @return reportC
+    * 
+    */ 
+    public static ObservableList<Report> getCustomersPerRegion(){
+        ObservableList<Report> reportC = FXCollections.observableArrayList();
+        String sql = "SELECT first_level_divisions.Division, countries.Country, count(*) AS Total FROM customers "
+                + "JOIN first_level_divisions ON first_level_divisions.Division_ID = customers.Division_ID "
+                + "JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID "
+                + "GROUP BY first_level_divisions.Division, countries.Country;";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String country = rs.getString("Country");
+                String region = rs.getString("Division");
+                int total = rs.getInt("Total");
+                Report rep = new Report(total, country, region );
+                reportC.add(rep); 
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }return reportC;
+    }
 }
 
