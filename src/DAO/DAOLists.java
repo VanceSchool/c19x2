@@ -11,6 +11,7 @@ import Models.Contacts;
 import Models.Countries;
 import Models.Customers;
 import Models.Provinces;
+import Models.Report;
 import Models.User;
 import java.sql.*;
 import java.time.LocalDate;
@@ -76,5 +77,33 @@ public class DAOLists {
         }return provListA;
     }
       
+    
+    
+    /**
+    * getAssignmentReportTypeMonth Method for SQL Statement for SELECT some FROM appointments Table
+    * filtered by Type, MONTH(appointments.Start)
+    * @return reportA
+    * 
+    */ 
+    public static ObservableList<Report> getAssignmentReportTypeMonth(){
+        ObservableList<Report> reportA = FXCollections.observableArrayList();
+        String sql = "SELECT Type, MONTHNAME(appointments.Start) AS Month, count(*) AS Total\n" +
+                "FROM appointments\n" +
+                "GROUP BY Type, MONTH(appointments.Start)";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String month = rs.getString("Month");
+                String type = rs.getString("Type");
+                int total = rs.getInt("Total");
+                Report rep = new Report(type, month, total);
+                reportA.add(rep); 
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }return reportA;
+    }
+
 }
 
