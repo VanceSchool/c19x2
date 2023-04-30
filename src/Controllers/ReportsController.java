@@ -87,21 +87,21 @@ public class ReportsController implements Initializable {
     @FXML
     private Tab elapsedTab;
     @FXML
-    private TableView<?> elapsedAppointmentsTable;
+    private TableView<Appointments> elapsedAppointmentsTable;
     @FXML
-    private TableColumn<?, ?> AppointmentIDColm1;
+    private TableColumn<Appointments, Integer> AppointmentIDColm1;
     @FXML
-    private TableColumn<?, ?> AppointmentTitlecolm1;
+    private TableColumn<Appointments, String> AppointmentTitlecolm1;
     @FXML
-    private TableColumn<?, ?> AppointmentsDescriptioncolm1;
+    private TableColumn<Appointments, String> AppointmentsDescriptioncolm1;
     @FXML
-    private TableColumn<?, ?> AppointmentsTypecolm1;
+    private TableColumn<Appointments, String> AppointmentsTypecolm1;
     @FXML
-    private TableColumn<?, ?> AppointmentsStartcolm1;
+    private TableColumn<Appointments, String> AppointmentsStartcolm1;
     @FXML
-    private TableColumn<?, ?> AppointmentEndColm1;
+    private TableColumn<Appointments, String> AppointmentEndColm1;
     @FXML
-    private TableColumn<?, ?> CustomerIDColm1;
+    private TableColumn<Appointments, Integer> CustomerIDColm1;
 
 
     /**
@@ -111,6 +111,7 @@ public class ReportsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         addContacts(Customerscd);
         addTotalReport();
+        populateLapsedTable();
     }    
 
     /*
@@ -137,6 +138,19 @@ public class ReportsController implements Initializable {
         CustomerIDColm.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         AppointmentsStartcolm.setCellValueFactory(new PropertyValueFactory<>("start"));
         AppointmentEndColm.setCellValueFactory(new PropertyValueFactory<>("end"));
+    }
+    
+    private void populateLapsedTable(){
+        ObservableList<Appointments> oldAppointments = DAOAppointments.getLapsedAppointments();    
+        elapsedAppointmentsTable.setItems(oldAppointments);
+        AppointmentIDColm1.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));;
+        AppointmentTitlecolm1.setCellValueFactory(new PropertyValueFactory<>("title"));;
+        AppointmentsDescriptioncolm1.setCellValueFactory(new PropertyValueFactory<>("description"));;
+        AppointmentsTypecolm1.setCellValueFactory(new PropertyValueFactory<>("type"));;
+        AppointmentsStartcolm1.setCellValueFactory(new PropertyValueFactory<>("start"));;
+        AppointmentEndColm1.setCellValueFactory(new PropertyValueFactory<>("end"));;
+        CustomerIDColm1.setCellValueFactory(new PropertyValueFactory<>("customerId"));;;
+        
     }
 
     @FXML
@@ -169,5 +183,6 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void handleOnElapsedTab(Event event) {
+        populateLapsedTable();
     }
 }

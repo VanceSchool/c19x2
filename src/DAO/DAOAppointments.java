@@ -214,6 +214,41 @@ public class DAOAppointments {
         return appointConListA;
     }
     
+      /**
+    * getLapsedAppointments Method for SQL Statement for SELECT all FROM appointments Table WHERE The timestamp
+    * is before current time
+    * 
+    * @return lapsedAppointList
+    * 
+    */ 
+    public static ObservableList<Appointments> getLapsedAppointments(){
+        ObservableList<Appointments> lapsedAppointList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM appointments WHERE Start < current_timestamp();";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            //System.out.println(rs);
+            while(rs.next()){
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String type = rs.getString("Type");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                int contactId = rs.getInt("Contact_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                Timestamp start = rs.getTimestamp("Start");
+                Timestamp end = rs.getTimestamp("End");
+                Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
+                lapsedAppointList.add(appoint); 
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        //return the list
+        return lapsedAppointList;
+    }
+    
     //INSERT, UPDATE, DELETE methods
     /**
     * addAppointment
