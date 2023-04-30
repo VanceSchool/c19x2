@@ -56,7 +56,36 @@
           </Tab>
             <Tab text="Appointments Created Per Month">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="710.0">
+                     <children>
+                        <TableView fx:id="AppointmentsCreatedTable" prefHeight="331.0" prefWidth="402.0">
+                          <columns>
+                            <TableColumn fx:id="appointmentYearCol" prefWidth="103.0" text="Year" />
+                            <TableColumn fx:id="appointmentMonthCol" prefWidth="102.0" text="Month" />
+                              <TableColumn fx:id="userCol" prefWidth="109.0" text="User" />
+                              <TableColumn fx:id="totalCol" prefWidth="87.0" text="Total" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="elapsedTab" onSelectionChanged="#handleOnElapsedTab" text="Elapsed Appointments">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="elapsedAppointmentsTable" prefHeight="369.0" prefWidth="711.0">
+                           <columns>
+                              <TableColumn fx:id="AppointmentIDColm1" prefWidth="36.0" text="ID" />
+                              <TableColumn fx:id="AppointmentTitlecolm1" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="90.0" text="Title" />
+                              <TableColumn fx:id="AppointmentsDescriptioncolm1" maxWidth="1.7976931348623157E308" prefWidth="122.0" text="Description" />
+                              <TableColumn fx:id="AppointmentsTypecolm1" maxWidth="1.7976931348623157E308" prefWidth="81.0" text="Type" />
+                              <TableColumn fx:id="AppointmentsStartcolm1" maxWidth="1.7976931348623157E308" prefWidth="151.0" text="Start Date and Time" />
+                              <TableColumn fx:id="AppointmentEndColm1" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="End Date and Time" />
+                              <TableColumn fx:id="CustomerIDColm1" maxWidth="1.7976931348623157E308" prefWidth="90.0" text="Customer ID" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>

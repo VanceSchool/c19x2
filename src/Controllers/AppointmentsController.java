@@ -233,7 +233,7 @@ public class AppointmentsController implements Initializable {
     }
     
     
-    void populateAllTable(){
+    private void populateAllTable(){
         ObservableList<Appointments> appointListB = DAOAppointments.getAllAppointments();
         //System.out.println("List Size Equals:" + appointListB.size());
         allAptTable.setItems(appointListB);

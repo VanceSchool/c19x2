@@ -4,6 +4,8 @@
  */
 package Models;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author LabUser
@@ -13,6 +15,9 @@ public class Report {
     String type;
     String month;
     int total;
+    String user;
+    LocalDate year;
+    
     
     /**
      * Blank Constructor
@@ -28,6 +33,16 @@ public class Report {
         this.month = month;
         this.total = total;
     }
+    
+    /**
+     * Constructors for Report Showing Month, Year, User, Total
+     */
+    public Report(LocalDate year, String month, String user, int total){
+        this.year = year;
+        this.month = month;
+        this.user = user;
+        this.total = total;
+    }
    
     //Getters
     public String getType(){
@@ -41,6 +56,14 @@ public class Report {
     public int getTotal(){
         return total;
     }
+    
+    public String getUser(){
+        return user;
+    }
+    
+    public LocalDate getYear(){
+        return year;
+    }
     //Setters
     
     public void setType(String type){
@@ -53,5 +76,13 @@ public class Report {
     
     public void setTotal(int total){
         this.total = total;
+    }
+    
+    public void setUser(String user){
+        this.user = user;
+    }
+    
+    public void setYear(LocalDate year){
+        this.year = year;
     }
 }

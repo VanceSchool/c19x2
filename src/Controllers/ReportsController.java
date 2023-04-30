@@ -74,6 +74,34 @@ public class ReportsController implements Initializable {
     private TableColumn<Report, String> CountAppointMonth;
     @FXML
     private TableColumn<Report, String> CountAppointTotal;
+    @FXML
+    private TableView<Report> AppointmentsCreatedTable;
+    @FXML
+    private TableColumn<Report, String> appointmentYearCol;
+    @FXML
+    private TableColumn<Report, String> appointmentMonthCol;
+    @FXML
+    private TableColumn<Report, String> userCol;
+    @FXML
+    private TableColumn<Report, Integer> totalCol;
+    @FXML
+    private Tab elapsedTab;
+    @FXML
+    private TableView<?> elapsedAppointmentsTable;
+    @FXML
+    private TableColumn<?, ?> AppointmentIDColm1;
+    @FXML
+    private TableColumn<?, ?> AppointmentTitlecolm1;
+    @FXML
+    private TableColumn<?, ?> AppointmentsDescriptioncolm1;
+    @FXML
+    private TableColumn<?, ?> AppointmentsTypecolm1;
+    @FXML
+    private TableColumn<?, ?> AppointmentsStartcolm1;
+    @FXML
+    private TableColumn<?, ?> AppointmentEndColm1;
+    @FXML
+    private TableColumn<?, ?> CustomerIDColm1;
 
 
     /**
@@ -82,6 +110,7 @@ public class ReportsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         addContacts(Customerscd);
+        addTotalReport();
     }    
 
     /*
@@ -116,6 +145,7 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void handleOnCountSelection(Event event) {
+        addTotalReport();
     }
 
     @FXML
@@ -123,8 +153,21 @@ public class ReportsController implements Initializable {
         populateTableContactAppointment(Customerscd.getValue().toString());
     }
     
+    
+    public void addTotalReport(){
+    ObservableList<Report> reportList = DAOLists.getAssignmentReportTypeMonth();
+    appointmentCountTable.setItems(reportList);
+    CountappointTypeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
+    CountAppointMonth.setCellValueFactory(new PropertyValueFactory<>("Month"));
+    CountAppointTotal.setCellValueFactory(new PropertyValueFactory<>("Total"));
+    }
+        
     public static void addContacts(ComboBox contactdd) {
     ObservableList<Contacts> contListB = DAOContacts.getAllContacts();
     contactdd.setItems(contListB);
+    }
+
+    @FXML
+    private void handleOnElapsedTab(Event event) {
     }
 }
