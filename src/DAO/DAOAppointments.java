@@ -177,6 +177,41 @@ public class DAOAppointments {
         return appointCustListA;
     }
     
+        /**
+    * getFilteredContactsAppointments Method for SQL Statement for SELECT all FROM appointments Table
+    * filtered by Contact_ID
+    * @return appointConListA
+    * @param CName
+    */ 
+    public static ObservableList<Appointments> getFilteredContactsAppointments(String CName){
+        ObservableList<Appointments> appointConListA = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM appointments WHERE Contact_ID = (SELECT Contact_ID FROM contacts WHERE Contact_Name = ?);";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, CName);
+            ResultSet rs = ps.executeQuery();
+            //System.out.println(rs);
+            while(rs.next()){
+                int appointmentID = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String type = rs.getString("Type");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                int contactId = rs.getInt("Contact_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                Timestamp start = rs.getTimestamp("Start");
+                Timestamp end = rs.getTimestamp("End");
+                Appointments appoint = new Appointments(appointmentID, title, type, description, location, contactId, customerId, userId, start, end);
+                appointConListA.add(appoint); 
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        //return the list
+        return appointConListA;
+    }
+    
     //INSERT, UPDATE, DELETE methods
     /**
     * addAppointment
@@ -221,21 +256,18 @@ public class DAOAppointments {
     * @throws SQLException
     */
     public static void modifyAppointment(Appointments modAppoint) throws SQLException{
-        String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
-        
-
-    
+        //String sql1 = "SELECT * FROM customers WHERE Customer_ID = ?";
         String sql2="UPDATE appointments SET "
                 + "Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = current_timestamp(), "
                 + "Last_Updated_By = ?, Customer_ID = ?, User_ID = (SELECT User_ID FROM users WHERE User_Name = ?), Contact_ID = ? "
                 + "WHERE Appointment_ID = ?; "; 
         try {
-            PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);
+            //PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sql1);
             PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql2);
-            ps1.setInt(1, modAppoint.getAppointmentID());
+            //ps1.setInt(1, modAppoint.getAppointmentID());
             
-            ResultSet rs1 = ps1.executeQuery();
-            System.out.println(rs1);
+            //ResultSet rs1 = ps1.executeQuery();
+            //System.out.println(rs1);
                 ps2.setString(1, modAppoint.getTitle());
                 ps2.setString(2, modAppoint.getDescription());
                 ps2.setString(3, modAppoint.getLocation());

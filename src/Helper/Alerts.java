@@ -4,6 +4,7 @@
  */
 package Helper;
 
+import Models.Appointments;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -169,6 +170,20 @@ public class Alerts {
         }
         alert.showAndWait();
         
+    }
+    
+    public static boolean deleteAppointmentAlert(Appointments delappoint){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete");
+        alert.setHeaderText("Are you Sure you Want to Delete Appointment?");
+        alert.setContentText("AppointmentID: " + delappoint.getAppointmentID()
+                           + " Appointment Type: " + delappoint.getType() + ".\n"
+                           + "Proceed With Delete?/");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            return true;
+        }
+        return false;
     }
     
 }

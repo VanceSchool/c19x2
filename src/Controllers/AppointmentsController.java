@@ -211,20 +211,20 @@ public class AppointmentsController implements Initializable {
     @FXML
     private void handleADeletebt(ActionEvent event) throws SQLException {
         if (byMonthTable.getSelectionModel().getSelectedItem() != null){
-            if(alertGroupVerifyAction(2)){
             Appointments delAppoint = byMonthTable.getSelectionModel().getSelectedItem();
+            if(deleteAppointmentAlert(delAppoint)){
             deleteAppointment(delAppoint);
             populateMonthTable();
             } return;
         }else if(byWeekTable.getSelectionModel().getSelectedItem() != null){
-            if(alertGroupVerifyAction(2)){;
             Appointments delAppoint = byWeekTable.getSelectionModel().getSelectedItem();
+            if(deleteAppointmentAlert(delAppoint)){;
             deleteAppointment(delAppoint);
             populateWeekTable();  
             }return;
         }else if(allAptTable.getSelectionModel().getSelectedItem() != null){
-            if(alertGroupVerifyAction(2)){
             Appointments delAppoint = allAptTable.getSelectionModel().getSelectedItem();
+            if(deleteAppointmentAlert(delAppoint)){
             deleteAppointment(delAppoint);
             populateAllTable(); 
             }return;
