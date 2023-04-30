@@ -5,7 +5,7 @@
 package Models;
 import java.sql.Timestamp;
 
-/**
+/** This class contains setters, getters, and constructors for appointments.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
@@ -23,7 +23,7 @@ public class Appointments{
     private String customerName;
     private String contactName;
     
-    /**
+    /** Constructor for appointment.
      *
      * @param appointmentID
      * @param title
@@ -50,7 +50,7 @@ public class Appointments{
     
     }
     
-    /**
+    /**Constructor for appointment.
      *
      * @param appointmentID
      * @param title
@@ -75,7 +75,7 @@ public class Appointments{
     
     }
         
-    /**
+    /** Constructor for appointment.
      *
      */
     public Appointments() {
@@ -86,9 +86,9 @@ public class Appointments{
     
     //Getters
 
-    /**
+    /** Getter for appointment ID.
      *
-     * @return
+     * @return appointmentID
      */
     
     public int getAppointmentID(){
@@ -97,7 +97,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return title
      */
     public String getTitle(){
         return title;
@@ -105,7 +105,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return description
      */
     public String getDescription(){
         return description;
@@ -113,7 +113,7 @@ public class Appointments{
 
     /**
      *
-     * @return
+     * @return location
      */
     public String getLocation(){
         return location;
@@ -121,7 +121,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return type
      */
     public String getType(){
         return type;
@@ -129,7 +129,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return customerId
      */
     public int getCustomerId(){
         return customerId;
@@ -137,7 +137,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return userId
      */
     public int getUserId(){
        return userId;
@@ -145,7 +145,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return contactId
      */
     public int getContactId(){
         return contactId;
@@ -153,7 +153,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return start
      */
     public Timestamp getStart(){
         return start;
@@ -161,7 +161,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return end
      */
     public Timestamp getEnd(){
         return end;
@@ -169,7 +169,7 @@ public class Appointments{
     
     /**
      *
-     * @return
+     * @return contactName
      */
     public String getContactName(){
         return contactName;
@@ -177,7 +177,7 @@ public class Appointments{
      
     /**
      *
-     * @return
+     * @return customerName
      */
     public String getCustomerName(){
         return customerName;
@@ -288,6 +288,6 @@ public class Appointments{
      * @param value
      */
     public void setUserName(User value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }

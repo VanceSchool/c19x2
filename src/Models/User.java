@@ -16,10 +16,10 @@ public class User{
     private static String userName;
     
 
-    /**Constructor for User
-     * @param i
-     * @param string
-     * @param string1
+    /**Constructor for User. 
+     * @param userId
+     * @param userPassword
+     * @param userName
     */ 
     public User(int userId, String userPassword, String userName){
         userId = this.userId;
@@ -28,8 +28,8 @@ public class User{
     }
 
     /**Constructor for User.
-     * @param i
-     * @param string
+     * @param userId
+     * @param userPassword
      * 
      */ 
     public User(int userId, String userPassword) {
@@ -38,15 +38,15 @@ public class User{
     }
     
     /**Constructor for User.
-     * @param string
-     * @param i
+     * @param userName
+     * @param userId
      */ 
     public User(String userName, int userId) {
        userId = this.userId;
        userName = this.userName;
     }
 
-    /**
+    /** Empty constructor for User. 
      *
      */
     public User() {
@@ -88,7 +88,7 @@ public class User{
         return userId;
     }
 
-    /**
+    /** Getter for user name. 
      *
      * @return userName
      */
@@ -96,7 +96,7 @@ public class User{
         return userName;
     }
 
-    /**
+    /** Getter for user password.
      *
      * @return userPassword
      */
@@ -104,7 +104,7 @@ public class User{
         return userPassword;
     }
 
-        @Override
+    @Override
     public String toString(){
         return userName;
     }

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Models;
-/**
+
+
+/** This class contains setters, getters and constructors for contacts. 
  *
  *@author sean thompson <stho292@wgu.edu>
  */
@@ -12,7 +14,7 @@ public class Contacts {
     String contactName;
     String email;
 
-    /**
+    /** Constructor for contacts.
      *
      * @param contactId
      * @param contactName
@@ -22,7 +24,7 @@ public class Contacts {
         this.contactName = contactName;
     }
     
-    /**
+    /** Constructor for contacts. 
      *
      * @param contactId
      * @param contactName
@@ -36,25 +38,25 @@ public class Contacts {
     
     //Getters
 
-    /**
+    /** Getter for contact ID.
      *
-     * @return
+     * @return contactId
      */
     public int getContactId(){
         return contactId;
     }
     
-    /**
+    /** Getter for contact name.
      *
-     * @return
+     * @return contactName
      */
     public String getContactName(){
         return contactName;
     }
     
-    /**
+    /** Getter for email.
      *
-     * @return
+     * @return email
      */
     public String getEmail(){
         return email;
@@ -62,21 +64,21 @@ public class Contacts {
     
     //Setters
 
-    /**
+    /** Setter for contact ID.
      *
      */
     public void setContactId(){
       this.contactId = contactId;
     }
     
-    /**
+    /** Setter for contact name.
      *
      */
     public void setContactName(){
       this.contactName = contactName;
     }
     
-    /**
+    /** Setter for email.
      *
      */
     public void setEmail(){

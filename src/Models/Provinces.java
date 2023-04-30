@@ -4,7 +4,7 @@
  */
 package Models;
 
-/**
+/** This class contains the constructors, setters and getters for first level divisions.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
@@ -13,7 +13,7 @@ public class Provinces {
     String divName;
     int countryID;
 
-    /**
+    /** This is a constructor for Provinces. 
      *
      * @param divName
      */
@@ -28,7 +28,7 @@ public class Provinces {
         return(divName);
     }
     
-    /**
+    /** This is a constructor for provinces. 
      *
      * @param divID
      * @param divName
@@ -42,25 +42,25 @@ public class Provinces {
     
     //Getters
 
-    /**
+    /** This method is a getter for provinces ID.
      *
-     * @return
+     * @return divID
      */
     public int getdivID(){
         return divID;
     }
     
-    /**
+    /** This method is a getter for country ID.
      *
-     * @return
+     * @return countryID
      */
     public int getCountryID(){
         return countryID;
     }
     
-    /**
+    /** This method is a getter for province name. 
      *
-     * @return
+     * @return divName
      */
     public String getDivName(){
         return divName;
@@ -68,21 +68,21 @@ public class Provinces {
     
     //Setters
 
-    /**
+    /** This method is a setter for province name. 
      *
      */
     public void setDivName(){
         this.divName = divName;
     }
     
-    /**
+    /** This method is a setter for province country ID. 
      *
      */
     public void setCountryID(){
         this.countryID = countryID;
     }
         
-    /**
+    /** This method is a setter for province ID.
      *
      */
     public void setdivID(){

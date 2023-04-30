@@ -5,7 +5,7 @@
 package Models;
 import java.security.Timestamp;
 
-/**
+/** This class contains setters, getters and constructors for countries.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
@@ -18,16 +18,8 @@ public class Countries{
     public String toString(){
         return(countryName);
     }
-    
-    /*
-    public Countries(int countryId, String countryName,String lastUpdateBy, String createdBy, Timestamp createdTimeDate, Timestamp lastUpdatedTimeDate){
-        super(lastUpdateBy, createdBy, createdTimeDate, lastUpdatedTimeDate);
-        this.countryId = countryId;
-        this.countryName = countryName;
-    }
-    */
 
-    /**
+    /** Constructor for country.
      *
      * @param countryId
      * @param countryName
@@ -38,7 +30,7 @@ public class Countries{
         this.countryName = countryName;
     }
     
-    /**
+    /** Constructor for country.
      *
      * @param countryName
      */
@@ -49,32 +41,32 @@ public class Countries{
     
     //Getters
 
-    /**
+    /** Getter for country ID.
      *
-     * @return
+     * @return countryId
      */
     
     public int getCountryId(){
         return countryId;
     }
     
-    /**
+    /** Getter for country name.
      *
-     * @return
+     * @return countryName
      */
     public String getCountryName(){
         return countryName;
     }
     //Setters
     
-    /**
+    /** Setter for country ID.
      *
      */
     public void setCountryId(){
         this.countryId = countryId;
     }
     
-    /**
+    /** Setter for country name.
      *
      */
     public void setCountryName(){

@@ -6,9 +6,10 @@ package Models;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author LabUser
+/** This class contains parameters for unique class of report. 
+ * This class was created to be used in unique report creation.
+ * 
+ * @author sean thompson <stho292@wgu.edu>
  */
 
 public class Report {
@@ -69,65 +70,65 @@ public class Report {
    
     //Getters
 
-    /**
+    /** Getter for country name. 
      *
-     * @return
+     *@return country
      */
     
     public String getCountry(){
         return country;
     }
     
-    /**
+    /** Getter for region A.K.A provinces.
      *
-     * @return
+     * @return region
      */
     public String getRegion(){
         return region;
     }
         
-    /**
-     *
-     * @return
+    /** Getter for type.
+     * Type comes from appointments.
+     * @return type
      */
     public String getType(){
         return type;
     }
     
-    /**
+    /** Getter for month.
      *
-     * @return
+     * @return month
      */
     public String getMonth(){
         return month;
     }
     
-    /**
-     *
+    /** Getter for total.
+     * Total is used as an integer value that represents sum.
      * @return
      */
     public int getTotal(){
         return total;
     }
     
-    /**
+    /** Getter used for user, which is user name.
      *
-     * @return
+     * @return user
      */
     public String getUser(){
         return user;
     }
     
-    /**
+    /** Getter for year.
      *
-     * @return
+     * @return year
      */
     public LocalDate getYear(){
         return year;
     }
     //Setters
     
-    /**
+    /** Setter for type.
      *
      * @param type
      */
@@ -135,7 +136,7 @@ public class Report {
         this.type = type;
     }
     
-    /**
+    /** Setter for Month. 
      *
      * @param month
      */
@@ -143,7 +144,7 @@ public class Report {
         this.type = type;
     }
     
-    /**
+    /** Setter for total.
      *
      * @param total
      */
@@ -151,7 +152,7 @@ public class Report {
         this.total = total;
     }
     
-    /**
+    /** Setter for user.
      *
      * @param user
      */
@@ -159,7 +160,7 @@ public class Report {
         this.user = user;
     }
     
-    /**
+    /** Setter for year.
      *
      * @param year
      */
@@ -167,7 +168,7 @@ public class Report {
         this.year = year;
     }
     
-    /**
+    /** Setter for country.
      *
      * @param country
      */
@@ -175,7 +176,7 @@ public class Report {
         this.country = country;
     }
     
-    /**
+    /** Setter for region AKA provinces.
      *
      * @param region
      */

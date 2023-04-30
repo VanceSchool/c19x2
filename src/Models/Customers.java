@@ -6,12 +6,8 @@ package Models;
 
 import java.sql.Date;
 
-/**
- *@class Customers
- * Constructors, Setters and Getters For Class Customers
- * @param customerName
- * @param address
- * @param postalCode
+/** Class containing setters, getters, and constructors for customers.
+ *. 
  *@author sean thompson <stho292@wgu.edu>
  */
 public class Customers {
@@ -29,7 +25,7 @@ public class Customers {
 
     //constructors
 
-    /**
+    /** Constructors for class customers. 
      *
      * @param customerID
      * @param customerName
@@ -47,7 +43,7 @@ public class Customers {
         this.divisionId = divisionId;
     }
     
-    /**
+    /** Constructors for class customers.
      *
      * @param customerID
      * @param customerName
@@ -69,14 +65,14 @@ public class Customers {
         this.countryId = countryId;
     }
 
-    /**
+    /** Constructors for class customers.
      *
      */
     public Customers() {
         
     }
 
-    /**
+    /** Constructors for class customers.
      *
      * @param id
      * @param cName
@@ -88,73 +84,73 @@ public class Customers {
     
     //getters
 
-    /**
+    /** Getter for customer ID.
      *
-     * @return
+     * @return customerId
      */
     public int getCustomerID() {
         return customerId;
     }
 
-    /**
+    /** Getter for customer name.
      *
-     * @return
+     * @return customerName
      */
     public String getCustomerName() {
         return customerName;
     }
 
-    /**
+    /** Getter for customer address.
      *
-     * @return
+     * @return address
      */
     public String getAddress() {
         return address;
     }
 
-    /**
+    /** Getter for postal code.
      *
-     * @return
+     * @return postalCode
      */
     public String getPostalcode() {
         return postalCode;
     }
 
-    /**
+    /** Getter for phone. 
      *
-     * @return
+     * @return phone
      */
     public String getPhone() {
         return phone;
     }
 
-    /**
+    /** Getter for division ID.
      *
-     * @return
+     * @return divisionId
      */
     public int getDivisionId() {
         return divisionId;
     }
     
-    /**
+    /** Getter for country name.
      *
-     * @return
+     * @return country
      */
     public String getCountry(){
         return country;
     }
 
-    /**
+    /** Getter for country ID.
      *
-     * @return
+     * @return countryId
      */
     public int getCountryId(){
         return countryId;
     }
     
-    /**
+    /** Getter for state or province name.
      *
-     * @return
+     * @return state
      */
     public String getState(){
         return state;
@@ -162,7 +158,7 @@ public class Customers {
 
     //setters
 
-    /**
+    /** Setter for customer ID.
      *
      * @param customerId
      */
@@ -172,7 +168,7 @@ public class Customers {
         this.customerId = customerId;
     }
 
-    /**
+    /** Setter for customer name.
      *
      * @param customerName
      */
@@ -180,7 +176,7 @@ public class Customers {
         this.customerName = customerName;
     }
 
-    /**
+    /** Setter for address.
      *
      * @param address
      */
@@ -188,7 +184,7 @@ public class Customers {
         this.address = address;
     }
 
-    /**
+    /** setter for postal code.
      *
      * @param postalCode
      */
@@ -196,7 +192,7 @@ public class Customers {
         this.postalCode = postalCode;
     }
 
-    /**
+    /** Setter for phone.
      *
      * @param phone
      */
@@ -204,7 +200,7 @@ public class Customers {
         this.phone = phone;
     }
 
-    /**
+    /** Setter for division ID AKA province ID.
      *
      * @param divisionId
      */
@@ -212,7 +208,7 @@ public class Customers {
         this.divisionId = divisionId;
     }
     
-    /**
+    /** Setter for country name.
      *
      * @param country
      */
@@ -220,7 +216,7 @@ public class Customers {
         this.country = country;
     }
     
-    /**
+    /** Setter for country ID.
      *
      * @param countryId
      */
@@ -228,7 +224,7 @@ public class Customers {
         this.countryId = countryId;
     }
 
-    /**
+    /** Setter for state aka province name.
      *
      * @param state
      */
