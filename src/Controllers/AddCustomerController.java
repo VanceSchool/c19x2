@@ -110,7 +110,7 @@ public class AddCustomerController implements Initializable {
         return;
     }
 
-    /* Method handles back button behavior.
+    /** Method handles back button behavior.
     * Sends users to previous screen by changing scenes.
     */
     @FXML
