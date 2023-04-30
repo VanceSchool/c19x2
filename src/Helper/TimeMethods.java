@@ -18,58 +18,57 @@ import java.time.ZonedDateTime;
 
 
 
-/**
+/** This class contains various methods to use for time based transformations.
+ * Several instances require time to change variable type or value, this class
+ * was created to  be used during those times.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
 public class TimeMethods {
 
-    /**
-     *
-     */
     public LocalDateTime dateTime;
     
-    /**
+    /** Method to obtain current zone ID.
      *
-     * @return
+     * @return zone
      */
     public static ZoneId getZoneId(){
      ZoneId zone = ZoneId.systemDefault();
      return zone;
     }
 
-    /**
+    /** Method created to get the current time and date as LocalDateTime.
      *
-     * @return
+     * @return ldtn
      */
     public static LocalDateTime getNowLocalDateTime(){
         LocalDateTime ldtn = LocalDateTime.now();
         return ldtn;
     }
 
-    /**
+    /** Method to get current time as LocalTime.
      *
-     * @return
+     * @return ltn
      */
     public static LocalTime getNowLocaltime(){
         LocalTime ltn = LocalTime.now();
         return ltn;
     }
 
-    /**
+    /** Method to get current date as LocalDate.
      *
-     * @return
+     * @return ldn
      */
     public static LocalDate getNowLocalDate(){
         LocalDate ldn = LocalDate.now();
         return ldn;
     }
 
-    /**
+    /** Method to change a LocalDate and LocalTime to a LocalDateTime.
      *
      * @param pDate
      * @param pTime
-     * @return
+     * @return combineDateTime
      */
     public static LocalDateTime changeUpLocaleDateTime(LocalDate pDate, LocalTime pTime){
         LocalDateTime combineDateTime;
@@ -77,10 +76,10 @@ public class TimeMethods {
         return combineDateTime;
     }
     
-    /**
+    /** Method to change a LocalDatetime to the ZonedDateTime for UTC.
      *
      * @param ldt
-     * @return
+     * @return utcZoneTime
      */
     public ZonedDateTime changeToUTC(LocalDateTime ldt){
         ZonedDateTime ldtZone;
@@ -90,10 +89,10 @@ public class TimeMethods {
         return utcZoneTime;
     }
     
-    /**
+    /** Method to return LocalDateTime to UTC time.
      *
      * @param lD
-     * @return
+     * @return ustldt
      */
     public static LocalDateTime changeToUST(LocalDateTime lD){
         //Set LocalDateTime to ZonedDateTime of current Zone
@@ -105,11 +104,11 @@ public class TimeMethods {
         return ustldt;   
     }
         
-    /**
+    /** Method to  change a LocalDate and LocalTime to a LocalDateTime at EST timezone.
      *
      * @param ld
      * @param lt
-     * @return
+     * @return estldt
      */
     public static LocalDateTime changeToEst(LocalDate ld, LocalTime lt){
 
@@ -125,10 +124,10 @@ public class TimeMethods {
         return estldt;   
     }
     
-    /**
+    /** Method tot change a LocalDateTime to a Timestamp.
      *
      * @param ldt
-     * @return
+     * @return ts
      */
     public static Timestamp changeToTimeStamp(LocalDateTime ldt){
         Timestamp ts;
@@ -136,20 +135,20 @@ public class TimeMethods {
         return ts;
     }
     
-    /**
+    /** Method to add fifteen minutes to a LocalDateTime.
      *
      * @param someTime
-     * @return
+     * @return plusFifteen
      */
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
        LocalDateTime plusFifteen = someTime.plusMinutes(15);
        return plusFifteen;
     }
     
-    /**
+    /** Method to minus fifteen minutes from a LocalDateTime.
      *
      * @param someTime
-     * @return
+     * @return minusFifteen
      */
     public static LocalDateTime localTimeMinusFifteen(LocalDateTime someTime){
        LocalDateTime minusFifteen = someTime.minusMinutes(15);

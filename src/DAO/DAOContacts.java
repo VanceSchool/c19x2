@@ -12,17 +12,17 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
+/** Class contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database for contacts.. 
 * @class DAOContacts
-* Contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database 
+* Contains methods to SELECT MySQL Database 
 * Affects tables contacts, countries, first_level_divisions
 * @author sean thompson <stho292@wgu.edu>
 */ 
 public class DAOContacts {
     //SELECT Methods
     
-    /**
-    * getAllContacts Method for SQL Statement for SELECT all FROM contacts Table
+    /** Method for SQL Statement for SELECT all FROM contacts Table.
+    * getAllContacts 
     * @return contactsListA
     */ 
     public static ObservableList<Contacts> getAllContacts(){
@@ -42,9 +42,7 @@ public class DAOContacts {
         }return contactsListA;
     }
     
-    /**
-    *findContactByID Method for SQL Statement for SELECT all FROM 
-    *contacts Table WHERE Contact_ID = id contacts Table
+    /** Method for SQL Statement for SELECT all FROM contacts Table WHERE Contact_ID = id contacts Table.
     *@param id
     *@return count
     */

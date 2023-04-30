@@ -33,9 +33,10 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-/**
- *FXML Controller class
- *@author sean thompson <stho292@wgu.edu>
+/** Class that controls behavior of modify appointments page.
+ * Contains methods for all the selection controls.
+ *
+ * @author sean thompson <stho292@wgu.edu>
  */
 public class ModifyAppointmentController implements Initializable {
 
@@ -69,8 +70,8 @@ public class ModifyAppointmentController implements Initializable {
     @FXML
     private Label endTimelb;
 
-    /**
-     * Initializes the controller class.
+     /**Initializes the controller class.
+     * Calls on methods to add options to ComboBoxes.
      * @param url
      * @param rb
      */
@@ -84,6 +85,14 @@ public class ModifyAppointmentController implements Initializable {
      addCustomers(AppointmentCustomercb);
     }    
 
+    /** Method used to save changes on screen and update appointment in database.
+     * Calls on functions from Helper.UsefulMethods to validate user picked or entered
+     * all necessary information.
+     * 
+     * @param event
+     * @throws IOException
+     * @throws SQLException 
+     */
     @FXML
     private void handleAppointmentSavebt(ActionEvent event) throws IOException, SQLException {
         validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt);
@@ -122,7 +131,10 @@ public class ModifyAppointmentController implements Initializable {
             stage.show();   
         }return;
     }
-
+    /** Method handles back button behavior.
+    * Sends users to previous screen by changing scenes.
+    */
+    @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointsments.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -132,7 +144,7 @@ public class ModifyAppointmentController implements Initializable {
         stage.show();
     }
     
-    /**
+    /** Method that updates the  current fields on page with previously selected appointment.
      *
      * @param appointment
      */
@@ -157,7 +169,9 @@ public class ModifyAppointmentController implements Initializable {
         updateTimeText();
         }
     
-
+    /* Method handles back button behavior.
+    * Sends users to previous screen by changing scenes.
+    */
     @FXML
     private void handleAppointmentBackbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
@@ -168,11 +182,20 @@ public class ModifyAppointmentController implements Initializable {
         stage.show();
     }
 
+        /**Method to handle date picker behavior.
+     * Is linked with two ComboBoxes to display the picked  time as EST so user will know,
+     * their appointment time.
+     * 
+     * @param event 
+     */
     @FXML
     private void handleDatePicker(ActionEvent event) {
-    updateTimeText();
+        updateTimeText();
     }
-
+    /** Method to handle ComboBox for picking start time.
+     * This method checks if Date is also selected then displays time in EST.
+     * @param event 
+     */
     @FXML
     private void handleStartTimedd(ActionEvent event) {
                 if(startDatepick.getValue() != null){
@@ -186,7 +209,10 @@ public class ModifyAppointmentController implements Initializable {
              startTimelb.setText("Please Choose Date");
         }
     }
-
+    /** Method to handle ComboBox for picking end time.
+     * This method checks if Date is also selected then displays time in EST.
+     * @param event 
+     */
     @FXML
     private void handleEndTimedd(ActionEvent event) {
         if(startDatepick.getValue() != null){
@@ -209,7 +235,10 @@ public class ModifyAppointmentController implements Initializable {
     private void handleCustomerdd(ActionEvent event) {
         
     }
-    
+    /**Method created to  handle updating the time displayed on text fields next
+     * to the ComboBox for start and end time.
+     * 
+     */
     private void updateTimeText(){
         if((startTimedd.getValue() != null) && (endTimedd.getValue() != null)){
             LocalTime lt1 = startTimedd.getValue();

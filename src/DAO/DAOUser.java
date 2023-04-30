@@ -13,13 +13,13 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
+/** Class containing Methods to obtain User info from MySQL Database.
  *
  * @author LabUser
  */
 public class DAOUser {
     
-    /**
+    /** Method to get all users from MySQL database.
      *
      * @return userListtA
      */

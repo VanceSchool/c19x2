@@ -29,18 +29,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-     /**
-     * @class UsefulMethtods
-     * Contains methods that can be  re-used for multiple pages
+     /** Class contains methods that can be  re-used for multiple pages.
+     * 
+     * .
      * @author sean thompson <stho292@wgu.edu>
      */ 
 public abstract class UserfulMethods {
     
     
     
-     /**
-     * validateNonEmpty
-     * Verifies TextField is not empty
+     /** Method verifies TextField is not empty.
+     * 
      * @param tf
      */ 
         public static void validateNonEmpty(TextField... tf) {        
@@ -56,10 +55,9 @@ public abstract class UserfulMethods {
     }
 }
         
-    /**
-    * validateHasSelection
-    * Verifies ComboBox has a selection
-     * @param cb
+    /** Method that validates ComboBox has a selection, can be used for multiple ComboBox.
+    * 
+    * @param cb
     */ 
     public static void validateHasSelection(ComboBox... cb) {        
         for (ComboBox combobox: cb){
@@ -74,8 +72,7 @@ public abstract class UserfulMethods {
         }
     }
     
-     /**
-     * validateHasDate
+     /** Method verifies DatePicker has a selection.
      * Verifies Date Picker has a selection
      * @param dp
      */ 
@@ -92,13 +89,11 @@ public abstract class UserfulMethods {
     }
 }
         
-      /**
-     * validateHasTime
-     * Verifies End time or start time do not overlap, come in impossible sequence, or exceed hours of operation
-     * @param cb1
-     * @param cb2
-     * @param ld1
-     */
+    /** Method Verifies End time or start time do not overlap, come in impossible sequence, or exceed hours of operation.
+    * @param cb1
+    * @param cb2
+    * @param ld1
+    */
     public static void validateHasTime(LocalTime cb1, LocalTime cb2,LocalDate ld1){  
         boolean valid = true;
         LocalDateTime ldt1 = LocalDateTime.of(ld1, cb1);
@@ -120,7 +115,7 @@ public abstract class UserfulMethods {
         }return;
     }   
         
-    /**
+    /** Method used to add time to ComboBox, adds from 0 to 23.
      *
      * @param startTimedd
      * @param endTimedd
@@ -132,7 +127,7 @@ public abstract class UserfulMethods {
         }
     }
     
-    /**
+    /** Method adds all contacts to ComboBox.
      *
      * @param contactdd
      */
@@ -141,7 +136,7 @@ public abstract class UserfulMethods {
     contactdd.setItems(contListB);
     }
     
-    /**
+    /** Method adds all customers to ComboBox.
      *
      * @param AppointmentCustomercb
      */
@@ -150,7 +145,7 @@ public abstract class UserfulMethods {
     AppointmentCustomercb.setItems(custListB);
     }
     
-    /**
+    /** Method can be used to add all Users to ComboBox.
      *
      * @param usercb
      */

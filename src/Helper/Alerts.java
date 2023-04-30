@@ -12,18 +12,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 
-/**
+/** This class contains various alerts that are used throughout application.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
 public class Alerts {
     
-    /**
-    * exitAlert
-    * Method created to alert of exiting program, upon confirmation connection to database will close
+    /** Method created to alert of exiting program, upon confirmation connection to database will close 
     * and system will exit.
-    * Lambda expression used to bypass if statement, methods to exit system and close connection were merged into 
-    * @method closeConnection
+    * Lambda expression used to bypass if statement, methods to exit system and close connection were merged. 
+    * @method exitAlert
     */
     public static void exitAlert(){
         ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
@@ -44,7 +42,7 @@ public class Alerts {
         .ifPresent(response -> JDBC.closeConnection());
     }
    
-    /**
+    /** This method is used to alert if password is wrong at login.
      *
      */
     public static void passwordAlert(){
@@ -61,10 +59,9 @@ public class Alerts {
     }
     
     
-    /**
-    * alertGroup3
-    * Contains alerts having to do with Appointment Schedules
-    *
+    /** Contains alerts having to do with appointment schedules.
+     * Triggered if an appointment time is not correct.
+    * 
     * @param type
     */
         public static void appointmentTimeAlerts(int type){
@@ -104,11 +101,12 @@ public class Alerts {
     }
     
 
-    /**
+    /** Method used to verify choice after an action that may change date.
     *
     * 
     * @param type
-     * @return 
+     *@return false
+     * @return true
     */
     public static boolean alertGroupVerifyAction(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -149,7 +147,7 @@ public class Alerts {
     }
     
     
-    /** alertGroup1
+    /** Method to alert record change or added to database.
     *
     * 
     * @param type
@@ -180,7 +178,7 @@ public class Alerts {
         
     }
     
-    /**
+    /** Method to display alert showing details of appointment to be deleted.
      *
      * @param delappoint
      * @return

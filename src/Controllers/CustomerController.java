@@ -95,7 +95,10 @@ public class CustomerController implements Initializable {
                 }
                 );
         
-    }    
+    }
+    /* Method handles Main menu button behavior.
+    * Sends users to previous screen by changing scenes.
+    */    
 
     @FXML
     private void handleCMainMenubt(ActionEvent event) throws IOException {

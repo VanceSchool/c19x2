@@ -33,10 +33,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-/**
+/** Class containing methods that control he behavior of the Reports fxml page.
  * FXML Controller class
  *
- * @author LabUser
+ * @author sean thompson <stho292@wgu.edu>
  */
 public class ReportsController implements Initializable {
 
@@ -104,8 +104,8 @@ public class ReportsController implements Initializable {
     private TableColumn<Report, Integer> customerRegioinTotalcol;
 
 
-    /**
-     * Initializes the controller class.
+    /**Initializes the controller class.
+     * 
      * @param url
      * @param rb
      */
@@ -117,8 +117,8 @@ public class ReportsController implements Initializable {
         populateCustomersByRegionTable();
     }    
 
-    /*
-    *@FXML
+    /* Method handles back button behavior.
+    * Sends users to previous screen by changing scenes.
     */
     @FXML
     private void handleBackbt(ActionEvent event) throws IOException {

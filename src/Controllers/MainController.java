@@ -23,7 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
+/**Class that contains the controls for the main menu.
  *FXML Controller class
  * 
  *@author sean thompson <stho292@wgu.edu>
@@ -48,7 +48,11 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+/**Method that moves user to customer page.
+ * 
+ * @param event
+ * @throws IOException 
+ */
     @FXML
     private void handleCustomersbt(ActionEvent event) throws IOException {
             // load widget hierarchy of next screen
@@ -65,6 +69,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**Method that moves user to appointments page.
+    * 
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     private void handleAppointmentsbt(ActionEvent event) throws IOException {
             // load widget hierarchy of next screen
@@ -80,7 +89,12 @@ public class MainController implements Initializable {
         // "raise the curtain" Show the scene
         stage.show();
     }
-
+    
+    /**Method that moves user to reports page.
+    * 
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     private void handleReportsbt(ActionEvent event) throws IOException {
             // load widget hierarchy of next screen
@@ -96,7 +110,11 @@ public class MainController implements Initializable {
         // "raise the curtain" Show the scene
         stage.show();
     }
-
+    /**Method that logs user out of application.
+    * 
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     private void handleLogoutbt(ActionEvent event) {
     exitAlert();

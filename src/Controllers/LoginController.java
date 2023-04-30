@@ -48,7 +48,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
+/**Class containing controls for login form.
  *FXML Controller class
  * 
  *@author sean thompson <stho292@wgu.edu>
@@ -63,10 +63,7 @@ public class LoginController implements Initializable {
     private Button Loginbt;
     @FXML
     private Button LoginExitbt;
-
-    /**
-     *
-     */
+    @FXML
     public static String meUserID;
     @FXML
     private Text ZoneIdtxt;
@@ -101,8 +98,13 @@ public class LoginController implements Initializable {
         setZoneIdField();  
     }    
 
-    /**
-     *
+    /**Method that handles when login button is press.
+     * Currently calls on methods in class to check password and username.
+     * Also starts method to create login attempt record.
+     * Lambda function present was used to bypass making new method by streaming appointments to new list.
+     * If list has any appointments an alert is created.
+     * The lambda checks each value against presets of current time and time plus 15 minutes.
+     * If an  appointment is within those two times it is collected into a new List.
      * @param event
      * @throws IOException
      * @throws SQLException
@@ -168,14 +170,17 @@ public class LoginController implements Initializable {
             passwordAlert();
         }
     }
-
+    
+    /**Method handles exit button action.
+     * 
+     * @param event 
+     */
     @FXML
     private void handleExitbt(ActionEvent event) {
         exitAlert();
     }
     
-    /**setZoneIdField
-    *Set ZoneID text to system Default Zone ID
+    /** Method that sets ZoneID text to system Default Zone ID
     *Set Login Date Text Field to Local Login Date
     *Create Date Time Formatter
     *Set Login Time text to local time using Date Time Formatter
@@ -186,7 +191,7 @@ public class LoginController implements Initializable {
         LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
     }
     
-    /** *  setUserInformation
+    /**setUserInformation
     * create userID, set to -1
     * Create Statement Object
     * Create SQL Statement
@@ -270,16 +275,13 @@ public class LoginController implements Initializable {
     }
     */
 
-    /**
-     *
+    /** Method that creates a user object with given info from login page.
      * @param userID
      * @param password
      * @param username
-     * @return
+     * @return user
      * @throws SQLException
      */
-
-    
     public User setUpUserInfo(int userID, String password, String username) throws SQLException{
         User user = new User(-1, password, username);
         user.setUserId(setUserInformation(username));
@@ -288,7 +290,9 @@ public class LoginController implements Initializable {
         return user;
     }
     
-    /**loginRecordSuccess
+    /**Method that updates login_activity.txt or creates it if it doesn't
+     * exist.
+     * This adds records off successful attempts.
     *
     * @param user
     */
@@ -296,7 +300,7 @@ public class LoginController implements Initializable {
     //System.out.println("Login Record Updated Positive"); 
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(
-                new File("login_activity.txt.txt"),
+                new File("login_activity.txt"),
                 true));
             //out.txt will appear in the project's root directory under NetBeans projects
             //Note that Notepad will not display the following lines on separate lines
@@ -308,9 +312,10 @@ public class LoginController implements Initializable {
     }
     }
     
-    /** loginRecordfailure
+    /**Method that updates login_activity.txt or creates it if it doesn't
+     * exist.
+     * This adds records off failed attempts.
     *
-    * 
     * @param user
     */
     private void loginRecordfailure(User user){
@@ -329,6 +334,10 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**Method that handles changing on screen information based on resource bundle selected.
+     * 
+     */
     private void resourceBundleChange(){
         System.out.println(Locale.getDefault());
         try {

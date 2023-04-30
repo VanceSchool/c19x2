@@ -19,17 +19,16 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-     /**
+     /** Class contains methods to SELECT MySQL Database info into ObservableLists,
      * @class DAOLists
-     * Contains methods to SELECT MySQL Database info into ObservableLists,
-     * Affects tables countries and first_level_divisions
-     * Contains general(obtain All) and filtered(obtain specific set) queries
+     * Contains methods to SELECT MySQL Database info into ObservableLists.
+     * Affects tables countries and first_level_divisions.
+     * Contains general(obtain All) and filtered(obtain specific set) queries.
      * @author sean thompson <stho292@wgu.edu>
      */ 
 public class DAOLists {
     
-    /**
-    * getAllCountries Method for SQL Statement for SELECT all FROM countries Table
+    /** Method for SQL Statement for SELECT all FROM countries Table.
     * @return countryListA
     */ 
     public static ObservableList<Countries> getAllCountries(){
@@ -52,9 +51,7 @@ public class DAOLists {
     }
    
     
-    /**
-    * getFilteredProvinces Method for SQL Statement for SELECT some FROM provinces Table
-    * filtered by country.Country_ID
+    /** Method for SQL Statement for SELECT some FROM provinces Table filtered by country.Country_ID.
     * @return provListA
     * @param cId
     */ 
@@ -79,9 +76,7 @@ public class DAOLists {
       
     
     
-    /**
-    * getAssignmentReportTypeMonth Method for SQL Statement for SELECT some FROM appointments Table
-    * filtered by Type, MONTH(appointments.Start)
+    /** Method for SQL Statement for SELECT some FROM appointments Table filtered by Type, MONTH(appointments.Start).
     * @return reportA
     * 
     */ 
@@ -106,9 +101,8 @@ public class DAOLists {
     }
 
     
-        /**
-    * getCustomersPerRegion Method for SQL Statement for SELECT some FROM Customers Table
-    * firs_level_divisions table and countries Table, Then gives count of each region customers
+    /** Method for SQL Statement for SELECT some FROM Customers Table
+    * firs_level_divisions table and countries Table, Then gives count of each region customers.
     * @return reportC
     * 
     */ 

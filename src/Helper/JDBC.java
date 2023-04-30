@@ -6,7 +6,8 @@ package Helper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-/**
+
+/** Class contains database connection methods.
  *
  *@author sean thompson <stho292@wgu.edu>
  */
@@ -20,14 +21,14 @@ public abstract class JDBC {
     private static final String userName = "sqlUser"; // Username
     private static String password = "Passw0rd!"; // Password
 
-    /**
+    /** 
      *
      */
     public static Connection connection = null;  // Connection Interface
 
-    /**
-     *
-     * @return
+    /** Method to connect to database.
+     * displays message if connection successful.
+     * @return connection
      */
     public static Connection openConnection()
     {
@@ -51,7 +52,7 @@ public abstract class JDBC {
             return connection;
         }
     
-    /**
+    /** Method to close connection to database.
      *
      */
     public static void closeConnection() {

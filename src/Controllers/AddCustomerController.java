@@ -97,6 +97,9 @@ public class AddCustomerController implements Initializable {
         return;
     }
 
+    /* Method handles back button behavior.
+    * Sends users to previous screen by changing scenes.
+    */
     @FXML
     private void handleCustomerBackbt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));

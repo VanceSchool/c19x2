@@ -18,16 +18,15 @@ import java.time.ZonedDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- * @class DAOContacts
- * Contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database 
- * Affects tables Appointments
+/** Class contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database, affects tables Appointments. 
+ *  
  * @author sean thompson <stho292@wgu.edu>
  */ 
 public class DAOAppointments {
+    
     //SELECT Methods
-    /**
-    * getAllAppointments Method for SQL Statement for SELECT all FROM appointments Table
+    /** Method for SQL Statement for SELECT all FROM appointments Table.
+    * 
     * @return appointListA
     */ 
     public static ObservableList<Appointments> getAllAppointments(){
@@ -67,9 +66,7 @@ public class DAOAppointments {
         return appointListA;   
     }
     
-    /**
-    * getFilteredMonthAppointments Method for SQL Statement for SELECT some FROM appointments Table
-    * filtered by MONTH(current_date)
+    /**Method for SQL Statement for SELECT some FROM appointments Table filtered by MONTH(current_date).
     * @return appointMonthListA
     */ 
     public static ObservableList<Appointments> getFilteredMonthAppointments(){
@@ -107,9 +104,9 @@ public class DAOAppointments {
         return appointMonthListA;  
     }
     
-    /**
-    * getFilteredWeekAppointments Method for SQL Statement for SELECT some FROM appointments Table
-    * filtered by appointments.Start
+    /** Method for SQL Statement for SELECT some FROM appointments Table filtered by appointments start.
+    * 
+    * 
     * @return appointWeekListA
     */ 
     public static ObservableList<Appointments> getFilteredWeekAppointments(){
@@ -146,7 +143,7 @@ public class DAOAppointments {
         return appointWeekListA;
     }
     
-    /**
+    /** Method that checks that a single contact does not have overlapping appointments.
      *
      * @param start
      * @param end
@@ -175,9 +172,7 @@ public class DAOAppointments {
         return true;
     }
     
-    /**
-    * getFilteredCustAppointments Method for SQL Statement for SELECT some FROM provinces Table
-    * filtered by country.Country_ID
+    /** Method for SQL Statement for SELECT some FROM appointments Table filtered by customer ID.
     * @return appointCustListA
     * @param CustID
     */ 
@@ -210,9 +205,7 @@ public class DAOAppointments {
         return appointCustListA;
     }
     
-        /**
-    * getFilteredContactsAppointments Method for SQL Statement for SELECT all FROM appointments Table
-    * filtered by Contact_ID
+    /**Method for SQL Statement for SELECT all FROM appointments Table iltered by Contact_ID.
     * @return appointConListA
     * @param CName
     */ 
@@ -247,9 +240,8 @@ public class DAOAppointments {
         return appointConListA;
     }
     
-      /**
-    * getLapsedAppointments Method for SQL Statement for SELECT all FROM appointments Table WHERE The timestamp
-    * is before current time
+    /** Method for SQL Statement for SELECT all FROM appointments 
+    * Table WHERE The timestamp .is before current time. 
     * 
     * @return lapsedAppointList
     * 
@@ -283,10 +275,9 @@ public class DAOAppointments {
     }
     
     //INSERT, UPDATE, DELETE methods
-    /**
+    /** Method that Inserts new Appointment into appointments table. 
     * addAppointment
-    * Inserts new Appointment into appointments table
-     * @param appointToAdd
+    * @param appointToAdd
     * @throws SQLException
     */
         public static void addAppointment(Appointments appointToAdd) throws SQLException{
@@ -318,7 +309,7 @@ public class DAOAppointments {
         }
     }
         
-    /**
+    /** Method that updates an existing appointment.
     * modifyAppointment
     * @param modAppoint
     * @throws SQLException
@@ -357,7 +348,7 @@ public class DAOAppointments {
     }
         
         
-    /**
+    /** Method that deletes an existing appointment.
     * deleteAppointment 
     * @param delAppoint
     * @throws SQLException
@@ -374,7 +365,7 @@ public class DAOAppointments {
         }
     }
         
-    /**
+    /** Method that deletes an existing appointment, filtered by Customer_ID.
     * deleteCustomerAppoint 
     * @param custId
     * @throws SQLException

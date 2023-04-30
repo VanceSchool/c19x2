@@ -153,16 +153,10 @@ public class AppointmentsController implements Initializable {
     private void handleAllRefreshTab(Event event) {
         populateAllTable();
     }
-    /*
-     *@FXML
+
+    /* Method handles Main menu button behavior.
+    * Sends users to previous screen by changing scenes.
     */
-
-    /**
-     *
-     * @param event
-     * @throws IOException
-     */
-
     @FXML
     public void handleCMainMenubt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));

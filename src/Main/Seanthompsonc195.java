@@ -16,18 +16,17 @@ import javafx.stage.Stage;
 
 
 
-/**
+/** This class contains the main method that initializes at program start. 
  *
  *@author sean thompson <stho292@wgu.edu>
  */
 public class Seanthompsonc195 extends Application{
 
-    /**
-     *
-     */
+
     public User currentMe;
 
-    /**
+    /** This is main method that starts at beginning of program.
+     * As this method occurs at beginning of program it is used to open and close database connection.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -41,7 +40,7 @@ public class Seanthompsonc195 extends Application{
         
     }
 
-    /**
+    /** This method starts FXML of program and loads first scene/view which is Login.
      *
      * @param stage
      * @throws Exception
