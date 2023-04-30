@@ -215,3 +215,5 @@ Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '0
 Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '01:02:31' Date: '2023-04-30'
 Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '01:23:58' Date: '2023-04-30'
 Succesful Login Attempt - User_ID: '1', Username:'test' Password'test'Time: '01:27:19' Date: '2023-04-30'
+Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '02:04:45' Date: '2023-04-30'
+Succesful Login Attempt - User_ID: '2', Username:'admin' Password'admin'Time: '02:10:13' Date: '2023-04-30'

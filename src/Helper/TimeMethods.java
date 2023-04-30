@@ -49,6 +49,8 @@ public class TimeMethods {
         combineDateTime = LocalDateTime.of(pDate, pTime);
         return combineDateTime;
     }
+    
+    
     public ZonedDateTime changeToUTC(LocalDateTime ldt){
         ZonedDateTime ldtZone;
         ldtZone = ZonedDateTime.of(ldt, ZoneId.systemDefault());

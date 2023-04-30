@@ -5,6 +5,7 @@
 package Controllers;
 
 import static DAO.DAOAppointments.addAppointment;
+import static DAO.DAOAppointments.checkingOverLap;
 import static Helper.Alerts.*;
 import DAO.DAOLists;
 import static Helper.TimeMethods.*;
@@ -28,6 +29,9 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -119,6 +123,17 @@ public class AddAppointmentsController implements Initializable {
        newAppointment.setContactId(modAppointCon.getContactId());
        LocalDateTime starttime = changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue());
        LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
+       ZonedDateTime zdtEnd = ZonedDateTime.of(endtime, ZoneId.systemDefault());
+       ZonedDateTime zdtStart = ZonedDateTime.of(starttime, ZoneId.systemDefault());
+       ZonedDateTime utcZoneStart = zdtStart.withZoneSameInstant(ZoneOffset.UTC);
+       ZonedDateTime utcZoneEnd = zdtEnd.withZoneSameInstant(ZoneOffset.UTC);
+       Timestamp tsStart = Timestamp.valueOf(utcZoneStart.toLocalDateTime());
+       Timestamp tsEnd = Timestamp.valueOf(utcZoneEnd.toLocalDateTime());
+       if(checkingOverLap(tsStart, tsEnd, modAppointCon.getContactId())){
+           alertGroupDatabaseChange(3);
+           return;
+       }else{
+       checkingOverLap(tsStart, tsEnd, modAppointCon.getContactId());
        newAppointment.setStart(Timestamp.valueOf(starttime));
        newAppointment.setEnd(Timestamp.valueOf(endtime));
        addAppointment(newAppointment);
@@ -129,6 +144,7 @@ public class AddAppointmentsController implements Initializable {
         stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
+       }
         }return;
         
     }

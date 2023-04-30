@@ -5,12 +5,16 @@
 package DAO;
 
 import Controllers.LoginController;
+import static Helper.Alerts.appointmentTimeAlerts;
 import Helper.JDBC;
 import Models.Appointments;
 import java.sql.PreparedStatement;
+import Helper.TimeMethods;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -142,6 +146,27 @@ public class DAOAppointments {
         return appointWeekListA;
     }
     
+    public static Boolean checkingOverLap(Timestamp start, Timestamp end, int contactID) throws SQLException{
+        ObservableList<Appointments> BadAppointmennt = FXCollections.observableArrayList();
+            String sq1 = "SELECT * FROM appointments "
+                    + "WHERE ((Contact_ID = ?)"
+                    + "AND ((? BETWEEN Start and End) OR "
+                    + "(? BETWEEN Start and End) OR "
+                    + "(? > End AND ? < Start)));";
+
+                PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sq1);
+                ps1.setInt(1, contactID);
+                ps1.setTimestamp(2, start);
+                ps1.setTimestamp(3, end);
+                ps1.setTimestamp(4, end);
+                ps1.setTimestamp(5, start);
+                ResultSet rs = ps1.executeQuery();
+                if(rs.next()){
+                    return false;
+                }
+        return true;
+    }
+    
     /**
     * getFilteredCustAppointments Method for SQL Statement for SELECT some FROM provinces Table
     * filtered by country.Country_ID
@@ -257,35 +282,33 @@ public class DAOAppointments {
     * @throws SQLException
     */
         public static void addAppointment(Appointments appointToAdd) throws SQLException{
-            String sql="INSERT INTO appointments \n" +
+            String sq2="INSERT INTO appointments \n" +
             "(Title, Description, Location, Type, Start, End, Create_Date, Created_By, \n"
             + "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
             "VALUES ( ? ,? ,? , ? , ? ,? , current_timestamp(), ?, current_timestamp(), ?, ?,\n"
             + " (SELECT User_ID FROM users WHERE User_Name = ?), ?); ";   
-            //LocalDateTime startlds = changeToUST(appointToAdd.getStart());
-            //LocalDateTime endslds = changeToUST(appointToAdd.getEnd());
-            //Timestamp startts = Timestamp.valueOf(startlds);
-            //Timestamp endts = Timestamp.valueOf(endslds);
-         try {   
-        PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sql);
-            ps2.setString(1, appointToAdd.getTitle());
-            ps2.setString(2, appointToAdd.getDescription());
-            ps2.setString(3, appointToAdd.getLocation());
-            ps2.setString(4, appointToAdd.getType());
-            ps2.setTimestamp(5, appointToAdd.getStart());
-            ps2.setTimestamp(6, appointToAdd.getEnd());
-            ps2.setString(7, LoginController.meUserID);
-            ps2.setString(8, LoginController.meUserID);
-            ps2.setInt(9, appointToAdd.getCustomerId());
-            ps2.setString(10, LoginController.meUserID);
-            ps2.setInt(11, appointToAdd.getContactId());
-            System.out.println(ps2);
-            ps2.executeUpdate();
-             } catch(SQLException e) {
+
+            try { 
+                PreparedStatement ps2 = JDBC.getConnection().prepareStatement(sq2);
+                ps2.setString(1, appointToAdd.getTitle());
+                ps2.setString(2, appointToAdd.getDescription());
+                ps2.setString(3, appointToAdd.getLocation());
+                ps2.setString(4, appointToAdd.getType());
+                ps2.setTimestamp(5, appointToAdd.getStart());
+                ps2.setTimestamp(6, appointToAdd.getEnd());
+                ps2.setString(7, LoginController.meUserID);
+                ps2.setString(8, LoginController.meUserID);
+                ps2.setInt(9, appointToAdd.getCustomerId());
+                ps2.setString(10, LoginController.meUserID);
+                ps2.setInt(11, appointToAdd.getContactId());
+                System.out.println(ps2);
+                ps2.executeUpdate();
+            
+            }catch(SQLException e){
             System.out.println("Issue with SQL");
             e.printStackTrace();
         }
-       }
+    }
         
     /**
     * modifyAppointment

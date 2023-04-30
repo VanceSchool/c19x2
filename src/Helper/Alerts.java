@@ -90,6 +90,11 @@ public class Alerts {
                 alert.setContentText("Appointment End Time is Outside Normal Hours of Operation 8AM to 4PM EST, Please Ammend!");
                 break;
             }
+            
+            case 6: {
+                alert.setContentText("Contact Has Appointment During That Scheduled Time");
+                break;
+            }
                         
         }
         alert.showAndWait();
