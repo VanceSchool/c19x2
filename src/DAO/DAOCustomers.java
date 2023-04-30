@@ -14,10 +14,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /** Contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database info into ObservableLists,
-* @class DAOContacts
 * Contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database info into ObservableLists,
 * Affects tables customers, countries, first_level_divisions
-* @author sean thompson <stho292@wgu.edu>
+* @author sean thompson stho292@wgu.edu
 */ 
 public class DAOCustomers {
     //SELECT Methods

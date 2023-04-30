@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
  * Several instances require time to change variable type or value, this class
  * was created to  be used during those times.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class TimeMethods {
 

@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 
 /** Class contains database connection methods.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public abstract class JDBC {
     private static final String protocol = "jdbc";

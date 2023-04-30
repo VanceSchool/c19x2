@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /** This class contains parameters for unique class of report. 
  * This class was created to be used in unique report creation.
  * 
- * @author sean thompson <stho292@wgu.edu>
+ * @author sean thompson stho292@wgu.edu
  */
 
 public class Report {

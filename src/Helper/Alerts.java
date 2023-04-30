@@ -14,14 +14,14 @@ import javafx.stage.Modality;
 
 /** This class contains various alerts that are used throughout application.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Alerts {
     
     /** Method created to alert of exiting program, upon confirmation connection to database will close 
     * and system will exit.
     * Lambda expression used to bypass if statement, methods to exit system and close connection were merged. 
-    * @method exitAlert
+    * 
     */
     public static void exitAlert(){
         ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
@@ -105,8 +105,7 @@ public class Alerts {
     *
     * 
     * @param type
-     *@return false
-     * @return true
+     *@return true/false 
     */
     public static boolean alertGroupVerifyAction(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

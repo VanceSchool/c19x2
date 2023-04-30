@@ -36,7 +36,7 @@ import javafx.stage.Stage;
 /** Class containing methods that control he behavior of the Reports fxml page.
  * FXML Controller class
  *
- * @author sean thompson <stho292@wgu.edu>
+ * @author sean thompson stho292@wgu.edu
  */
 public class ReportsController implements Initializable {
 

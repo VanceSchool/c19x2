@@ -8,7 +8,7 @@ import java.sql.Date;
 
 /** Class containing setters, getters, and constructors for customers.
  *. 
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Customers {
 

@@ -38,7 +38,7 @@ import javafx.util.StringConverter;
 /**
  *FXML Controller class
  * 
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class AddCustomerController implements Initializable {
 

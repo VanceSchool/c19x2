@@ -60,7 +60,7 @@ import javafx.stage.Stage;
 /** Class that controls behavior of add appointments page.
  * Contains methods for all the selection controls.
  *
- * @author sean thompson <stho292@wgu.edu>
+ * @author sean thompson stho292@wgu.edu
  */
 public class AddAppointmentsController implements Initializable {
 
@@ -110,7 +110,7 @@ public class AddAppointmentsController implements Initializable {
      * all necessary information.
      * If all boxes are filled and times choices are valid, proceeds to save appointment.
      * 
-     * @param event
+     * @param {ActionEvent} event
      * @throws IOException
      * @throws SQLException 
      */

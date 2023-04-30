@@ -20,11 +20,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
      /** Class contains methods to SELECT MySQL Database info into ObservableLists,
-     * @class DAOLists
+     * 
      * Contains methods to SELECT MySQL Database info into ObservableLists.
      * Affects tables countries and first_level_divisions.
      * Contains general(obtain All) and filtered(obtain specific set) queries.
-     * @author sean thompson <stho292@wgu.edu>
+     * @author sean thompson stho292@wgu.edu
      */ 
 public class DAOLists {
     

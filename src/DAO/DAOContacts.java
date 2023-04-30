@@ -13,10 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /** Class contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database for contacts.. 
-* @class DAOContacts
 * Contains methods to SELECT MySQL Database 
 * Affects tables contacts, countries, first_level_divisions
-* @author sean thompson <stho292@wgu.edu>
+* @author sean thompson stho292@wgu.edu
 */ 
 public class DAOContacts {
     //SELECT Methods

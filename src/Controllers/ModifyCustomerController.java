@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 /**
  *FXML Controller for ModifyCustomer Scene/view
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class ModifyCustomerController implements Initializable {
 

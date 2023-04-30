@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
 
 /** Class contains methods to SELECT, INSERT, DELETE and UPDATE MySQL Database, affects tables Appointments. 
  *  
- * @author sean thompson <stho292@wgu.edu>
+ * @author sean thompson stho292@wgu.edu
  */ 
 public class DAOAppointments {
     

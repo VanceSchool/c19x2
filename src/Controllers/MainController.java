@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 /**Class that contains the controls for the main menu.
  *FXML Controller class
  * 
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class MainController implements Initializable {
 

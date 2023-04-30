@@ -7,7 +7,7 @@ import java.security.Timestamp;
 
 /** This class contains setters, getters and constructors for countries.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Countries{
     int countryId;

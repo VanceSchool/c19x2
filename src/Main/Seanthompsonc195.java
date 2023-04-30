@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /** This class contains the main method that initializes at program start. 
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Seanthompsonc195 extends Application{
 

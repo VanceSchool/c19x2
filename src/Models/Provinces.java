@@ -6,7 +6,7 @@ package Models;
 
 /** This class contains the constructors, setters and getters for first level divisions.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Provinces {
     int divID;

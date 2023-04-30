@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 /** Class that controls behavior of modify appointments page.
  * Contains methods for all the selection controls.
  *
- * @author sean thompson <stho292@wgu.edu>
+ * @author sean thompson stho292@wgu.edu
  */
 public class ModifyAppointmentController implements Initializable {
 

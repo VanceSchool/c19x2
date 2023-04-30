@@ -7,7 +7,7 @@ package Models;
 
 /** This class contains setters, getters and constructors for contacts. 
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Contacts {
     int contactId;

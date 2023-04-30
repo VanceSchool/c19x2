@@ -8,7 +8,7 @@ import java.security.Timestamp;
 
 /** This Class Contains User Information.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class User{
     private static int userId;
@@ -73,7 +73,7 @@ public class User{
 
     /** setter for user name.
      *
-     * @param String
+     * @param userName - Name of user.
      */
     public void setUserName(String userName){
         this.userName = userName;
@@ -82,7 +82,7 @@ public class User{
 
     /** Getter for user ID.
      *
-     * @return userId
+     * @return {int} userId -- Id of User.
      */
     public int getUserId(){
         return userId;
@@ -90,7 +90,7 @@ public class User{
 
     /** Getter for user name. 
      *
-     * @return userName
+     * @return {String} userName -- Name of user
      */
     public String getUserName(){
         return userName;

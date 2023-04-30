@@ -34,7 +34,7 @@ import javafx.stage.Stage;
      /** Class contains methods that can be  re-used for multiple pages.
      * 
      * .
-     * @author sean thompson <stho292@wgu.edu>
+     * @author sean thompson stho292@wgu.edu
      */ 
 public abstract class UserfulMethods {
     

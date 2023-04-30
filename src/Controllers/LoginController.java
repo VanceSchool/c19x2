@@ -51,7 +51,7 @@ import javafx.stage.Stage;
 /**Class containing controls for login form.
  *FXML Controller class
  * 
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class LoginController implements Initializable {
 

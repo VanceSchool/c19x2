@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 /**
  *FXML Controller class
  * 
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class AppointmentsController implements Initializable {
 

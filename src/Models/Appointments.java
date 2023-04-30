@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 /** This class contains setters, getters, and constructors for appointments.
  *
- *@author sean thompson <stho292@wgu.edu>
+ *@author sean thompson stho292@wgu.edu
  */
 public class Appointments{
     private int appointmentID;
