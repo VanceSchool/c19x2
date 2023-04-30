@@ -82,6 +82,10 @@ public class Appointments{
     
     }
 
+    public Appointments(int appointmentID) {
+        this.appointmentID =appointmentID;
+    }
+
     
     
     //Getters

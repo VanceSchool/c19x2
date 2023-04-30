@@ -147,29 +147,35 @@ public class DAOAppointments {
      *
      * @param start
      * @param end
-     * @param contactID
      * @return
      * @throws SQLException
      */
-    public static Boolean checkingOverLap(Timestamp start, Timestamp end, int contactID) throws SQLException{
+    public static Boolean checkingOverLap(Timestamp start, Timestamp end) throws SQLException{
         ObservableList<Appointments> BadAppointmennt = FXCollections.observableArrayList();
-            String sq1 = "SELECT * FROM appointments "
-                    + "WHERE ((Contact_ID = ?)"
-                    + "AND ((? BETWEEN Start and End) OR "
-                    + "(? BETWEEN Start and End) OR "
-                    + "(? > End AND ? < Start)));";
-
-                PreparedStatement ps1 = JDBC.getConnection().prepareStatement(sq1);
-                ps1.setInt(1, contactID);
-                ps1.setTimestamp(2, start);
-                ps1.setTimestamp(3, end);
-                ps1.setTimestamp(4, end);
-                ps1.setTimestamp(5, start);
-                ResultSet rs = ps1.executeQuery();
-                if(rs.next()){
-                    return false;
-                }
-        return true;
+        String sq1 = "SELECT * FROM appointments;";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sq1);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                if((start.before(rs.getTimestamp("Start")) && (end.after(rs.getTimestamp("Start"))))){
+                     return true;
+                }else if((start.after(rs.getTimestamp("Start")) && (start.before(rs.getTimestamp("End"))))){
+                   return true;
+                }else if((start.before(rs.getTimestamp("Start")) && (end.after(rs.getTimestamp("End"))))){
+                    return true;
+                }else if((start.after(rs.getTimestamp("Start")) && (end.before(rs.getTimestamp("End"))))){
+                    return true;
+                }else if(start.equals(rs.getTimestamp("Start"))){
+                    return true;
+                }else if(end.equals(rs.getTimestamp("End"))){
+                    return true;
+                }return false;
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return false;
+        
     }
     
     /** Method for SQL Statement for SELECT some FROM appointments Table filtered by customer ID.

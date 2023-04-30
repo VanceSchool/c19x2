@@ -5,6 +5,7 @@
 package Controllers;
 
 import static DAO.DAOAppointments.addAppointment;
+import static DAO.DAOAppointments.checkingOverLap;
 import static DAO.DAOAppointments.modifyAppointment;
 import static DAO.DAOContacts.findContactByID;
 import static DAO.DAOCustomers.findCustomeresByID;
@@ -88,18 +89,20 @@ public class ModifyAppointmentController implements Initializable {
     /** Method used to save changes on screen and update appointment in database.
      * Calls on functions from Helper.UsefulMethods to validate user picked or entered
      * all necessary information.
-     * 
+     * If selections are empty or invalid time selections, method stops.
      * @param event
      * @throws IOException
      * @throws SQLException 
      */
     @FXML
     private void handleAppointmentSavebt(ActionEvent event) throws IOException, SQLException {
-        validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt);
-        validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd);
-        validateHasDate(startDatepick);
-        //validateHasTime(startTimedd.getValue(),endTimedd.getValue(),startDatepick.getValue());
-        if(alertGroupVerifyAction(9)){
+        if(validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt)){
+            return;
+        }else if(validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd)){
+            return;
+        }else if(validateHasDate(startDatepick)){
+            return;
+        }else if(alertGroupVerifyAction(9)){
             Customers modAppointCust = AppointmentCustomercb.getValue();
             Contacts modAppointCon = contactdd.getValue();
             int appointmentID = Integer.parseInt(appointmentIDtxt.getText());
@@ -116,12 +119,19 @@ public class ModifyAppointmentController implements Initializable {
             LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
             changeAppointment.setStart(Timestamp.valueOf(starttime));
             changeAppointment.setEnd(Timestamp.valueOf(endtime));
+            ZonedDateTime zdtEnd = ZonedDateTime.of(endtime, ZoneId.systemDefault());
+            ZonedDateTime zdtStart = ZonedDateTime.of(starttime, ZoneId.systemDefault());
+            ZonedDateTime utcZoneStart = zdtStart.withZoneSameInstant(ZoneOffset.UTC);
+            ZonedDateTime utcZoneEnd = zdtEnd.withZoneSameInstant(ZoneOffset.UTC);
+            Timestamp tsStart = Timestamp.valueOf(utcZoneStart.toLocalDateTime());
+            Timestamp tsEnd = Timestamp.valueOf(utcZoneEnd.toLocalDateTime());
+            if(checkingOverLap(tsStart, tsEnd)){
+                alertGroupDatabaseChange(3);
+            }else{
             System.out.println(appointmentID);
             changeAppointment.setAppointmentID(appointmentID);
             System.out.println(changeAppointment.getAppointmentID());
-            //modifyAppointment(changeAppointment, appointmentID);
             modifyAppointment(changeAppointment);
-       
             alertGroupDatabaseChange(4);
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -130,7 +140,9 @@ public class ModifyAppointmentController implements Initializable {
             stage.setScene(scene);
             stage.show();   
         }return;
+        }
     }
+    
     /** Method handles back button behavior.
     * Sends users to previous screen by changing scenes.
     */

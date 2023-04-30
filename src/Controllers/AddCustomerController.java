@@ -86,26 +86,27 @@ public class AddCustomerController implements Initializable {
 
     @FXML
     private void handleCustomerSavebt(ActionEvent event) throws IOException, SQLException {
-        validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf);
-        validateHasSelection(CustomerCountrycb, CustomerStatecb);
-             //if (allAptTable.getSelectionModel().getSelectedItem() != null){
-        if(alertGroupVerifyAction(6)){
-       Customers custMod = new Customers();
-       Provinces modProvCust = CustomerStatecb.getValue();
-       custMod.setState(modProvCust.getDivName());
-       custMod.setAddress(CustomerAddresstf.getText());
-       custMod.setCustomerName(CustomerNametf.getText());
-       custMod.setCustomerPhone(CustomerPhonetf.getText());
-       custMod.setCustomerPostalCode(CustomerPostaltf.getText());
-       addNewCustomers(custMod);
+        if(validateNonEmpty(CustomerNametf, CustomerAddresstf, CustomerPhonetf, CustomerPostaltf)){
+            return;
+        }else if(validateHasSelection(CustomerCountrycb, CustomerStatecb)){
+            return;
+        }else if(alertGroupVerifyAction(6)){
+            Customers custMod = new Customers();
+            Provinces modProvCust = CustomerStatecb.getValue();
+            custMod.setState(modProvCust.getDivName());
+            custMod.setAddress(CustomerAddresstf.getText());
+            custMod.setCustomerName(CustomerNametf.getText());
+            custMod.setCustomerPhone(CustomerPhonetf.getText());
+            custMod.setCustomerPostalCode(CustomerPostaltf.getText());
+            addNewCustomers(custMod);
        
-       alertGroupDatabaseChange(1);
-       Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
-       Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-       Scene scene = new Scene(root);
-       stage.setTitle("Customer Menu");
-       stage.setScene(scene);
-       stage.show();
+            alertGroupDatabaseChange(1);
+            Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Customer.fxml"));
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Customer Menu");
+            stage.setScene(scene);
+            stage.show();
         }
         return;
     }

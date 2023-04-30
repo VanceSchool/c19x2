@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="431.0">
                      <children>
-                        <TableView fx:id="byMonthTable" prefHeight="293.0" prefWidth="922.0">
+                        <TableView fx:id="byMonthTable" prefHeight="192.0" prefWidth="922.0">
                            <columns>
                               <TableColumn fx:id="AppointmentIDColm" prefWidth="22.0" text="ID" />
                               <TableColumn fx:id="AppointmentTitlecolm" minWidth="0.0" prefWidth="109.0" text="Title" />
@@ -44,7 +44,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="byWeekTable" prefHeight="294.0" prefWidth="922.0">
+                        <TableView fx:id="byWeekTable" prefHeight="193.0" prefWidth="922.0">
                            <columns>
                               <TableColumn fx:id="AppointmentIDcolw" prefWidth="39.0" text="ID" />
                               <TableColumn fx:id="AppointmentTitlecolw" prefWidth="92.0" text="Title" />
@@ -64,9 +64,9 @@
           </Tab>
             <Tab fx:id="AppointmentsAllTab" onSelectionChanged="#handleAllRefreshTab" text="All">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="922.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="922.0">
                      <children>
-                        <TableView fx:id="allAptTable" layoutY="-4.0" prefHeight="273.0" prefWidth="922.0">
+                        <TableView fx:id="allAptTable" layoutY="-4.0" prefHeight="197.0" prefWidth="922.0">
                            <columns>
                               <TableColumn fx:id="AppointmentIDcol1a" prefWidth="39.0" text="ID" />
                               <TableColumn fx:id="AppointmentTitlecola" prefWidth="92.0" text="Title" />
