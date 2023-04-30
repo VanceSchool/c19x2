@@ -61,6 +61,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="Backbt" layoutX="302.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleCancelbt" prefHeight="36.0" prefWidth="107.0" text="Back" />
+      <Button fx:id="Backbt" layoutX="302.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleBackbt" prefHeight="36.0" prefWidth="107.0" text="Back" />
    </children>
 </AnchorPane>
