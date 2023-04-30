@@ -44,7 +44,9 @@ public class Alerts {
         .ifPresent(response -> JDBC.closeConnection());
     }
    
-    
+    /**
+     *
+     */
     public static void passwordAlert(){
         ResourceBundle rb = ResourceBundle.getBundle("Language.lang", Locale.getDefault());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -106,6 +108,7 @@ public class Alerts {
     *
     * 
     * @param type
+     * @return 
     */
     public static boolean alertGroupVerifyAction(int type){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -177,6 +180,11 @@ public class Alerts {
         
     }
     
+    /**
+     *
+     * @param delappoint
+     * @return
+     */
     public static boolean deleteAppointmentAlert(Appointments delappoint){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete");

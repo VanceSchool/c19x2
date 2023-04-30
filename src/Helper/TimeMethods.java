@@ -24,33 +24,64 @@ import java.time.ZonedDateTime;
  */
 public class TimeMethods {
 
-
+    /**
+     *
+     */
     public LocalDateTime dateTime;
     
-    
+    /**
+     *
+     * @return
+     */
     public static ZoneId getZoneId(){
      ZoneId zone = ZoneId.systemDefault();
      return zone;
     }
+
+    /**
+     *
+     * @return
+     */
     public static LocalDateTime getNowLocalDateTime(){
         LocalDateTime ldtn = LocalDateTime.now();
         return ldtn;
     }
+
+    /**
+     *
+     * @return
+     */
     public static LocalTime getNowLocaltime(){
         LocalTime ltn = LocalTime.now();
         return ltn;
     }
+
+    /**
+     *
+     * @return
+     */
     public static LocalDate getNowLocalDate(){
         LocalDate ldn = LocalDate.now();
         return ldn;
     }
+
+    /**
+     *
+     * @param pDate
+     * @param pTime
+     * @return
+     */
     public static LocalDateTime changeUpLocaleDateTime(LocalDate pDate, LocalTime pTime){
         LocalDateTime combineDateTime;
         combineDateTime = LocalDateTime.of(pDate, pTime);
         return combineDateTime;
     }
     
-    
+    /**
+     *
+     * @param ldt
+     * @return
+     */
     public ZonedDateTime changeToUTC(LocalDateTime ldt){
         ZonedDateTime ldtZone;
         ldtZone = ZonedDateTime.of(ldt, ZoneId.systemDefault());
@@ -59,7 +90,12 @@ public class TimeMethods {
         return utcZoneTime;
     }
     
-        public static LocalDateTime changeToUST(LocalDateTime lD){
+    /**
+     *
+     * @param lD
+     * @return
+     */
+    public static LocalDateTime changeToUST(LocalDateTime lD){
         //Set LocalDateTime to ZonedDateTime of current Zone
         ZonedDateTime nowzdt = lD.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
         //Convert ZonedDateTime to EST Date Time
@@ -69,6 +105,12 @@ public class TimeMethods {
         return ustldt;   
     }
         
+    /**
+     *
+     * @param ld
+     * @param lt
+     * @return
+     */
     public static LocalDateTime changeToEst(LocalDate ld, LocalTime lt){
 
         //Convert local Date and Local time values to LocalDateTime
@@ -83,20 +125,33 @@ public class TimeMethods {
         return estldt;   
     }
     
+    /**
+     *
+     * @param ldt
+     * @return
+     */
     public static Timestamp changeToTimeStamp(LocalDateTime ldt){
         Timestamp ts;
         ts = Timestamp.valueOf(ldt);
         return ts;
     }
     
-
-    
+    /**
+     *
+     * @param someTime
+     * @return
+     */
     public static LocalDateTime localTimePlus15(LocalDateTime someTime){
        LocalDateTime plusFifteen = someTime.plusMinutes(15);
        return plusFifteen;
     }
     
-        public static LocalDateTime localTimeMinusFifteen(LocalDateTime someTime){
+    /**
+     *
+     * @param someTime
+     * @return
+     */
+    public static LocalDateTime localTimeMinusFifteen(LocalDateTime someTime){
        LocalDateTime minusFifteen = someTime.minusMinutes(15);
        return minusFifteen;
     }

@@ -106,6 +106,8 @@ public class ReportsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,7 +178,9 @@ public class ReportsController implements Initializable {
         populateTableContactAppointment(Customerscd.getValue().toString());
     }
     
-    
+    /**
+     *
+     */
     public void addTotalReport(){
     ObservableList<Report> reportList = DAOLists.getAssignmentReportTypeMonth();
     appointmentCountTable.setItems(reportList);
@@ -185,6 +189,10 @@ public class ReportsController implements Initializable {
     CountAppointTotal.setCellValueFactory(new PropertyValueFactory<>("Total"));
     }
         
+    /**
+     *
+     * @param contactdd
+     */
     public static void addContacts(ComboBox contactdd) {
     ObservableList<Contacts> contListB = DAOContacts.getAllContacts();
     contactdd.setItems(contListB);

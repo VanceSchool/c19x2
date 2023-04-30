@@ -126,6 +126,8 @@ public class AppointmentsController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,6 +156,13 @@ public class AppointmentsController implements Initializable {
     /*
      *@FXML
     */
+
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
+
     @FXML
     public void handleCMainMenubt(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Main.fxml"));

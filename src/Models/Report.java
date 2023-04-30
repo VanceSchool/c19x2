@@ -30,7 +30,9 @@ public class Report {
     }
     /**
      * Constructors for Report Showing Month and Type with total
-     * @param country
+     * @param type
+     * @param total
+     * @param month
      */
     public Report(String type, String month, int total){
         this.type = type;
@@ -40,6 +42,10 @@ public class Report {
     
     /**
      * Constructors for Report Showing Month, Year, User, Total
+     * @param year
+     * @param user
+     * @param month
+     * @param total
      */
     public Report(LocalDate year, String month, String user, int total){
         this.year = year;
@@ -62,60 +68,117 @@ public class Report {
     
    
     //Getters
+
+    /**
+     *
+     * @return
+     */
     
     public String getCountry(){
         return country;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getRegion(){
         return region;
     }
         
+    /**
+     *
+     * @return
+     */
     public String getType(){
         return type;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getMonth(){
         return month;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getTotal(){
         return total;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getUser(){
         return user;
     }
     
+    /**
+     *
+     * @return
+     */
     public LocalDate getYear(){
         return year;
     }
     //Setters
     
+    /**
+     *
+     * @param type
+     */
     public void setType(String type){
         this.type = type;
     }
     
+    /**
+     *
+     * @param month
+     */
     public void setMonth(String month){
         this.type = type;
     }
     
+    /**
+     *
+     * @param total
+     */
     public void setTotal(int total){
         this.total = total;
     }
     
+    /**
+     *
+     * @param user
+     */
     public void setUser(String user){
         this.user = user;
     }
     
+    /**
+     *
+     * @param year
+     */
     public void setYear(LocalDate year){
         this.year = year;
     }
     
+    /**
+     *
+     * @param country
+     */
     public void setCountry(String country){
         this.country = country;
     }
     
+    /**
+     *
+     * @param region
+     */
     public void setRegion(String region){
         this.region = region;
     }

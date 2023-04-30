@@ -71,6 +71,8 @@ public class ModifyAppointmentController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,6 +132,10 @@ public class ModifyAppointmentController implements Initializable {
         stage.show();
     }
     
+    /**
+     *
+     * @param appointment
+     */
     public void appointmentModify(Appointments appointment){       
         currentAppointment = appointment;
         LocalDateTime startAppointment = currentAppointment.getStart().toLocalDateTime();

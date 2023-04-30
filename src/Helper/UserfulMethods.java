@@ -41,7 +41,7 @@ public abstract class UserfulMethods {
      /**
      * validateNonEmpty
      * Verifies TextField is not empty
-     * @param TextField
+     * @param tf
      */ 
         public static void validateNonEmpty(TextField... tf) {        
         for (TextField textField: tf){
@@ -59,7 +59,7 @@ public abstract class UserfulMethods {
     /**
     * validateHasSelection
     * Verifies ComboBox has a selection
-    * @param ComboBox
+     * @param cb
     */ 
     public static void validateHasSelection(ComboBox... cb) {        
         for (ComboBox combobox: cb){
@@ -77,7 +77,7 @@ public abstract class UserfulMethods {
      /**
      * validateHasDate
      * Verifies Date Picker has a selection
-     * @param DatePicker
+     * @param dp
      */ 
         public static void validateHasDate(DatePicker... dp) {        
         for (DatePicker datepicker: dp){
@@ -120,7 +120,11 @@ public abstract class UserfulMethods {
         }return;
     }   
         
-        
+    /**
+     *
+     * @param startTimedd
+     * @param endTimedd
+     */
     public static void addTime(ComboBox startTimedd, ComboBox endTimedd){
         for(int i=0;i<24;i++){
         startTimedd.getItems().add(LocalTime.of(i, 0));
@@ -128,17 +132,28 @@ public abstract class UserfulMethods {
         }
     }
     
-    
+    /**
+     *
+     * @param contactdd
+     */
     public static void addContacts(ComboBox contactdd) {
     ObservableList<Contacts> contListB = DAOContacts.getAllContacts();
     contactdd.setItems(contListB);
     }
     
+    /**
+     *
+     * @param AppointmentCustomercb
+     */
     public static void addCustomers(ComboBox AppointmentCustomercb) {
     ObservableList<Customers> custListB = DAOCustomers.getAllCustomers();
     AppointmentCustomercb.setItems(custListB);
     }
     
+    /**
+     *
+     * @param usercb
+     */
     public static void addUsers(ComboBox usercb) {
         ObservableList<User> userListB = DAOUser.getAllUsers();
         usercb.setItems(userListB);

@@ -13,7 +13,15 @@ public class Level extends Update {
     int levelId;
     String division;
     
-    
+    /**
+     *
+     * @param levelId
+     * @param division
+     * @param lastUpdateBy
+     * @param createdBy
+     * @param createdTimeDate
+     * @param lastUpdatedTimeDate
+     */
     public Level(int levelId, String division,String lastUpdateBy, String createdBy, Timestamp createdTimeDate, Timestamp lastUpdatedTimeDate){
         super(lastUpdateBy, createdBy, createdTimeDate, lastUpdatedTimeDate);
         levelId = this.levelId;
@@ -21,18 +29,34 @@ public class Level extends Update {
     }
     
     //Getters
+
+    /**
+     *
+     * @return
+     */
     public int getLevelID(){
         return levelId;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getDivision(){
         return division;
     }
     //Setters
+
+    /**
+     *
+     */
     public void setLevelId(){
         this.levelId = levelId;
     }
     
+    /**
+     *
+     */
     public void setDivision(){
         this.division = division;
     }

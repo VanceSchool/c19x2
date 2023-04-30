@@ -17,8 +17,13 @@ public class Update {
   private  static Timestamp createdTimeDate;
   private  static Timestamp lastUpdatedTimeDate;
     
-    
-    
+    /**
+     *
+     * @param lastUpdateBy
+     * @param createdBy
+     * @param createdTimeDate
+     * @param lastUpdatedTimeDate
+     */
     public Update(String lastUpdateBy, String createdBy, Timestamp createdTimeDate,Timestamp lastUpdatedTimeDate ){
 lastUpdateBy = this.lastUpdateBy;
 createdBy = this.createdBy;
@@ -28,36 +33,66 @@ lastUpdatedTimeDate = this.lastUpdatedTimeDate;
 }
     
     //Getters
+
+    /**
+     *
+     * @return
+     */
     public Timestamp getLastUpdate(){
         return lastUpdatedTimeDate;
     }
     
+    /**
+     *
+     * @return
+     */
     public Timestamp getCreated(){
         return createdTimeDate;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getLastUpdateBy(){
         return lastUpdateBy;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getCreatedBy(){
         return createdBy;
     }
     //Setters
+
+    /**
+     *
+     */
      public void setLastUpdate(){
         lastUpdatedTimeDate = this.lastUpdatedTimeDate;
     }
     
+    /**
+     *
+     */
     public void setCreated(){
         
         createdTimeDate = this.createdTimeDate;
     }
     
+    /**
+     *
+     */
     public void setLastUpdateBy(){
         
         lastUpdateBy = this.lastUpdateBy;
     }
     
+    /**
+     *
+     */
     public void setCreatedBy(){
         createdBy = this.createdBy;
     }

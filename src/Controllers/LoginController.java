@@ -63,6 +63,10 @@ public class LoginController implements Initializable {
     private Button Loginbt;
     @FXML
     private Button LoginExitbt;
+
+    /**
+     *
+     */
     public static String meUserID;
     @FXML
     private Text ZoneIdtxt;
@@ -78,10 +82,16 @@ public class LoginController implements Initializable {
     private Label ZoneIdlb;
     ObservableList<Appointments> currentAppointments = FXCollections.observableArrayList();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+
+    /**
+     *
+     */
     public User meUser;
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,6 +101,12 @@ public class LoginController implements Initializable {
         setZoneIdField();  
     }    
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     @FXML
     public void handleLoginbt(ActionEvent event) throws IOException, SQLException {
         String username = LoginUsernametf.getText();
@@ -170,13 +186,14 @@ public class LoginController implements Initializable {
         LoginTimetxt.setText(LocalTime.now().format(dtf).toString());
     }
     
-    /** setUserInformation
+    /** *  setUserInformation
     * create userID, set to -1
     * Create Statement Object
     * Create SQL Statement
-    * designate result set, designate that executed statement is result set.
-    * while going through result set, if text matches provided info then return the new user ID
+    * designate result set, designate that executed statement is result set.while going through result set, if text matches provided info then return the new user ID
     *@param username
+     * @return 
+     * @throws java.sql.SQLException
     */  
     public int setUserInformation(String username) throws SQLException{
     int meUserID = -1;
@@ -252,6 +269,16 @@ public class LoginController implements Initializable {
         }
     }
     */
+
+    /**
+     *
+     * @param userID
+     * @param password
+     * @param username
+     * @return
+     * @throws SQLException
+     */
+
     
     public User setUpUserInfo(int userID, String password, String username) throws SQLException{
         User user = new User(-1, password, username);

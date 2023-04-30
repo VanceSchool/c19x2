@@ -13,6 +13,10 @@ public class Provinces {
     String divName;
     int countryID;
 
+    /**
+     *
+     * @param divName
+     */
     public Provinces(String divName) {
         this.countryID = countryID;
         this.divName = divName;
@@ -24,7 +28,12 @@ public class Provinces {
         return(divName);
     }
     
-
+    /**
+     *
+     * @param divID
+     * @param divName
+     * @param countryID
+     */
     public Provinces(int divID, String divName, int countryID){
         this.countryID = countryID;
         this.divName = divName;
@@ -32,28 +41,51 @@ public class Provinces {
     }
     
     //Getters
+
+    /**
+     *
+     * @return
+     */
     public int getdivID(){
         return divID;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getCountryID(){
         return countryID;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getDivName(){
         return divName;
     }
     
     //Setters
+
+    /**
+     *
+     */
     public void setDivName(){
         this.divName = divName;
     }
     
-        public void setCountryID(){
+    /**
+     *
+     */
+    public void setCountryID(){
         this.countryID = countryID;
     }
         
-            public void setdivID(){
+    /**
+     *
+     */
+    public void setdivID(){
         this.divID = divID;
     }
 }

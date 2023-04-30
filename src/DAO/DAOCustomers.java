@@ -87,8 +87,8 @@ public class DAOCustomers {
     /**
     *findCustomeresByID Method for SQL Statement for SELECT All FROM customers Table WHERE Customer_ID = id
     * This method returns a Customers
+     * @param id
     *@return cusListB
-    *@param custID
     */ 
     public static Customers findCustomeresByID(int id){
         String sql = "SELECT * From customers WHERE Customer_ID = ?";

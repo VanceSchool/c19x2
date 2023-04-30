@@ -19,8 +19,16 @@ public abstract class JDBC {
     private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
     private static final String userName = "sqlUser"; // Username
     private static String password = "Passw0rd!"; // Password
+
+    /**
+     *
+     */
     public static Connection connection = null;  // Connection Interface
 
+    /**
+     *
+     * @return
+     */
     public static Connection openConnection()
     {
         try {
@@ -35,12 +43,17 @@ public abstract class JDBC {
         return connection;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public static Connection getConnection(){
             return connection;
         }
     
-    
+    /**
+     *
+     */
     public static void closeConnection() {
         try {
             connection.close();

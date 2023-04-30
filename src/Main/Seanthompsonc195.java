@@ -21,6 +21,10 @@ import javafx.stage.Stage;
  *@author sean thompson <stho292@wgu.edu>
  */
 public class Seanthompsonc195 extends Application{
+
+    /**
+     *
+     */
     public User currentMe;
 
     /**
@@ -37,6 +41,11 @@ public class Seanthompsonc195 extends Application{
         
     }
 
+    /**
+     *
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         

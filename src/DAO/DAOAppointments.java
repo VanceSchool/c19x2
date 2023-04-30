@@ -146,6 +146,14 @@ public class DAOAppointments {
         return appointWeekListA;
     }
     
+    /**
+     *
+     * @param start
+     * @param end
+     * @param contactID
+     * @return
+     * @throws SQLException
+     */
     public static Boolean checkingOverLap(Timestamp start, Timestamp end, int contactID) throws SQLException{
         ObservableList<Appointments> BadAppointmennt = FXCollections.observableArrayList();
             String sq1 = "SELECT * FROM appointments "
@@ -278,7 +286,7 @@ public class DAOAppointments {
     /**
     * addAppointment
     * Inserts new Appointment into appointments table
-    * @param newAppoint
+     * @param appointToAdd
     * @throws SQLException
     */
         public static void addAppointment(Appointments appointToAdd) throws SQLException{
