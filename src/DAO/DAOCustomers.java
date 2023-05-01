@@ -84,7 +84,7 @@ public class DAOCustomers {
     }
 
     /**
-    *findCustomeresByID Method for SQL Statement for SELECT All FROM customers Table WHERE Customer_ID = id
+    *Method for SQL Statement for SELECT All FROM customers Table WHERE Customer_ID = id
     * This method returns a Customers
      * @param id
     *@return cusListB

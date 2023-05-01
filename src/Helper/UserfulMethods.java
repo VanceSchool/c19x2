@@ -60,7 +60,7 @@ public abstract class UserfulMethods {
     public static boolean validateHasSelection(ComboBox... cb) {  
         
         for (ComboBox combobox: cb){
-            if (combobox.getSelectionModel().isEmpty()){
+            if (combobox.getValue()==null){
             
             return true; 
             }

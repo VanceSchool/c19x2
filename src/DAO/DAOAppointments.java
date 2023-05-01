@@ -143,14 +143,14 @@ public class DAOAppointments {
         return appointWeekListA;
     }
     
-    /** Method that checks that a single contact does not have overlapping appointments.
-     *
+    /** Method that checks that a new appointment does not have overlapping appointments.
+     * Checks for any combination of times that can cause either start or end time to be within bounds of another appointment.
      * @param start
      * @param end
      * @return
      * @throws SQLException
      */
-    public static Boolean checkingOverLap(Timestamp start, Timestamp end) throws SQLException{
+    public static Boolean checkingOverLapNew(Timestamp start, Timestamp end) throws SQLException{
         ObservableList<Appointments> BadAppointmennt = FXCollections.observableArrayList();
         String sq1 = "SELECT * FROM appointments;";
         try{
@@ -169,7 +169,44 @@ public class DAOAppointments {
                     return true;
                 }else if(end.equals(rs.getTimestamp("End"))){
                     return true;
-                }return false;
+                }
+            }
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return false;
+        
+    }
+    
+    /** Method that checks that all appointments except the one being currently modified does not have overlap.
+     *Checks for any combination of times that can cause either start or end time to be within bounds of another appointment.
+     * @param start
+     * @param end
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public static Boolean checkingOverLapExisting(Timestamp start, Timestamp end, int id) throws SQLException{
+        ObservableList<Appointments> BadAppointmennt = FXCollections.observableArrayList();
+        String sq1 = "SELECT * FROM appointments WHERE Appointment_ID <> ?;";
+        try{
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sq1);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                if((start.before(rs.getTimestamp("Start")) && (end.after(rs.getTimestamp("Start"))))){
+                     return true;
+                }else if((start.after(rs.getTimestamp("Start")) && (start.before(rs.getTimestamp("End"))))){
+                   return true;
+                }else if((start.before(rs.getTimestamp("Start")) && (end.after(rs.getTimestamp("End"))))){
+                    return true;
+                }else if((start.after(rs.getTimestamp("Start")) && (end.before(rs.getTimestamp("End"))))){
+                    return true;
+                }else if(start.equals(rs.getTimestamp("Start"))){
+                    return true;
+                }else if(end.equals(rs.getTimestamp("End"))){
+                    return true;
+                }
             }
         }catch(SQLException throwables){
             throwables.printStackTrace();

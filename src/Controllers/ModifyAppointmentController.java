@@ -5,12 +5,13 @@
 package Controllers;
 
 import static DAO.DAOAppointments.addAppointment;
-import static DAO.DAOAppointments.checkingOverLap;
+import static DAO.DAOAppointments.checkingOverLapExisting;
 import static DAO.DAOAppointments.modifyAppointment;
 import static DAO.DAOContacts.findContactByID;
 import static DAO.DAOCustomers.findCustomeresByID;
 import static Helper.Alerts.alertGroupDatabaseChange;
 import static Helper.Alerts.alertGroupVerifyAction;
+import static Helper.Alerts.appointmentTimeAlerts;
 import Helper.TimeMethods;
 import static Helper.TimeMethods.changeToEst;
 import static Helper.TimeMethods.changeUpLocaleDateTime;
@@ -32,6 +33,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /** Class that controls behavior of modify appointments page.
@@ -82,8 +84,8 @@ public class ModifyAppointmentController implements Initializable {
         appointmentIDtxt.setEditable(false);
         appointmentIDtxt.setDisable(true);
      addTime(startTimedd, endTimedd);
-     addContacts(contactdd);
-     addCustomers(AppointmentCustomercb);
+    //addContacts(contactdd);
+    //addCustomers(AppointmentCustomercb);
     }    
 
     /** Method used to save changes on screen and update appointment in database.
@@ -96,18 +98,36 @@ public class ModifyAppointmentController implements Initializable {
      */
     @FXML
     private void handleAppointmentSavebt(ActionEvent event) throws IOException, SQLException {
+        LocalDateTime starttime = changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue());
+        LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
+        int appointmentID = Integer.parseInt(appointmentIDtxt.getText());
+        Timestamp tsStart = Timestamp.valueOf(starttime);
+        Timestamp tsEnd = Timestamp.valueOf(endtime);
         if(validateNonEmpty(descriptiontxt, locationtxt, typetxt, titletxt)){
-            return;
-        }else if(validateHasSelection(AppointmentCustomercb,contactdd, startTimedd, endTimedd)){
-            return;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("Please Fill All Fields");
+            alert.show();
+        }else if(validateHasSelection(AppointmentCustomercb, contactdd, startTimedd, endTimedd)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("Please Select Drop Down Items");
+            alert.show();
         }else if(validateHasDate(startDatepick)){
-            return;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Validation of Fields");
+            alert.setContentText("Please Select Date of Appointment");
+            alert.show(); 
+        }else if(validateHasTime(startTimedd.getValue(), endTimedd.getValue(), startDatepick.getValue())){
+            // Nothing to run as Check function has Alerts built in.
+        }else if(checkingOverLapExisting(tsStart, tsEnd, appointmentID )){
+                appointmentTimeAlerts(6);
         }else if(alertGroupVerifyAction(9)){
             Customers modAppointCust = AppointmentCustomercb.getValue();
             Contacts modAppointCon = contactdd.getValue();
-            int appointmentID = Integer.parseInt(appointmentIDtxt.getText());
-            //System.out.println(modAppointCon.getContactId());
-            //System.out.println(modAppointCust.getCustomerID());
             Appointments changeAppointment = new Appointments();
             changeAppointment.setTitle(titletxt.getText());
             changeAppointment.setDescription(descriptiontxt.getText());
@@ -115,22 +135,11 @@ public class ModifyAppointmentController implements Initializable {
             changeAppointment.setType(typetxt.getText());
             changeAppointment.setCustomerId(modAppointCust.getCustomerID());
             changeAppointment.setContactId(modAppointCon.getContactId());
-            LocalDateTime starttime = changeUpLocaleDateTime(startDatepick.getValue(), startTimedd.getValue());
-            LocalDateTime endtime = changeUpLocaleDateTime(startDatepick.getValue(), endTimedd.getValue());
             changeAppointment.setStart(Timestamp.valueOf(starttime));
             changeAppointment.setEnd(Timestamp.valueOf(endtime));
-            ZonedDateTime zdtEnd = ZonedDateTime.of(endtime, ZoneId.systemDefault());
-            ZonedDateTime zdtStart = ZonedDateTime.of(starttime, ZoneId.systemDefault());
-            ZonedDateTime utcZoneStart = zdtStart.withZoneSameInstant(ZoneOffset.UTC);
-            ZonedDateTime utcZoneEnd = zdtEnd.withZoneSameInstant(ZoneOffset.UTC);
-            Timestamp tsStart = Timestamp.valueOf(utcZoneStart.toLocalDateTime());
-            Timestamp tsEnd = Timestamp.valueOf(utcZoneEnd.toLocalDateTime());
-            if(checkingOverLap(tsStart, tsEnd)){
-                alertGroupDatabaseChange(3);
-            }else{
-            System.out.println(appointmentID);
+            //System.out.println(appointmentID);
             changeAppointment.setAppointmentID(appointmentID);
-            System.out.println(changeAppointment.getAppointmentID());
+            //System.out.println(changeAppointment.getAppointmentID());
             modifyAppointment(changeAppointment);
             alertGroupDatabaseChange(4);
             Parent root = FXMLLoader.load(getClass().getResource("/Scenes/Appointments.fxml"));
@@ -139,8 +148,8 @@ public class ModifyAppointmentController implements Initializable {
             stage.setTitle("Appointments");
             stage.setScene(scene);
             stage.show();   
-        }return;
         }
+        
     }
     
     /** Method handles back button behavior.
@@ -160,7 +169,10 @@ public class ModifyAppointmentController implements Initializable {
      *
      * @param appointment
      */
-    public void appointmentModify(Appointments appointment){       
+    public void appointmentModify(Appointments appointment){
+        
+        addContacts(contactdd);
+        addCustomers(AppointmentCustomercb);
         currentAppointment = appointment;
         LocalDateTime startAppointment = currentAppointment.getStart().toLocalDateTime();
         LocalDateTime endAppointment = currentAppointment.getEnd().toLocalDateTime();

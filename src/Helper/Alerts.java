@@ -91,7 +91,7 @@ public class Alerts {
             }
             
             case 6: {
-                alert.setContentText("Contact Has Appointment During That Scheduled Time");
+                alert.setContentText("Previous Appointment During That Scheduled Time");
                 break;
             }
                         

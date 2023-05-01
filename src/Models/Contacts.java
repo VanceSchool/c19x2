@@ -35,6 +35,8 @@ public class Contacts {
         contactName = this.contactName;
         email = this.email;
     }
+
+
     
     //Getters
 

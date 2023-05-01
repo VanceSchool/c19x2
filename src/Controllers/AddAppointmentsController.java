@@ -5,7 +5,7 @@
 package Controllers;
 
 import static DAO.DAOAppointments.addAppointment;
-import static DAO.DAOAppointments.checkingOverLap;
+import static DAO.DAOAppointments.checkingOverLapNew;
 import static Helper.Alerts.*;
 import DAO.DAOLists;
 import static Helper.TimeMethods.*;
@@ -141,8 +141,8 @@ public class AddAppointmentsController implements Initializable {
             alert.show(); 
         }else if(validateHasTime(startTimedd.getValue(), endTimedd.getValue(), startDatepick.getValue())){
             // Nothing to run as Check function has Alerts built in.
-        }else if(checkingOverLap(tsStart, tsEnd)){
-                alertGroupDatabaseChange(3);
+        }else if(checkingOverLapNew(tsStart, tsEnd)){
+                appointmentTimeAlerts(6);
         }else if(alertGroupVerifyAction(10)){
             Customers modAppointCust = AppointmentCustomercb.getValue();
             Contacts modAppointCon = contactdd.getValue();
